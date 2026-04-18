@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# Data (keep registry but not raw files - too big for git)
+data/raw/
+data/processed/
+*.h5ad
+*.h5
+*.mtx
+*.mtx.gz
+
+# Models, runs, logs
+runs/
+*.pt
+*.ckpt
+wandb/
+mlruns/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Jupyter
+*.ipynb_checkpoints

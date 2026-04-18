@@ -1,0 +1,53 @@
+# Default configuration for multi-condition contrastive VI on chemo brain data.
+# Override any field on the command line with Hydra-style dot paths, e.g.:
+#   python scripts/02_train.py model.latent_dim_bg=16 training.epochs=200
+
+project:
+  name: chemobrain-contrastive
+  seed: 42
+  output_dir: runs
+
+data:
+  adata_path: data/processed/merged_chemobrain.h5ad
+  batch_key: dataset_id           # corrects technical batch across GEO studies
+  condition_key: drug             # "control" or one of the drug names
+  cell_type_key: cell_type        # coarse label from Allen-reference transfer
+  drugs:                          # order matters: index == drug-specific head index
+    - control
+    - doxorubicin
+    - cisplatin
+    # fludarabine_cyclophosphamide: add once Monje snRNA-seq data is available
+
+model:
+  name: mc_contrastive_vi
+  input_type: hvg_logcounts       # hvg_logcounts | raw_counts_zinb
+  hidden_dim: 256
+  n_hidden_layers: 2
+  latent_dim_bg: 16               # background (shared biological variance)
+  latent_dim_shared: 8            # shared toxicity axis (across all drugs)
+  latent_dim_drug: 4              # per-drug-specific axis (independent head per drug)
+  dropout: 0.1
+  # Disentanglement regularizers
+  hsic_weight_bg_shared: 10.0     # enforce bg _||_ shared
+  hsic_weight_bg_drug: 10.0       # enforce bg _||_ drug_specific
+  hsic_weight_shared_drug: 5.0    # weaker: shared and drug-specific may co-vary
+  kl_weight: 1.0
+  use_batch_onehot: true          # condition decoder on dataset_id for integration
+
+training:
+  epochs: 150
+  batch_size: 512
+  lr: 1.0e-3
+  weight_decay: 1.0e-5
+  early_stopping_patience: 20
+  val_frac: 0.1
+  device: auto                    # auto | cpu | cuda | mps
+
+logging:
+  use_wandb: false                # flip to true once you have a W&B account
+  project_tag: chemobrain
+
+analysis:
+  n_top_genes_per_axis: 50
+  umap_min_dist: 0.3
+  behavior_correlation_method: spearman

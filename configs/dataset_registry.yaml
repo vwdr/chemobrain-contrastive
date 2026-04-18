@@ -1,0 +1,161 @@
+# =============================================================================
+# Mouse Chemo-Brain scRNA-seq / snRNA-seq Dataset Registry
+# =============================================================================
+# This is the curated list of public datasets we will aggregate for the
+# contrastive latent variable analysis. Each entry tracks:
+#   - accession       : GEO / SRA / repository ID
+#   - drug            : chemotherapeutic agent (or "control" for baseline atlases)
+#   - region          : brain region profiled
+#   - assay           : scRNA-seq | snRNA-seq
+#   - status          : confirmed | candidate | needs_verification
+#   - notes           : any caveats
+#
+# STATUS LEGEND
+#   confirmed           -> accession located and matches drug + region described
+#   candidate           -> paper mentions data deposit, accession not yet pulled
+#   needs_verification  -> Claude found a hint but the accession must be checked
+#                          by a human before download (fill in and flip status)
+#
+# ACTION FOR THE STUDENT: open each paper's "Data Availability" section,
+# confirm the accession, and flip status -> confirmed. Then run
+# `python scripts/00_download_data.py`.
+# =============================================================================
+
+datasets:
+
+  # ---------------------------------------------------------------------------
+  # DOXORUBICIN -- hippocampus, snRNA-seq, with HDAC6i rescue arm
+  # ---------------------------------------------------------------------------
+  - id: dox_hipp_hdac6
+    accession: "GSE271055"
+    paper: "Single-Nucleus RNA Sequencing of HDAC6 Inhibition in Resolving Doxorubicin-Induced Cognitive Impairment"
+    doi: "10.1007/s12035-025-05161-4"
+    drug: doxorubicin
+    rescue_arm: "ACY-1083 (HDAC6i)"
+    species: mus_musculus
+    region: hippocampus
+    assay: snRNA-seq
+    sex: female
+    conditions: [vehicle, doxorubicin, doxorubicin+ACY1083]
+    status: confirmed
+    notes: >
+      Very high value: contains a rescue arm, which lets us validate that
+      the learned "shared toxicity" salient axis shifts back toward control
+      under HDAC6i treatment. Positive control for mechanistic interpretation.
+
+  # ---------------------------------------------------------------------------
+  # CISPLATIN -- cortex/hippocampus, scRNA-seq, with 40Hz gamma rescue arm
+  # ---------------------------------------------------------------------------
+  - id: cispl_tsai_gamma
+    accession: "GSE216146"
+    paper: "Gamma entrainment using audiovisual stimuli alleviates chemobrain pathology and cognitive impairment induced by chemotherapy in mice"
+    doi: "10.1126/scitranslmed.adf4601"
+    drug: cisplatin
+    rescue_arm: "40 Hz audiovisual stimulation"
+    species: mus_musculus
+    region: hippocampus
+    assay: scRNA-seq
+    n_cells: 19834
+    conditions: [vehicle, cisplatin, cisplatin+40Hz]
+    condition_col: pathology        # obs column in the h5ad encoding condition
+    condition_map:                  # maps pathology values -> drug label for model
+      control: [CN, CS]             # CN=vehicle/no-stim, CS=vehicle+40Hz
+      cisplatin: [PN, PS]           # PN=cisplatin/no-stim, PS=cisplatin+40Hz
+    status: confirmed
+    notes: >
+      Another rescue-arm dataset. Different drug, different rescue mechanism
+      -> excellent for cross-condition validation of the shared-toxicity axis.
+      19,834 single-cell transcriptomes from mouse hippocampus.
+
+  # ---------------------------------------------------------------------------
+  # FLUDARABINE/CYCLOPHOSPHAMIDE (CAR-T preconditioning) + CAR-T -- Monje lab
+  # ---------------------------------------------------------------------------
+  - id: flucy_cart_monje
+    accession: "GSE286221"              # mouse snRNA-seq; GSE287125 = matched human snRNA-seq
+    paper: "Immunotherapy-related cognitive impairment after CAR T cell therapy in mice"
+    doi: "10.1016/j.cell.2025.03.041"
+    drug: fludarabine_cyclophosphamide
+    secondary_condition: CAR_T
+    species: mus_musculus
+    region: whole_brain
+    assay: snRNA-seq (+ bulk RNA-seq of sorted microglia)
+    conditions: [vehicle, flu_cy, flu_cy+CAR_T]
+    status: confirmed
+    notes: >
+      Has both chemo-only and chemo+CAR-T arms -> can ask whether the
+      immunotherapy adds variance along the SAME shared-toxicity axis
+      (consistent with converged microglial reactivity mechanism) or a
+      new axis. Strong biological test for the model.
+
+  # ---------------------------------------------------------------------------
+  # METHOTREXATE -- Gibson/Monje 2019 was mostly FACS+bulk, but newer
+  # follow-up papers may have sc/snRNA-seq. Add here when located.
+  # ---------------------------------------------------------------------------
+  - id: mtx_gibson_2019
+    accession: "TBD"
+    paper: "Methotrexate Chemotherapy Induces Persistent Tri-glial Dysregulation (Gibson et al., Cell 2019)"
+    drug: methotrexate
+    status: candidate
+    notes: >
+      Original paper used FACS-sorted bulk RNA-seq rather than scRNA-seq.
+      Check Geraghty et al. 2019 (Neuron) and subsequent Monje lab papers
+      for single-cell follow-ups. If no sc data exists, use bulk for
+      pathway-level consistency checks rather than model input.
+
+  # ---------------------------------------------------------------------------
+  # PACLITAXEL -- endothelial senescence / BBB focus, p16-3MR model
+  # ---------------------------------------------------------------------------
+  - id: ptx_endo_sen
+    accession: "TBD"
+    paper: "Transcriptomic profiling of senescence effects on BBB-related gene expression in paclitaxel chemobrain"
+    drug: paclitaxel
+    species: mus_musculus
+    region: brain_microvasculature
+    assay: bulk_RNA-seq (confirm if sc exists)
+    status: candidate
+    notes: >
+      Focused on endothelial cells. If single-cell data exists, include;
+      otherwise keep as an orthogonal validation set for vascular/endothelial
+      dimensions of the learned salient space.
+
+  # ---------------------------------------------------------------------------
+  # REFERENCE ATLAS -- for cell type label transfer (control baseline)
+  # ---------------------------------------------------------------------------
+  - id: allen_mousebrain_ctx_hpf
+    accession: "Allen_Brain_Map_CTX_HPF_2021"
+    source: allen_brain_map   # NOT a GEO accession — download script handles separately
+    paper: "Yao et al., Cell 2021 - Taxonomy of mouse cortex & hippocampus"
+    species: mus_musculus
+    region: cortex_hippocampus
+    assay: scRNA-seq + snRNA-seq
+    conditions: [reference_only]
+    status: confirmed
+    notes: >
+      Used only as a reference for cell-type annotation via label transfer
+      (scANVI / symphony / azimuth). NOT included in the contrastive model's
+      condition axis -- it is a background-only reference.
+
+# =============================================================================
+# MINIMUM VIABLE PROJECT (MVP)
+# =============================================================================
+# If only 2 drug datasets + controls are available at project start, the
+# model still works -- contrastiveVI needs just treatment+control per drug.
+# The "shared-toxicity" axis becomes meaningful once >=2 drugs are included.
+# Aim for 3+ drugs for the poster. 2 is acceptable as a proof of concept.
+# =============================================================================
+
+mvp:
+  minimum_drugs: 2
+  target_drugs: 3
+  stretch_drugs: 5
+
+# =============================================================================
+# PREPROCESSING DEFAULTS (override in configs/default.yaml if needed)
+# =============================================================================
+preprocessing:
+  min_genes_per_cell: 500
+  min_cells_per_gene: 10
+  max_pct_mt: 10
+  n_hvgs: 3000
+  normalize_total: 1.0e4
+  log1p: true
