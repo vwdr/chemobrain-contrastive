@@ -1,0 +1,42 @@
+project:
+  name: chemobrain-contrastive
+  seed: 42
+  output_dir: runs
+data:
+  adata_path: data/processed/merged_chemobrain.h5ad
+  batch_key: dataset_id
+  condition_key: drug
+  cell_type_key: cell_type
+  drugs:
+  - control
+  - doxorubicin
+  - cisplatin
+model:
+  name: mc_contrastive_vi
+  input_type: hvg_logcounts
+  hidden_dim: 256
+  n_hidden_layers: 2
+  latent_dim_bg: 16
+  latent_dim_shared: 8
+  latent_dim_drug: 4
+  dropout: 0.1
+  hsic_weight_bg_shared: 10.0
+  hsic_weight_bg_drug: 10.0
+  hsic_weight_shared_drug: 5.0
+  kl_weight: 1.0
+  use_batch_onehot: true
+training:
+  epochs: 150
+  batch_size: 512
+  lr: 0.001
+  weight_decay: 1.0e-05
+  early_stopping_patience: 20
+  val_frac: 0.1
+  device: auto
+logging:
+  use_wandb: false
+  project_tag: chemobrain
+analysis:
+  n_top_genes_per_axis: 50
+  umap_min_dist: 0.3
+  behavior_correlation_method: spearman

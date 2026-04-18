@@ -11,7 +11,7 @@ __pycache__/
 venv/
 env/
 
-# Data (keep registry but not raw files - too big for git)
+# Data (too big for git — raw GEO downloads and processed matrices)
 data/raw/
 data/processed/
 *.h5ad
@@ -19,10 +19,13 @@ data/processed/
 *.mtx
 *.mtx.gz
 
-# Models, runs, logs
-runs/
+# Model weights and latents (too big for git)
 *.pt
 *.ckpt
+
+# Runs: exclude large files but keep figures, CSVs, logs, configs
+runs/*/latents.h5ad
+runs/*/model.pt
 wandb/
 mlruns/
 
