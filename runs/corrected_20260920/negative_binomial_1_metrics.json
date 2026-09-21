@@ -1,0 +1,9 @@
+{
+  "mode": "negative_binomial",
+  "seed": 1,
+  "best_epoch": 97,
+  "epochs_run": 100,
+  "test_mse": 0.21135089695854492,
+  "test_plugin_count_nll": 387.6032408343881,
+  "shared_fraction": 0.892474353313446
+}

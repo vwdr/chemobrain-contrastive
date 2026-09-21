@@ -87,8 +87,10 @@ def _condition_from_dirname(dirname: str) -> str:
         return "rescue"
     if "dox" in d:
         return "doxorubicin"
-    if "cisplat" in d or "cispl" in d or "pbs" in d:
-        return "control"   # PBS is vehicle for cisplatin studies
+    if "cisplat" in d or "cispl" in d:
+        return "cisplatin"
+    if "pbs" in d:
+        return "control"
     if "flucy" in d or "flu" in d:
         return "fludarabine_cyclophosphamide"
     return "unknown"
@@ -112,6 +114,10 @@ def _read_supp_dirs(ds_dir: Path, drug: str):
         if adata is None:
             continue
         condition = _condition_from_dirname(d.name)
+        if condition == "unknown":
+            raise ValueError(f"Unmapped sample condition {d.name}")
+        adata.obs["rescue"] = condition == "rescue"
+        adata.obs["sample_id"] = d.name
         adata.obs["condition"] = condition
         # map to drug label used by the model
         adata.obs["drug"] = "control" if condition == "control" else drug
@@ -183,6 +189,9 @@ def load_dataset(raw_dir: Path, ds_entry: dict):
     condition_col = ds_entry.get("condition_col")
     condition_map = ds_entry.get("condition_map")  # dict: drug_label -> [obs_values]
     if condition_col and condition_map and condition_col in adata.obs.columns:
+        adata.obs["rescue"] = adata.obs[condition_col].astype(str).isin(ds_entry.get("rescue_values", []))
+        if "biosample" in adata.obs:
+            adata.obs["sample_id"] = adata.obs["biosample"].astype(str)
         value_to_drug = {}
         for drug_label, values in condition_map.items():
             for v in values:
@@ -246,7 +255,9 @@ def annotate_cell_types(adata, reference_h5ad: Path | None):
     ref = sc.read_h5ad(reference_h5ad)
     # basic alignment
     common = adata.var_names.intersection(ref.var_names)
-    sc.tl.ingest(adata[:, common], ref[:, common], obs="cell_type")
+    query = adata[:, common].copy()
+    sc.tl.ingest(query, ref[:, common].copy(), obs="cell_type")
+    adata.obs["cell_type"] = query.obs["cell_type"].reindex(adata.obs_names)
     return adata
 
 
@@ -258,6 +269,7 @@ def main() -> int:
     ap.add_argument("--n-hvgs", type=int, default=3000)
     ap.add_argument("--reference", type=Path, default=None,
                     help="Allen mouse brain reference h5ad for label transfer.")
+    ap.add_argument("--include-rescue", action="store_true", help="Explicitly retain rescue arms in preprocessing output")
     args = ap.parse_args()
 
     with open(args.registry) as f:
@@ -275,6 +287,8 @@ def main() -> int:
         except FileNotFoundError as e:
             print(f"  [skip] {e}")
             continue
+        if "rescue" in a.obs and not args.include_rescue:
+            a = a[~a.obs["rescue"]].copy()
         a = qc_filter(a)
         per_ds.append(a)
         print(f"  -> {a.n_obs} cells, {a.n_vars} genes after QC")

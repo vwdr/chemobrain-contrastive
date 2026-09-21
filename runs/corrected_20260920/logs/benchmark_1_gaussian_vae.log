@@ -1,0 +1,6 @@
+gaussian_vae 1 0 val_mse 0.28265 seconds 2
+gaussian_vae 1 20 val_mse 0.17477 seconds 36
+gaussian_vae 1 40 val_mse 0.16922 seconds 73
+gaussian_vae 1 60 val_mse 0.16673 seconds 107
+gaussian_vae 1 80 val_mse 0.16594 seconds 142
+{'mode': 'gaussian_vae', 'seed': 1, 'best_epoch': 99, 'epochs_run': 100, 'test_mse': 0.16769707202911377, 'test_plugin_nll': 174.3372802734375, 'shared_fraction': 0.15270215272903442, 'bg_study_balanced_accuracy': 0.7522035058841401, 'bg_condition_balanced_accuracy': 0.534893020370188, 'shared_ungated_study_balanced_accuracy': 0.6284112538359423, 'shared_ungated_condition_balanced_accuracy': 0.42397750605109974, 'drug_gated_study_balanced_accuracy': 0.5856232789981375, 'drug_gated_condition_balanced_accuracy': 0.37586000562315464, 'drug_ungated_study_balanced_accuracy': 0.5856232789981375, 'drug_ungated_condition_balanced_accuracy': 0.37586000562315464}

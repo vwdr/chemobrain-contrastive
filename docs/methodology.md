@@ -1,3 +1,7 @@
+# Historical methodology plan
+
+The completed corrected workflow is documented in [research_reanalysis.md](research_reanalysis.md). This older plan contains proposals, not evidence that those analyses were performed.
+
 # Methodology
 
 Detailed methods for the chemo-brain contrastive analysis project. This is the source document for the **Methods** section of the poster/paper.

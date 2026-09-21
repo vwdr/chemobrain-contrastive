@@ -39,3 +39,22 @@ Thumbs.db
 
 # Jupyter
 *.ipynb_checkpoints
+
+# Research data and fitted arrays remain local.
+*.npz
+*.npy
+data/evidence/*.gmt
+data/evidence/*.soft.gz
+runs/corrected_20260920/cells.csv
+runs/corrected_20260920/annotated_cells.csv
+analysis/corrected_20260920/complete_corrected_attributions.csv
+analysis/corrected_20260920/pseudobulk_exploratory.csv.gz
+# Manuscript materials remain separate.
+paper/
+requirements-paper.txt
+scripts/04_make_paper_figures.py
+scripts/05_download_paper_data.py
+scripts/13_references.py
+scripts/15_paper_tables.py
+scripts/run_paper_analysis.sh
+tests/test_paper_invariants.py

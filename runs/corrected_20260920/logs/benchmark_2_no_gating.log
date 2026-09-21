@@ -1,0 +1,6 @@
+no_gating 2 0 val_mse 0.28368 seconds 3
+no_gating 2 20 val_mse 0.17515 seconds 38
+no_gating 2 40 val_mse 0.1689 seconds 71
+no_gating 2 60 val_mse 0.16709 seconds 108
+no_gating 2 80 val_mse 0.1662 seconds 143
+{'mode': 'no_gating', 'seed': 2, 'best_epoch': 99, 'epochs_run': 100, 'test_mse': 0.1677771657705307, 'test_plugin_nll': 173.82449340820312, 'shared_fraction': 0.31576916575431824, 'bg_study_balanced_accuracy': 0.9285551123036966, 'bg_condition_balanced_accuracy': 0.6058110247534104, 'shared_ungated_study_balanced_accuracy': 0.7372139976896488, 'shared_ungated_condition_balanced_accuracy': 0.5027329263198227, 'drug_gated_study_balanced_accuracy': 0.6808733988801939, 'drug_gated_condition_balanced_accuracy': 0.4434388672625082, 'drug_ungated_study_balanced_accuracy': 0.6808733988801939, 'drug_ungated_condition_balanced_accuracy': 0.4434388672625082}

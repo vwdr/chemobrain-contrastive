@@ -1,0 +1,24 @@
+study      annotation
+GSE216146  Astrocyte           1437
+           Choroid Plexus      2628
+           Endothelial         1290
+           Ependymal            134
+           Fibroblast            26
+           Immune               424
+           Microglia           4065
+           Neuron               287
+           OPC                  635
+           Oligodendrocyte     3539
+           Pericyte             346
+           Progenitor           154
+GSE271055  Astrocyte            705
+           Choroid Plexus        21
+           Endothelial           34
+           Ependymal              3
+           Immune                17
+           Neuron              7242
+           OPC                  346
+           Oligodendrocyte      354
+           Pericyte              12
+           uncertain          23158
+dtype: int64

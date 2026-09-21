@@ -1,0 +1,17 @@
+{
+  "mode": "gaussian_vae",
+  "seed": 1,
+  "best_epoch": 99,
+  "epochs_run": 100,
+  "test_mse": 0.16769707202911377,
+  "test_plugin_nll": 174.3372802734375,
+  "shared_fraction": 0.15270215272903442,
+  "bg_study_balanced_accuracy": 0.7522035058841401,
+  "bg_condition_balanced_accuracy": 0.534893020370188,
+  "shared_ungated_study_balanced_accuracy": 0.6284112538359423,
+  "shared_ungated_condition_balanced_accuracy": 0.42397750605109974,
+  "drug_gated_study_balanced_accuracy": 0.5856232789981375,
+  "drug_gated_condition_balanced_accuracy": 0.37586000562315464,
+  "drug_ungated_study_balanced_accuracy": 0.5856232789981375,
+  "drug_ungated_condition_balanced_accuracy": 0.37586000562315464
+}

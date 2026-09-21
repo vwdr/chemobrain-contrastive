@@ -1,0 +1,6 @@
+full 2 0 val_mse 0.28928 seconds 2
+full 2 20 val_mse 0.1763 seconds 45
+full 2 40 val_mse 0.17015 seconds 81
+full 2 60 val_mse 0.16842 seconds 116
+full 2 80 val_mse 0.16732 seconds 148
+{'mode': 'full', 'seed': 2, 'best_epoch': 98, 'epochs_run': 100, 'test_mse': 0.1686803251504898, 'test_plugin_nll': 185.55726623535156, 'shared_fraction': 0.9223678708076477, 'bg_study_balanced_accuracy': 0.7260822543948252, 'bg_condition_balanced_accuracy': 0.49688823802795795, 'shared_ungated_study_balanced_accuracy': 0.6567042693883011, 'shared_ungated_condition_balanced_accuracy': 0.46645793365919247, 'drug_gated_study_balanced_accuracy': 0.7202718006795017, 'drug_gated_condition_balanced_accuracy': 0.9883333333333333, 'drug_ungated_study_balanced_accuracy': 0.7822817154640485, 'drug_ungated_condition_balanced_accuracy': 0.5280039641466242}

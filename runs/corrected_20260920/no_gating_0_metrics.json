@@ -1,0 +1,17 @@
+{
+  "mode": "no_gating",
+  "seed": 0,
+  "best_epoch": 99,
+  "epochs_run": 100,
+  "test_mse": 0.16764533519744873,
+  "test_plugin_nll": 173.4196014404297,
+  "shared_fraction": 0.34010595083236694,
+  "bg_study_balanced_accuracy": 0.8786345802200841,
+  "bg_condition_balanced_accuracy": 0.5769651772402372,
+  "shared_ungated_study_balanced_accuracy": 0.6433406792976442,
+  "shared_ungated_condition_balanced_accuracy": 0.4059126029618237,
+  "drug_gated_study_balanced_accuracy": 0.5748115045963291,
+  "drug_gated_condition_balanced_accuracy": 0.4168606189372593,
+  "drug_ungated_study_balanced_accuracy": 0.5748115045963291,
+  "drug_ungated_condition_balanced_accuracy": 0.4168606189372593
+}

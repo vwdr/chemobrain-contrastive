@@ -1,0 +1,11 @@
+package,version
+torch,2.5.1+cpu
+numpy,2.5.3
+pandas,3.0.6
+scipy,1.18.1
+scikit-learn,1.9.1
+anndata,0.12.4
+scanpy,1.11.5
+scikit-misc,0.5.2
+matplotlib,3.11.2
+statsmodels,0.15.0

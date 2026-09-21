@@ -1,0 +1,17 @@
+cell_type,contrast,n_genes,n_fdr_005
+Microglia,cisplatin_vs_control,10048,0
+Microglia,cisplatin_GENUS_vs_cisplatin,9233,0
+Microglia,control_GENUS_vs_control,10086,0
+Oligodendrocyte,cisplatin_vs_control,9963,0
+Oligodendrocyte,cisplatin_GENUS_vs_cisplatin,9214,0
+Oligodendrocyte,control_GENUS_vs_control,9837,0
+Endothelial,cisplatin_vs_control,8371,0
+Endothelial,cisplatin_GENUS_vs_cisplatin,8084,0
+Astrocyte,cisplatin_vs_control,8805,0
+Astrocyte,cisplatin_GENUS_vs_cisplatin,7968,0
+Astrocyte,control_GENUS_vs_control,8795,0
+OPC,cisplatin_vs_control,8220,0
+OPC,control_GENUS_vs_control,8103,0
+Choroid Plexus,cisplatin_vs_control,5955,0
+Choroid Plexus,cisplatin_GENUS_vs_cisplatin,6953,0
+Immune,cisplatin_vs_control,2022,0

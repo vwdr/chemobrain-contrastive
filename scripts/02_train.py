@@ -92,6 +92,8 @@ def main() -> int:
     ap.add_argument("--config", type=Path, default="configs/default.yaml")
     args = ap.parse_args()
     cfg = load_config(args.config)
+    if cfg["model"].get("input_type", "hvg_logcounts") != "hvg_logcounts":
+        raise ValueError("This trainer implements only Gaussian log-expression likelihood. Use scripts/12_nb_sensitivity.py for the audited NB model.")
 
     # ----- output dir -----
     run_dir = Path(cfg["project"]["output_dir"]) / time.strftime("%Y%m%d_%H%M%S")
@@ -117,6 +119,8 @@ def main() -> int:
         ds, [train_size, val_size],
         generator=torch.Generator().manual_seed(cfg["project"]["seed"]),
     )
+    np.savez(run_dir / "split_indices.npz", train=np.asarray(train_ds.indices), validation=np.asarray(val_ds.indices))
+    (run_dir / "gene_order.json").write_text(json.dumps(adata.var_names.tolist()))
     train_loader = DataLoader(train_ds, batch_size=cfg["training"]["batch_size"], shuffle=True)
     val_loader = DataLoader(val_ds, batch_size=cfg["training"]["batch_size"])
 

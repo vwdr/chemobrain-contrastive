@@ -39,9 +39,8 @@ datasets:
     conditions: [vehicle, doxorubicin, doxorubicin+ACY1083]
     status: confirmed
     notes: >
-      Very high value: contains a rescue arm, which lets us validate that
-      the learned "shared toxicity" salient axis shifts back toward control
-      under HDAC6i treatment. Positive control for mechanistic interpretation.
+      One pooled library per arm. Rescue is excluded from fitting and projected
+      descriptively. Independent rescue inference is not possible.
 
   # ---------------------------------------------------------------------------
   # CISPLATIN -- cortex/hippocampus, scRNA-seq, with 40Hz gamma rescue arm
@@ -59,33 +58,33 @@ datasets:
     conditions: [vehicle, cisplatin, cisplatin+40Hz]
     condition_col: pathology        # obs column in the h5ad encoding condition
     condition_map:                  # maps pathology values -> drug label for model
-      control: [CN, CS]             # CN=vehicle/no-stim, CS=vehicle+40Hz
-      cisplatin: [PN, PS]           # PN=cisplatin/no-stim, PS=cisplatin+40Hz
+      control: [PN, PS]             # PBS without and with GENUS
+      cisplatin: [CN, CS]           # Cisplatin without and with GENUS
+    rescue_values: [PS, CS]
     status: confirmed
     notes: >
-      Another rescue-arm dataset. Different drug, different rescue mechanism
-      -> excellent for cross-condition validation of the shared-toxicity axis.
+      Three libraries per arm. Rescue arms are excluded from fitting.
+      Drug identity remains confounded with study and modality.
       19,834 single-cell transcriptomes from mouse hippocampus.
 
   # ---------------------------------------------------------------------------
   # FLUDARABINE/CYCLOPHOSPHAMIDE (CAR-T preconditioning) + CAR-T -- Monje lab
   # ---------------------------------------------------------------------------
   - id: flucy_cart_monje
-    accession: "GSE286221"              # mouse snRNA-seq; GSE287125 = matched human snRNA-seq
+    accession: "GSE286221"              # audited mouse bulk microglia deposit
     paper: "Immunotherapy-related cognitive impairment after CAR T cell therapy in mice"
     doi: "10.1016/j.cell.2025.03.041"
     drug: fludarabine_cyclophosphamide
     secondary_condition: CAR_T
     species: mus_musculus
     region: whole_brain
-    assay: snRNA-seq (+ bulk RNA-seq of sorted microglia)
-    conditions: [vehicle, flu_cy, flu_cy+CAR_T]
-    status: confirmed
+    assay: bulk_RNA-seq
+    exclusion_reason: GSE286221 contains bulk sorted microglia, not a compatible single-cell input
+    conditions: [mock, CAR_T]
+    status: excluded_bulk
     notes: >
-      Has both chemo-only and chemo+CAR-T arms -> can ask whether the
-      immunotherapy adds variance along the SAME shared-toxicity axis
-      (consistent with converged microglial reactivity mechanism) or a
-      new axis. Strong biological test for the model.
+      Bulk microglial profiles from mock and CAR-T groups.
+      Incompatible with single-cell fitting and excluded.
 
   # ---------------------------------------------------------------------------
   # METHOTREXATE -- Gibson/Monje 2019 was mostly FACS+bulk, but newer
@@ -131,16 +130,15 @@ datasets:
     conditions: [reference_only]
     status: confirmed
     notes: >
-      Used only as a reference for cell-type annotation via label transfer
-      (scANVI / symphony / azimuth). NOT included in the contrastive model's
-      condition axis -- it is a background-only reference.
+      Candidate external reference. Not used in the completed corrected analysis,
+      which transfers labels from source-annotated cisplatin-study controls.
 
 # =============================================================================
 # MINIMUM VIABLE PROJECT (MVP)
 # =============================================================================
 # If only 2 drug datasets + controls are available at project start, the
 # model still works -- contrastiveVI needs just treatment+control per drug.
-# The "shared-toxicity" axis becomes meaningful once >=2 drugs are included.
+# Two drugs alone do not establish an identifiable shared treatment program.
 # Aim for 3+ drugs for the poster. 2 is acceptable as a proof of concept.
 # =============================================================================
 

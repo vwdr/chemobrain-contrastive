@@ -1,0 +1,77 @@
+study,arm,annotation,annotation_origin,n_cells
+GSE216146,cisplatin,Astrocyte,source_study,296
+GSE216146,cisplatin,Choroid Plexus,source_study,1164
+GSE216146,cisplatin,Endothelial,source_study,398
+GSE216146,cisplatin,Ependymal,source_study,36
+GSE216146,cisplatin,Fibroblast,source_study,9
+GSE216146,cisplatin,Immune,source_study,97
+GSE216146,cisplatin,Microglia,source_study,907
+GSE216146,cisplatin,Neuron,source_study,22
+GSE216146,cisplatin,OPC,source_study,122
+GSE216146,cisplatin,Oligodendrocyte,source_study,855
+GSE216146,cisplatin,Pericyte,source_study,88
+GSE216146,cisplatin,Progenitor,source_study,11
+GSE216146,cisplatin_GENUS,Astrocyte,source_study,204
+GSE216146,cisplatin_GENUS,Choroid Plexus,source_study,475
+GSE216146,cisplatin_GENUS,Endothelial,source_study,207
+GSE216146,cisplatin_GENUS,Ependymal,source_study,11
+GSE216146,cisplatin_GENUS,Fibroblast,source_study,9
+GSE216146,cisplatin_GENUS,Immune,source_study,58
+GSE216146,cisplatin_GENUS,Microglia,source_study,411
+GSE216146,cisplatin_GENUS,Neuron,source_study,21
+GSE216146,cisplatin_GENUS,OPC,source_study,72
+GSE216146,cisplatin_GENUS,Oligodendrocyte,source_study,486
+GSE216146,cisplatin_GENUS,Pericyte,source_study,73
+GSE216146,cisplatin_GENUS,Progenitor,source_study,5
+GSE216146,control,Astrocyte,source_study,564
+GSE216146,control,Choroid Plexus,source_study,253
+GSE216146,control,Endothelial,source_study,399
+GSE216146,control,Ependymal,source_study,49
+GSE216146,control,Fibroblast,source_study,4
+GSE216146,control,Immune,source_study,140
+GSE216146,control,Microglia,source_study,1494
+GSE216146,control,Neuron,source_study,135
+GSE216146,control,OPC,source_study,280
+GSE216146,control,Oligodendrocyte,source_study,1328
+GSE216146,control,Pericyte,source_study,110
+GSE216146,control,Progenitor,source_study,74
+GSE216146,control_GENUS,Astrocyte,source_study,373
+GSE216146,control_GENUS,Choroid Plexus,source_study,736
+GSE216146,control_GENUS,Endothelial,source_study,286
+GSE216146,control_GENUS,Ependymal,source_study,38
+GSE216146,control_GENUS,Fibroblast,source_study,4
+GSE216146,control_GENUS,Immune,source_study,129
+GSE216146,control_GENUS,Microglia,source_study,1253
+GSE216146,control_GENUS,Neuron,source_study,109
+GSE216146,control_GENUS,OPC,source_study,161
+GSE216146,control_GENUS,Oligodendrocyte,source_study,870
+GSE216146,control_GENUS,Pericyte,source_study,75
+GSE216146,control_GENUS,Progenitor,source_study,64
+GSE271055,control,Astrocyte,provisional_transfer,155
+GSE271055,control,Choroid Plexus,provisional_transfer,5
+GSE271055,control,Endothelial,provisional_transfer,9
+GSE271055,control,Immune,provisional_transfer,4
+GSE271055,control,Neuron,provisional_transfer,2596
+GSE271055,control,OPC,provisional_transfer,33
+GSE271055,control,Oligodendrocyte,provisional_transfer,26
+GSE271055,control,uncertain,provisional_transfer,6627
+GSE271055,doxorubicin,Astrocyte,provisional_transfer,176
+GSE271055,doxorubicin,Choroid Plexus,provisional_transfer,11
+GSE271055,doxorubicin,Endothelial,provisional_transfer,9
+GSE271055,doxorubicin,Ependymal,provisional_transfer,2
+GSE271055,doxorubicin,Immune,provisional_transfer,2
+GSE271055,doxorubicin,Neuron,provisional_transfer,1874
+GSE271055,doxorubicin,OPC,provisional_transfer,46
+GSE271055,doxorubicin,Oligodendrocyte,provisional_transfer,37
+GSE271055,doxorubicin,Pericyte,provisional_transfer,3
+GSE271055,doxorubicin,uncertain,provisional_transfer,8358
+GSE271055,doxorubicin_ACY1083,Astrocyte,provisional_transfer,374
+GSE271055,doxorubicin_ACY1083,Choroid Plexus,provisional_transfer,5
+GSE271055,doxorubicin_ACY1083,Endothelial,provisional_transfer,16
+GSE271055,doxorubicin_ACY1083,Ependymal,provisional_transfer,1
+GSE271055,doxorubicin_ACY1083,Immune,provisional_transfer,11
+GSE271055,doxorubicin_ACY1083,Neuron,provisional_transfer,2772
+GSE271055,doxorubicin_ACY1083,OPC,provisional_transfer,267
+GSE271055,doxorubicin_ACY1083,Oligodendrocyte,provisional_transfer,291
+GSE271055,doxorubicin_ACY1083,Pericyte,provisional_transfer,9
+GSE271055,doxorubicin_ACY1083,uncertain,provisional_transfer,8173

@@ -1,0 +1,29 @@
+{
+  "uploaded_checkpoint_epoch": 148,
+  "uploaded_checkpoint_val_loss": 266.6031721019439,
+  "uploaded_model_config": {
+    "n_genes": 3000,
+    "n_drugs": 4,
+    "n_batches": 2,
+    "hidden_dim": 256,
+    "n_hidden_layers": 2,
+    "latent_dim_bg": 16,
+    "latent_dim_shared": 8,
+    "latent_dim_drug": 4,
+    "dropout": 0.1,
+    "use_batch_onehot": true
+  },
+  "uploaded_drug_to_idx": {
+    "control": 0,
+    "doxorubicin": 1,
+    "cisplatin": 2,
+    "fludarabine_cyclophosphamide": 3
+  },
+  "uploaded_sha256": "51bb1bfe5c23c1ad196a88c7f4f746f68839ce3ee3d939d0ef77c3c6855adf38",
+  "primary_result": {
+    "best_val_loss": 267.6550564532855,
+    "best_epoch": 147
+  },
+  "identity_status": "configuration and validation metadata do not match the designated run",
+  "gene_order_status": "original gene order absent from uploaded checkpoint"
+}

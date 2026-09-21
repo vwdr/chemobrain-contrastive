@@ -1,0 +1,6 @@
+no_hsic 0 0 val_mse 0.27989 seconds 3
+no_hsic 0 20 val_mse 0.17554 seconds 42
+no_hsic 0 40 val_mse 0.17006 seconds 78
+no_hsic 0 60 val_mse 0.16806 seconds 115
+no_hsic 0 80 val_mse 0.16692 seconds 152
+{'mode': 'no_hsic', 'seed': 0, 'best_epoch': 99, 'epochs_run': 100, 'test_mse': 0.16826380789279938, 'test_plugin_nll': 180.48350524902344, 'shared_fraction': 0.9486960768699646, 'bg_study_balanced_accuracy': 0.720666022761153, 'bg_condition_balanced_accuracy': 0.48028845940641124, 'shared_ungated_study_balanced_accuracy': 0.843167913099963, 'shared_ungated_condition_balanced_accuracy': 0.5455204145347018, 'drug_gated_study_balanced_accuracy': 0.7188360500931282, 'drug_gated_condition_balanced_accuracy': 0.9613656527249684, 'drug_ungated_study_balanced_accuracy': 0.7825005073023192, 'drug_ungated_condition_balanced_accuracy': 0.5771005919390215}

@@ -1,135 +1,46 @@
-# chemobrain-contrastive
+# Chemotherapy transcriptome representation research
 
-> Disentangling shared and drug-specific molecular signatures of chemotherapy-induced cognitive impairment (CICI) via multi-condition contrastive latent-variable modeling of mouse brain single-cell data.
+The current corrected analysis is `corrected_20260920`. This repository contains the research implementation, corrected preprocessing, benchmark scripts, compact numerical results, training histories and data-download instructions. Raw data, processed matrices, fitted checkpoints and large intermediates are intentionally excluded. Manuscript sources and publication figures are maintained separately.
 
----
+## Corrected analysis
 
-## What this repo is
+An audit identified reversed cisplatin labels and rescue arms pooled with the original training conditions. In GSE216146, PN/PS are PBS and CN/CS are cisplatin. PS/CS are GENUS rescue arms. The corrected workflow excludes rescue from fitting. Historical runs remain unchanged for provenance and must not be interpreted as corrected results.
 
-A bioinformatics project scaffold to execute the research plan: ingest public mouse scRNA-seq / snRNA-seq datasets spanning multiple chemotherapy agents, train a multi-condition contrastive VI model that separates (i) shared biological variance, (ii) a shared-toxicity axis common to all drugs, and (iii) drug-specific axes, then interpret the learned axes to generate mechanistic hypotheses about CICI. Final deliverable: a conference poster.
+Both studies sample mouse hippocampus. GSE216146 contains whole cells and GSE271055 contains nuclei. Drug identity is confounded with study and modality. Doxorubicin has one pooled library per arm, so its contributing mice do not provide independent expression replicates.
 
-## What's built vs. what's next
+The recovered cohort contains 46,857 observations across 15 libraries. The benchmark uses 6,000 training observations, 2,881 validation observations, 2,881 test observations and 1,500 training-selected genes. Splits are at the cell level within deposited libraries.
 
-**Built (and tested on synthetic data):**
-- `src/models/mc_contrastive_vi.py` — the multi-condition contrastive VI model (PyTorch). Verified end-to-end: forward pass, gating (control cells have zero salients), backward pass, 57% loss reduction on simulated data, shared axis 2.4× more active on treated cells.
-- `scripts/00_download_data.py` — GEO data fetcher reading from the registry.
-- `scripts/01_preprocess.py` — QC, HVG selection, cross-study merge, cell-type annotation.
-- `scripts/02_train.py` — training loop with early stopping, checkpointing, latent export.
-- `scripts/03_analyze.py` — integrated-gradient gene attribution, variance decomposition, cell-type engagement.
-- `tests/test_smoke.py` — synthetic-data end-to-end check.
-- `configs/dataset_registry.yaml` — curated list of candidate GEO datasets.
-- `configs/default.yaml` — all hyperparameters in one place.
+| Comparison | Fits | Held-out log-expression MSE |
+| --- | --- | --- |
+| Full MC-ContrastiveVI | Three seeds | 0.1687–0.1688 |
+| Without HSIC | Three seeds | 0.1683–0.1689 |
+| Without gating | Three seeds | 0.1676–0.1678 |
+| Noncontrastive Gaussian VAE | Three seeds | 0.1674–0.1678 |
+| Negative-binomial sensitivity | Three seeds | 0.2109–0.2123 |
+| PCA with 32 components | One fit | 0.1552 |
 
-**Next (this is what you do in Claude Code):**
-1. **Verify GEO accessions** in `configs/dataset_registry.yaml`. Every entry marked `needs_verification` has a paper DOI — open the paper's Data Availability section, copy the accession, flip `status: confirmed`.
-2. **Download data**: `python scripts/00_download_data.py`
-3. **Preprocess**: `python scripts/01_preprocess.py`
-4. **Train**: `python scripts/02_train.py` (needs a GPU for the full dataset; use a Colab, lab cluster, or your own GPU box)
-5. **Analyze**: `python scripts/03_analyze.py --run runs/<timestamp>`
-6. **Make figures → poster**.
+These comparisons do not establish reconstruction superiority for MC-ContrastiveVI. The shared posterior-mean variance fraction ranges from 92.1% to 95.7% across full Gaussian fits. It is a model-coordinate variance allocation, not a percentage of toxicity. Standard scVI and pairwise contrastiveVI were not run. See [research notes](docs/research_reanalysis.md) for interpretation and limitations.
 
----
+## Reproduce the research
 
-## Getting started in Claude Code
-
-Once you clone this into your working environment:
+The completed fits used Python 3.12.14 on CPU. Exact package versions are in `requirements-research.txt` and the environment record is in `analysis/corrected_20260920/environment.json`.
 
 ```bash
-cd chemobrain-contrastive
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-
-# Sanity check: the model trains on synthetic data
-python tests/test_smoke.py
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-research.txt
+make research-analysis
+make research-check
 ```
 
-If the smoke test passes (it will — it's been verified), your environment is good and you can move on to real data.
+The analysis target downloads pinned public inputs, corrects labels, performs QC and splitting, fits fifteen neural models plus PCA, and runs annotation, attribution, enrichment, pseudobulk and rescue diagnostics. It is computationally expensive and replaces local corrected outputs. Use a fresh checkout to retain published summary tables. The invariant checks require the locally generated arrays and do not run on a summaries-only checkout.
 
-**Recommended Claude Code prompts at each stage:**
+`make research-download` retrieves source matrices, GEO metadata and the exact mouse MSigDB 2025.1 gene-set collections without fitting models. File checksums are supplied in `data/evidence/source_file_manifest.csv`. The full raw and processed datasets, exact model arrays and trained checkpoints are not hosted in GitHub. Large attribution and pseudobulk tables are regenerated by the analysis scripts.
 
-Stage 2 (dataset verification):
-> "Open configs/dataset_registry.yaml. For each entry with status: needs_verification, search the web for the paper's Data Availability section and fill in the GEO accession. Flip status to confirmed when done."
+## Research outputs
 
-Stage 3 (first training run):
-> "Run a small training run: python scripts/02_train.py with epochs=30 and batch_size=256 to verify it works on real data. Report any errors and suggest fixes."
+`analysis/corrected_20260920` contains cohort and label audits, annotation diagnostics, model comparisons, latent probes, seed stability, variance uncertainty, integration completeness, enrichment tests, pseudobulk summaries and rescue comparisons. `runs/corrected_20260920` contains per-fit metrics, epoch histories and computational logs. `data/evidence` contains source GEO records and checksums.
 
-Stage 5 (analysis + figures):
-> "Use scripts/03_analyze.py outputs to generate the poster figures: UMAP of z_bg colored by cell type, UMAP of z_shared colored by drug, variance decomposition bar, top-gene heatmap. Save them as PDFs at 300 DPI."
+The workflow is implemented in scripts 05 through 13 and `scripts/run_research_analysis.sh`. The original `src/models/mc_contrastive_vi.py` supplies the Gaussian architecture. Scripts 01 and 02 retain the legacy workflow with corrected labels, rescue handling and unsupported-likelihood safeguards. Legacy Makefile targets remain available, but use `research-*` for the corrected analysis.
 
----
-
-## Directory structure
-
-```
-chemobrain-contrastive/
-├── configs/
-│   ├── default.yaml              # all hyperparameters
-│   └── dataset_registry.yaml     # GEO accessions + metadata
-├── src/
-│   ├── models/
-│   │   └── mc_contrastive_vi.py  # THE model
-│   ├── data/                     # (expand here as pipeline grows)
-│   ├── training/                 # (put reusable loops here)
-│   ├── analysis/                 # (put reusable analysis fns here)
-│   └── utils/
-├── scripts/
-│   ├── 00_download_data.py       # GEO ingest
-│   ├── 01_preprocess.py          # QC + merge + HVG + label transfer
-│   ├── 02_train.py               # train + export latents
-│   └── 03_analyze.py             # gene attribution + cross-drug decomposition
-├── tests/
-│   └── test_smoke.py             # synthetic end-to-end test
-├── docs/
-│   ├── methodology.md            # detailed methods for the poster/paper
-│   └── proposal.md               # the research plan
-├── notebooks/                    # exploration lives here (not committed)
-├── data/                         # (gitignored)
-│   ├── raw/                      # GEO downloads
-│   └── processed/                # merged h5ad
-├── runs/                         # (gitignored) training outputs
-├── requirements.txt
-├── .gitignore
-└── README.md
-```
-
----
-
-## The model in one paragraph
-
-Standard contrastiveVI (Weinberger et al., *Nature Methods* 2023) learns a background latent `z_bg` shared between treated and control cells, plus a salient latent `z_s` active only in treated cells. We extend this to the **multi-drug** setting: `z_bg` stays, we add a **shared-toxicity** salient `z_shared` that activates for any non-control drug, and a **drug-specific** salient `z_drug[k]` per drug, one-hot-gated so only the correct drug's head fires. HSIC penalties push the three groups toward statistical independence. The decoder reconstructs log-normalized expression from `[z_bg, z_shared, z_drug_cat]`, optionally conditioned on dataset-of-origin for batch correction. Control cells have `z_shared == 0` and all `z_drug[k] == 0` by hard gating, so those dimensions exclusively capture treatment-enriched variance.
-
-## What the analysis answers
-
-1. **Is there a convergent CICI signature?** Yes if `z_shared` explains a large fraction of treated-cell variance and its top genes enrich for known CICI pathways (inflammation, senescence, myelin, oxidative stress).
-2. **Which cell types carry it?** Per-cell-type mean magnitude along `z_shared` — high-magnitude cell types are the vulnerable ones.
-3. **What's drug-specific?** Per-drug attribution scores on `z_drug[k]` isolate idiosyncratic toxicity (e.g., paclitaxel-specific endothelial effects vs. methotrexate-specific OPC effects).
-4. **Does a rescue intervention reverse it?** Datasets with rescue arms (HDAC6i, 40Hz gamma) let us project rescued cells into the latent space and measure their shift back toward control along `z_shared`.
-
----
-
-## Known limitations / things to tune
-
-- **Drug-specific heads need real data.** The synthetic smoke test shows the architecture works but doesn't strongly separate drugs because of the short run + noisy simulation. On real data with longer training, lower HSIC weights on drug heads, or more cells per drug, separation is expected.
-- **Count model is Gaussian on log-normalized HVGs** for clarity. For production, swap in a ZINB head (see `scvi-tools.contrastive_vi` for reference). HVG-Gaussian is fine for the poster; ZINB is for a paper.
-- **Cross-study integration is the hardest part.** Different sequencing platforms, dosing regimens, sex, age. The `batch_key=dataset_id` in the decoder helps but is not a silver bullet. Inspect UMAPs of `z_bg` colored by `dataset_id` — if datasets still cluster separately, add a harmonization step (Harmony / scVI) before HVG selection.
-- **Cell-type annotation requires a reference.** We use `scanpy.tl.ingest` against an Allen mouse brain reference; for more accurate labels use Azimuth or scANVI separately and write the labels back into the merged AnnData.
-
-## Timeline suggestion (to poster)
-
-- Week 1: dataset verification + downloads + QC report
-- Week 2: preprocessing + cross-study merge + cell-type annotation
-- Week 3: first training runs + hyperparameter sweeps
-- Week 4: analysis + figure iteration
-- Week 5: poster drafting
-- Week 6: revisions + print
-
-## References
-
-- Weinberger et al. *Isolating salient variations of interest in single-cell data with contrastiveVI.* Nat Methods 2023.
-- Gibson et al. *Methotrexate Chemotherapy Induces Persistent Tri-glial Dysregulation.* Cell 2019.
-- Kim et al. *Non-invasive gamma stimulation for chemo brain.* Sci Transl Med 2024.
-- Ma et al. *snRNA-seq of HDAC6i in Doxorubicin-Induced CICI.* Mol Neurobiol 2025.
-- Han et al. *CLEAR: self-supervised contrastive learning for scRNA-seq.* Brief Bioinform 2022.
-- Tu et al. *Supervised Contrastive VAE for perturbation data.* PMLR 2024.
-
-See `docs/proposal.md` for the full research plan and `docs/methodology.md` for detailed methods.
+The supplied historical checkpoint did not match the designated historical run and lacked its original gene order. `analysis/corrected_20260920/checkpoint_audit.json` records this mismatch. The optional script `07_historical_check.py` requires that separate local checkpoint and is not part of the default reproduction command.

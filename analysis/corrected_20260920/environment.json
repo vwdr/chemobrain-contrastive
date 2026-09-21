@@ -1,0 +1,13 @@
+{
+  "python": "3.12.14",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "device": "CPU",
+  "upstream_commit": "e6f2816220bb47d2b1c792603e46b65b64de9e40",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "split_seed": 1729
+}

@@ -1,0 +1,8 @@
+study,source_code,drug,historical_drug,rescue,n_cells
+GSE216146,CN,cisplatin,control,False,4005
+GSE216146,CS,cisplatin,control,True,2032
+GSE216146,PN,control,cisplatin,False,4830
+GSE216146,PS,control,cisplatin,True,4098
+GSE271055,CNT,control,control,False,9455
+GSE271055,DOX,doxorubicin,doxorubicin,False,10518
+GSE271055,DOXACY,doxorubicin,doxorubicin,True,11919

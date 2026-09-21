@@ -1,0 +1,33 @@
+Cis columns ['initial_size_spliced', 'initial_size_unspliced', 'initial_size', 'n_genes_by_counts', 'log1p_n_genes_by_counts', 'total_counts', 'log1p_total_counts', 'pct_counts_in_top_50_genes', 'pct_counts_in_top_100_genes', 'pct_counts_in_top_200_genes', 'pct_counts_in_top_500_genes', 'pct_mt', 'pct_ribo', 'S_score', 'G2M_score', 'phase', 'doublet_score', 'predicted_doublet', 'biosample', 'pathology', 'batch', 'leiden_0', 'orig_celltype', 'leiden', 'MajorCellType']
+/workspace/scratch/9e517e6ed08d/chemobrain-contrastive/scripts/05_recover_cohort.py:19: DeprecationWarning: The default value for `spmatrix` is changing to `False` in v1.20.
+             That means the default return type will be a sparse array.
+             Unless you use * instead of @, ** for matrix power, or you depend
+             on 2D shapes from e.g. `A.sum(axis=0)` it may not matter to you.
+             See the spmatrix to sparray migration guide for details.
+             https://docs.scipy.org/doc/scipy/reference/sparse.migration_to_sparray.html
+
+  m=next((D/'dox').glob(gsm+'*matrix.mtx.gz'));f=next((D/'dox').glob(gsm+'*features.tsv.gz'));b=next((D/'dox').glob(gsm+'*barcodes.tsv.gz'));x=io.mmread(gzip.open(m)).T.tocsr();genes=pd.read_csv(f,sep='\t',header=None);bar=pd.read_csv(b,sep='\t',header=None)[0].astype(str);v=ad.AnnData(x,obs=pd.DataFrame(index=(bar+'_'+gsm).to_numpy()),var=pd.DataFrame(index=genes[1].astype(str).to_numpy()));v.var_names_make_unique();v.obs['study']='GSE271055';v.obs['sample_id']=gsm;v.obs['source_cell_type']='unannotated';v.obs['source_code']=code;v.obs['drug']=drug;v.obs['historical_drug']=drug;v.obs['rescue']=rescue;v.obs['arm']='doxorubicin_ACY1083' if rescue else drug;ls.append(v)
+/workspace/scratch/9e517e6ed08d/.venv/lib/python3.12/site-packages/anndata/_core/anndata.py:1794: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+  utils.warn_names_duplicates("var")
+/workspace/scratch/9e517e6ed08d/chemobrain-contrastive/scripts/05_recover_cohort.py:19: DeprecationWarning: The default value for `spmatrix` is changing to `False` in v1.20.
+             That means the default return type will be a sparse array.
+             Unless you use * instead of @, ** for matrix power, or you depend
+             on 2D shapes from e.g. `A.sum(axis=0)` it may not matter to you.
+             See the spmatrix to sparray migration guide for details.
+             https://docs.scipy.org/doc/scipy/reference/sparse.migration_to_sparray.html
+
+  m=next((D/'dox').glob(gsm+'*matrix.mtx.gz'));f=next((D/'dox').glob(gsm+'*features.tsv.gz'));b=next((D/'dox').glob(gsm+'*barcodes.tsv.gz'));x=io.mmread(gzip.open(m)).T.tocsr();genes=pd.read_csv(f,sep='\t',header=None);bar=pd.read_csv(b,sep='\t',header=None)[0].astype(str);v=ad.AnnData(x,obs=pd.DataFrame(index=(bar+'_'+gsm).to_numpy()),var=pd.DataFrame(index=genes[1].astype(str).to_numpy()));v.var_names_make_unique();v.obs['study']='GSE271055';v.obs['sample_id']=gsm;v.obs['source_cell_type']='unannotated';v.obs['source_code']=code;v.obs['drug']=drug;v.obs['historical_drug']=drug;v.obs['rescue']=rescue;v.obs['arm']='doxorubicin_ACY1083' if rescue else drug;ls.append(v)
+/workspace/scratch/9e517e6ed08d/.venv/lib/python3.12/site-packages/anndata/_core/anndata.py:1794: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+  utils.warn_names_duplicates("var")
+/workspace/scratch/9e517e6ed08d/chemobrain-contrastive/scripts/05_recover_cohort.py:19: DeprecationWarning: The default value for `spmatrix` is changing to `False` in v1.20.
+             That means the default return type will be a sparse array.
+             Unless you use * instead of @, ** for matrix power, or you depend
+             on 2D shapes from e.g. `A.sum(axis=0)` it may not matter to you.
+             See the spmatrix to sparray migration guide for details.
+             https://docs.scipy.org/doc/scipy/reference/sparse.migration_to_sparray.html
+
+  m=next((D/'dox').glob(gsm+'*matrix.mtx.gz'));f=next((D/'dox').glob(gsm+'*features.tsv.gz'));b=next((D/'dox').glob(gsm+'*barcodes.tsv.gz'));x=io.mmread(gzip.open(m)).T.tocsr();genes=pd.read_csv(f,sep='\t',header=None);bar=pd.read_csv(b,sep='\t',header=None)[0].astype(str);v=ad.AnnData(x,obs=pd.DataFrame(index=(bar+'_'+gsm).to_numpy()),var=pd.DataFrame(index=genes[1].astype(str).to_numpy()));v.var_names_make_unique();v.obs['study']='GSE271055';v.obs['sample_id']=gsm;v.obs['source_cell_type']='unannotated';v.obs['source_code']=code;v.obs['drug']=drug;v.obs['historical_drug']=drug;v.obs['rescue']=rescue;v.obs['arm']='doxorubicin_ACY1083' if rescue else drug;ls.append(v)
+/workspace/scratch/9e517e6ed08d/.venv/lib/python3.12/site-packages/anndata/_core/anndata.py:1794: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+  utils.warn_names_duplicates("var")
+AnnData object with n_obs × n_vars = 46857 × 18271
+    obs: 'study', 'sample_id', 'source_cell_type', 'source_code', 'drug', 'historical_drug', 'rescue', 'arm', 'total_counts', 'pct_counts_mt', 'n_genes_by_counts'

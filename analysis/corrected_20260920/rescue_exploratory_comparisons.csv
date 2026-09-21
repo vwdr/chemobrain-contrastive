@@ -1,0 +1,3 @@
+study,contrast,mean_difference,n_rescue_libraries,n_treated_libraries,batch_stratified_permutation_p,n_label_permutations
+GSE216146,cisplatin_GENUS_vs_cisplatin,0.000324063,3,3,1.0,12.0
+GSE271055,doxorubicin_ACY1083_vs_doxorubicin,0.0059129186,1,1,,

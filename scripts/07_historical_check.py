@@ -1,0 +1,4 @@
+"""Record historical checkpoint identity without assuming a missing gene order."""
+from pathlib import Path
+import json,torch,pandas as pd,hashlib
+R=Path(__file__).resolve().parents[1];p=R/'runs/uploaded_checkpoint_unmatched/model.pt';c=torch.load(p,map_location='cpu',weights_only=True);primary=json.loads((R/'runs/20260418_104826/result.json').read_text());out={'uploaded_checkpoint_epoch':c['epoch'],'uploaded_checkpoint_val_loss':c['val_loss'],'uploaded_model_config':c['model_cfg'],'uploaded_drug_to_idx':c['drug_to_idx'],'uploaded_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'primary_result':primary,'identity_status':'configuration and validation metadata do not match the designated run','gene_order_status':'original gene order absent from uploaded checkpoint'};(R/'analysis/corrected_20260920/checkpoint_audit.json').write_text(json.dumps(out,indent=2));print(out)

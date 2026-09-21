@@ -37,3 +37,12 @@ analyze:
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
 	find . -name "*.pyc" -delete
+
+PYTHON ?= python
+.PHONY: research-download research-analysis research-check
+research-download:
+	$(PYTHON) scripts/05_download_research_data.py
+research-analysis:
+	PYTHON="$(PYTHON)" bash scripts/run_research_analysis.sh
+research-check:
+	$(PYTHON) tests/test_research_invariants.py
