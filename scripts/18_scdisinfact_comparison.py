@@ -122,10 +122,23 @@ def verify_split(obs: pd.DataFrame, tr, va, te):
         .sort_values(["study", "arm", "sample_id", "split"])
         .reset_index(drop=True)
     )
+    # Pandas preserves AnnData categorical dtypes in `current`, whereas
+    # read_csv returns string-backed columns in `expected`. Compare the
+    # actual split labels/counts after normalizing representation dtypes.
+    key_cols = ["study", "arm", "sample_id", "split"]
+    current_cmp = current[expected.columns].copy()
+    expected_cmp = expected.copy()
+    for col in key_cols:
+        current_cmp[col] = current_cmp[col].astype(str)
+        expected_cmp[col] = expected_cmp[col].astype(str)
+    current_cmp["n_cells"] = current_cmp["n_cells"].astype(np.int64)
+    expected_cmp["n_cells"] = expected_cmp["n_cells"].astype(np.int64)
+
     pd.testing.assert_frame_equal(
-        current[expected.columns],
-        expected,
-        check_dtype=False,
+        current_cmp,
+        expected_cmp,
+        check_dtype=True,
+        check_categorical=False,
     )
 
 
