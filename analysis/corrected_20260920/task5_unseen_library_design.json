@@ -1,0 +1,40 @@
+{
+  "validation_type": "leave-one-GEO-replicate-pair-out deposited-library validation",
+  "heldout_pairs": {
+    "replicate_1": {
+      "control": "D20-6407",
+      "cisplatin": "D20-6409"
+    },
+    "replicate_2": {
+      "control": "D21-2746",
+      "cisplatin": "D21-2750"
+    },
+    "replicate_3": {
+      "control": "D21-2747",
+      "cisplatin": "D21-2751"
+    }
+  },
+  "rescue_arms_used": false,
+  "train_per_study_treatment_stratum": 1500,
+  "validation_per_study_treatment_stratum": 100,
+  "training_cells_per_fold": 6000,
+  "validation_cells_per_fold": 400,
+  "hvg_count": 1500,
+  "hvg_selection": "training cells only, seurat_v3, batch_key=study",
+  "neural_modes": [
+    "full",
+    "gaussian_vae"
+  ],
+  "neural_seeds": [
+    0,
+    1,
+    2
+  ],
+  "baselines": [
+    "PCA(32)",
+    "training gene-wise mean"
+  ],
+  "primary_metric": "within-fold mean of heldout control-library MSE and heldout cisplatin-library MSE; folds weighted equally",
+  "scope": "unseen deposited libraries within GSE216146; not unseen study and not necessarily leave-one-animal-out",
+  "GSE271055_limitation": "no analogous treatment-balanced library holdout because only one pooled control and one pooled doxorubicin library exist"
+}
