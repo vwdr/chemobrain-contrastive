@@ -1,9 +1,9 @@
-study,sample_id,original_drug,batch_group
-GSE216146,D20-6407,control,D20
-GSE216146,D20-6409,cisplatin,D20
-GSE216146,D21-2746,control,D21
-GSE216146,D21-2747,control,D21
-GSE216146,D21-2750,cisplatin,D21
-GSE216146,D21-2751,cisplatin,D21
+study,sample_id,original_drug,exchangeability_group
+GSE216146,D20-6407,control,replicate_1
+GSE216146,D20-6409,cisplatin,replicate_1
+GSE216146,D21-2746,control,replicate_2
+GSE216146,D21-2747,control,replicate_3
+GSE216146,D21-2750,cisplatin,replicate_2
+GSE216146,D21-2751,cisplatin,replicate_3
 GSE271055,GSM8367861,control,pooled_pair
 GSE271055,GSM8367862,doxorubicin,pooled_pair
