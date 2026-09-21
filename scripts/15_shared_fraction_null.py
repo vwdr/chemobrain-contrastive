@@ -181,58 +181,88 @@ def prepare() -> None:
     assert len(lib_meta) == 8, f"Expected 8 non-rescue libraries, got {len(lib_meta)}"
     assert set(lib_meta.study) == {"GSE216146", "GSE271055"}
 
-    rng = np.random.default_rng(SPLIT_SEED)
-    split_rows = []
-    train_global, val_global, test_global = [], [], []
-
-    for sid in sorted(lib_meta.sample_id.astype(str)):
-        study_for_library = str(
-            lib_meta.loc[lib_meta.sample_id.astype(str) == sid, "study"].iloc[0]
+    split_path = OUT / "task2_balanced_library_split.csv"
+    if split_path.exists():
+        split_df = pd.read_csv(split_path)
+        required = {"global_index", "sample_id", "split"}
+        assert required.issubset(split_df.columns)
+        assert len(split_df) == 7200
+        gi = split_df.global_index.to_numpy(dtype=np.int64)
+        assert np.all(gi >= 0) and np.all(gi < len(obs))
+        assert not obs.rescue.astype(bool).to_numpy()[gi].any()
+        assert np.array_equal(
+            obs.sample_id.astype(str).to_numpy()[gi],
+            split_df.sample_id.astype(str).to_numpy(),
         )
-        counts = SPLIT_COUNTS[study_for_library]
-        n_required = sum(counts.values())
-        idx = np.flatnonzero(
-            (~obs.rescue.astype(bool).to_numpy())
-            & (obs.sample_id.astype(str).to_numpy() == sid)
-        )
-        assert len(idx) >= n_required, (
-            f"{sid} has only {len(idx)} retained pure cells; "
-            f"{n_required} required"
-        )
-        chosen = rng.permutation(idx)[:n_required]
-        ntr = counts["train"]
-        nva = counts["validation"]
-        parts = {
-            "train": chosen[:ntr],
-            "validation": chosen[ntr : ntr + nva],
-            "test": chosen[ntr + nva : n_required],
-        }
-        assert len(parts["test"]) == counts["test"]
+        train_global = split_df.loc[
+            split_df.split == "train", "global_index"
+        ].to_numpy(dtype=np.int64)
+        val_global = split_df.loc[
+            split_df.split == "validation", "global_index"
+        ].to_numpy(dtype=np.int64)
+        test_global = split_df.loc[
+            split_df.split == "test", "global_index"
+        ].to_numpy(dtype=np.int64)
+        split_source = "existing_task2_balanced_library_split"
+    else:
+        rng = np.random.default_rng(SPLIT_SEED)
+        split_rows = []
+        train_global, val_global, test_global = [], [], []
 
-        train_global.extend(parts["train"].tolist())
-        val_global.extend(parts["validation"].tolist())
-        test_global.extend(parts["test"].tolist())
+        for sid in sorted(lib_meta.sample_id.astype(str)):
+            study_for_library = str(
+                lib_meta.loc[lib_meta.sample_id.astype(str) == sid, "study"].iloc[0]
+            )
+            counts = SPLIT_COUNTS[study_for_library]
+            n_required = sum(counts.values())
+            idx = np.flatnonzero(
+                (~obs.rescue.astype(bool).to_numpy())
+                & (obs.sample_id.astype(str).to_numpy() == sid)
+            )
+            assert len(idx) >= n_required, (
+                f"{sid} has only {len(idx)} retained pure cells; "
+                f"{n_required} required"
+            )
+            chosen = rng.permutation(idx)[:n_required]
+            ntr = counts["train"]
+            nva = counts["validation"]
+            parts = {
+                "train": chosen[:ntr],
+                "validation": chosen[ntr : ntr + nva],
+                "test": chosen[ntr + nva : n_required],
+            }
+            assert len(parts["test"]) == counts["test"]
 
-        for split_name, vals in parts.items():
-            for gi in vals:
-                split_rows.append(
-                    {
-                        "global_index": int(gi),
-                        "cell_id": str(a.obs_names[gi]),
-                        "study": str(obs.study.iloc[gi]),
-                        "sample_id": str(obs.sample_id.iloc[gi]),
-                        "exchangeability_group": _exchangeability_group(
-                            str(obs.study.iloc[gi]), str(obs.sample_id.iloc[gi])
-                        ),
-                        "original_drug": str(obs.drug.iloc[gi]),
-                        "source_cell_type": str(obs.source_cell_type.iloc[gi]),
-                        "split": split_name,
-                    }
-                )
+            train_global.extend(parts["train"].tolist())
+            val_global.extend(parts["validation"].tolist())
+            test_global.extend(parts["test"].tolist())
 
-    train_global = np.asarray(train_global, dtype=np.int64)
-    val_global = np.asarray(val_global, dtype=np.int64)
-    test_global = np.asarray(test_global, dtype=np.int64)
+            for split_name, vals in parts.items():
+                for gi in vals:
+                    split_rows.append(
+                        {
+                            "global_index": int(gi),
+                            "cell_id": str(a.obs_names[gi]),
+                            "study": str(obs.study.iloc[gi]),
+                            "sample_id": str(obs.sample_id.iloc[gi]),
+                            "exchangeability_group": _exchangeability_group(
+                                str(obs.study.iloc[gi]),
+                                str(obs.sample_id.iloc[gi]),
+                            ),
+                            "original_drug": str(obs.drug.iloc[gi]),
+                            "source_cell_type": str(
+                                obs.source_cell_type.iloc[gi]
+                            ),
+                            "split": split_name,
+                        }
+                    )
+
+        train_global = np.asarray(train_global, dtype=np.int64)
+        val_global = np.asarray(val_global, dtype=np.int64)
+        test_global = np.asarray(test_global, dtype=np.int64)
+        split_df = pd.DataFrame(split_rows)
+        split_df.to_csv(split_path, index=False)
+        split_source = "computed_label_independent_split"
 
     assert len(train_global) == 6000
     assert len(val_global) == 600
@@ -291,8 +321,6 @@ def prepare() -> None:
         global_index=selected_global,
     )
 
-    split_df = pd.DataFrame(split_rows)
-    split_df.to_csv(OUT / "task2_balanced_library_split.csv", index=False)
     lib_meta.to_csv(OUT / "task2_library_design.csv", index=False)
 
     assignments = _enumerate_assignments(lib_meta)
@@ -300,6 +328,7 @@ def prepare() -> None:
 
     metadata = {
         "split_seed": SPLIT_SEED,
+        "split_source": split_source,
         "per_library_split_counts": SPLIT_COUNTS,
         "n_libraries": int(len(lib_meta)),
         "n_train": int(len(train)),
