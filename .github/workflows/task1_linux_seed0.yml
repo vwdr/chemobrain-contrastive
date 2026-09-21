@@ -1,0 +1,86 @@
+name: Task 1 Linux seed 0 reproduction
+
+on:
+  workflow_dispatch:
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "2"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Show platform
+        run: |
+          python --version
+          uname -a
+          uname -m
+
+      - name: Install research environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-research.txt
+
+      - name: Show package versions
+        run: |
+          python - <<'PY'
+          import platform
+          import torch, numpy, pandas, scanpy, anndata, sklearn
+          print("Platform:", platform.platform())
+          print("Machine:", platform.machine())
+          print("Python:", platform.python_version())
+          print("Torch:", torch.__version__)
+          print("NumPy:", numpy.__version__)
+          print("Pandas:", pandas.__version__)
+          print("Scanpy:", scanpy.__version__)
+          print("AnnData:", anndata.__version__)
+          print("scikit-learn:", sklearn.__version__)
+          PY
+
+      - name: Download public inputs
+        run: python scripts/05_download_research_data.py
+
+      - name: Recover corrected cohort
+        run: python scripts/05_recover_cohort.py
+
+      - name: Verify recovered data hash
+        run: |
+          sha256sum data/processed/recovered_counts.h5ad
+
+      - name: Prepare benchmark
+        run: python scripts/06_validation.py --prepare
+
+      - name: Verify benchmark gene universe
+        run: |
+          git diff --exit-code analysis/corrected_20260920/benchmark_gene_universe.csv
+
+      - name: Train full model seed 0
+        run: python scripts/06_validation.py --mode full --seed 0 --epochs 100
+
+      - name: Show metrics
+        run: cat runs/corrected_20260920/full_0_metrics.json
+
+      - name: Collect reproduction outputs
+        run: |
+          mkdir task1_linux_seed0
+          cp runs/corrected_20260920/full_0.pt task1_linux_seed0/
+          cp runs/corrected_20260920/full_0_latents.npz task1_linux_seed0/
+          cp runs/corrected_20260920/full_0_metrics.json task1_linux_seed0/
+          cp runs/corrected_20260920/full_0_history.csv task1_linux_seed0/
+
+      - name: Upload outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: task1-linux-seed0
+          path: task1_linux_seed0/
+          retention-days: 7
