@@ -80,7 +80,7 @@ jobs:
           echo "===== ASSIGNMENTS ====="
           cat analysis/corrected_20260920/task2_label_assignments.csv
 
-      - name: Run exact 24-assignment reference distribution
+      - name: Run exact 16-assignment reference distribution
         run: |
           python scripts/15_shared_fraction_null.py --run --epochs 100
 
