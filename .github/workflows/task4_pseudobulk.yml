@@ -1,0 +1,99 @@
+name: Task 4 paired pseudobulk
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/16_pseudobulk_paired.py"
+      - "requirements-task4.txt"
+      - ".github/workflows/task4_pseudobulk.yml"
+
+jobs:
+  paired-pseudobulk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "2"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install research environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-research.txt
+          python -m pip install -r requirements-task4.txt
+
+      - name: Show versions
+        run: |
+          python - <<'PY'
+          import platform
+          import pydeseq2
+          import numpy, pandas, scipy, anndata
+          print("Platform:", platform.platform())
+          print("Python:", platform.python_version())
+          print("PyDESeq2:", pydeseq2.__version__)
+          print("NumPy:", numpy.__version__)
+          print("Pandas:", pandas.__version__)
+          print("SciPy:", scipy.__version__)
+          print("AnnData:", anndata.__version__)
+          PY
+
+      - name: Download public inputs
+        run: python scripts/05_download_research_data.py
+
+      - name: Recover corrected cohort
+        run: python scripts/05_recover_cohort.py
+
+      - name: Verify recovered data hash
+        run: |
+          ACTUAL=$(sha256sum data/processed/recovered_counts.h5ad | awk '{print $1}')
+          EXPECTED="62a5047e74d4ea704f2a10b5b91b35a4836ccefc99186d4c72101db78cbd8ac1"
+          echo "Actual:   $ACTUAL"
+          echo "Expected: $EXPECTED"
+          test "$ACTUAL" = "$EXPECTED"
+
+      - name: Run paired pseudobulk
+        run: python scripts/16_pseudobulk_paired.py
+
+      - name: Show Task 4 results
+        run: |
+          echo "===== CISPLATIN SUMMARY ====="
+          cat analysis/corrected_20260920/pseudobulk_task4_summary.csv
+          echo
+          echo "===== SKIPPED CELL-TYPE/CONTRAST COMBINATIONS ====="
+          cat analysis/corrected_20260920/pseudobulk_task4_skipped.csv || true
+          echo
+          echo "===== DOX DESCRIPTIVE SUMMARY ====="
+          cat analysis/corrected_20260920/pseudobulk_task4_dox_summary.csv
+          echo
+          echo "===== METHOD ====="
+          cat analysis/corrected_20260920/pseudobulk_task4_method.json
+
+      - name: Collect outputs
+        if: always()
+        run: |
+          mkdir -p task4_pseudobulk
+          for f in             pseudobulk_task4_library_qc.csv             pseudobulk_task4_paired_results.csv.gz             pseudobulk_task4_summary.csv             pseudobulk_task4_skipped.csv             pseudobulk_task4_dox_descriptive.csv.gz             pseudobulk_task4_dox_summary.csv             pseudobulk_task4_method.json
+          do
+            if [ -f "analysis/corrected_20260920/$f" ]; then
+              cp "analysis/corrected_20260920/$f" task4_pseudobulk/
+            fi
+          done
+
+      - name: Upload outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: task4-paired-pseudobulk
+          path: task4_pseudobulk/
+          retention-days: 7
