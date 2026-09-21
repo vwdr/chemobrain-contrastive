@@ -12,7 +12,7 @@ def get(pair):
 jobs=[]
 for acc in ['GSE216146','GSE271055','GSE286221']:jobs.append((f'https://ftp.ncbi.nlm.nih.gov/geo/series/{acc[:-3]}nnn/{acc}/soft/{acc}_family.soft.gz',E/f'{acc}.soft.gz'))
 for acc,name in [('GSE216146','GSE216146_chemo_brain.h5ad.gz'),('GSE271055','GSE271055_RAW.tar')]:jobs.append((f'https://ftp.ncbi.nlm.nih.gov/geo/series/{acc[:-3]}nnn/{acc}/suppl/{name}',D/name))
-for n in ['m2.cp.reactome.v2025.1.Mm.symbols.gmt','m5.go.bp.v2025.1.Mm.symbols.gmt']:jobs.append(('https://data.broadinstitute.org/gsea-msigdb/msigdb/release/2025.1.Mm/'+n,E/n))
+for n in ['m2.cp.reactome.v2025.1.Mm.symbols.gmt','m5.go.bp.v2025.1.Mm.symbols.gmt','m8.all.v2025.1.Mm.symbols.gmt']:jobs.append(('https://data.broadinstitute.org/gsea-msigdb/msigdb/release/2025.1.Mm/'+n,E/n))
 with concurrent.futures.ThreadPoolExecutor(5) as ex:list(ex.map(get,jobs))
 for p in E.glob('*.gz'):
  with gzip.open(p,'rb') as f,open(p.with_suffix(''),'wb') as g:shutil.copyfileobj(f,g)
