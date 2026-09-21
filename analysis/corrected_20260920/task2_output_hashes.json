@@ -1,0 +1,12 @@
+{
+  "task2_design.json": "17b91bd210f889d58e7232540559240e12cb8323fa0dc398a4432951964e6815",
+  "task2_seedwise_null_summary.csv": "229ac80f34fabd62a80b62e0fdb6a07da76bac6abd10d02ef2b82084340d87ce",
+  "task2_label_assignments.csv": "2c9f09e1440db8b94f15d3ccd49847276c0cf0621335416ddfd836a27d3c9363",
+  "task2_balanced_library_split.csv": "87d2e35197466e31caa4ce6e6930d46471be2b793e27abbe7d7484ab7429ba49",
+  "task2_permutation_fits.csv": "8e8c5e578a11d4610d531218d35fd2e56ffc7fb3a58461379827afad680f6f7c",
+  "task2_environment.txt": "a0f778326850d37fa4d3a9d73cf52d7c51dc4bde361a6c5939933de843c75bb7",
+  "task2_null_test_summary.csv": "b5ba333fa83441f3f53f53cecbffaa006090968b4b89b4f4d937787987831726",
+  "task2_library_design.csv": "baa01dbad36228a44f852ea1880b2725cbc5f620ec264d98f71b0f33137e0ea5",
+  "task2_assignment_summary.csv": "ea2b92e4c109c3dcae1087df96e8334d355658cffe92d311b88e136b42ed1aa9",
+  "task2_gene_universe.csv": "f03d04ea06bd09e8e2c403fee66e82195de7c8bddedf13ade913d44b9e139eae"
+}
