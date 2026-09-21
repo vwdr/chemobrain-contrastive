@@ -18,6 +18,7 @@ done
 "$PYTHON" scripts/08_annotation.py
 "$PYTHON" scripts/09_interpretation.py
 "$PYTHON" scripts/10_pseudobulk.py
+"$PYTHON" scripts/16_pseudobulk_paired.py
 "$PYTHON" scripts/11_diagnostics.py
 "$PYTHON" tests/test_research_invariants.py
 "$PYTHON" scripts/13_collect_results.py
