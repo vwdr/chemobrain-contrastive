@@ -1,0 +1,17 @@
+cell_type,contrast,n_pairs,n_genes_tested,n_wald_p_lt_0p05,n_wald_padj_lt_0p05,minimum_wald_padj,n_exact_signflip_p_lt_0p05,minimum_exact_two_sided_p,theoretical_exact_two_sided_p_floor,n_welch_q_lt_0p05,deseq2_vs_paired_logcpm_effect_correlation
+Astrocyte,cisplatin_vs_control,3,8805,196,15,1.3351393426891024e-05,0,0.25,0.25,0,0.9677365493463951
+Astrocyte,control_GENUS_vs_control,3,8795,29,0,0.9998242906900133,0,0.25,0.25,0,0.963278865081623
+Astrocyte,cisplatin_GENUS_vs_cisplatin,3,7968,53,1,3.2935112318556983e-14,0,0.25,0.25,0,0.9382902782713071
+Choroid Plexus,cisplatin_vs_control,3,5955,155,1,1.6959471930668506e-05,0,0.25,0.25,1,0.9119135725684002
+Choroid Plexus,cisplatin_GENUS_vs_cisplatin,3,6953,72,7,7.857662277007605e-07,0,0.25,0.25,0,0.9006683409236509
+Endothelial,cisplatin_vs_control,3,8371,233,23,1.6296475229954377e-12,0,0.25,0.25,0,0.99269826669487
+Endothelial,cisplatin_GENUS_vs_cisplatin,3,8084,121,0,0.23790126948758586,0,0.25,0.25,0,0.9735178071323928
+Immune,cisplatin_vs_control,3,2022,54,6,3.54229366165674e-05,0,0.25,0.25,0,0.9545600180590781
+Microglia,cisplatin_vs_control,3,10048,653,109,1.0575545783276389e-13,0,0.25,0.25,0,0.9895648849103765
+Microglia,control_GENUS_vs_control,3,10086,57,1,5.341293422772454e-06,0,0.25,0.25,0,0.9429616147898
+Microglia,cisplatin_GENUS_vs_cisplatin,3,9233,138,11,2.879788007659205e-07,0,0.25,0.25,0,0.9620132578339843
+OPC,cisplatin_vs_control,3,8220,130,6,0.03832626991514262,0,0.25,0.25,0,0.9931749459129945
+OPC,control_GENUS_vs_control,3,8103,26,1,0.0326505930491596,0,0.25,0.25,0,0.9886853472827237
+Oligodendrocyte,cisplatin_vs_control,3,9963,814,137,8.824895423669089e-16,0,0.25,0.25,0,0.9907552829349279
+Oligodendrocyte,control_GENUS_vs_control,3,9837,48,0,0.9999487063189914,0,0.25,0.25,0,0.9590453635630342
+Oligodendrocyte,cisplatin_GENUS_vs_cisplatin,3,9214,293,36,2.2948150789297223e-12,0,0.25,0.25,0,0.9874999205360558
