@@ -1,0 +1,4 @@
+# Task 6 external-method comparison
+# Official scDisInFact repository pinned to the last upstream commit currently
+# available on main. Base scientific packages come from requirements-research.txt.
+git+https://github.com/ZhangLabGT/scDisInFact.git@9466ecf257d923f879cb39712c530d24826d88bc
