@@ -997,7 +997,8 @@ global_index,cell_id,study,sample_id,batch_group,original_drug,source_cell_type,
 14638,TGAGGAGCAGTTAGAA_D20-6409-0,GSE216146,D20-6409,D20,cisplatin,Choroid Plexus,train
 14250,CATCGCTCATGACCCG_D20-6409-0,GSE216146,D20-6409,D20,cisplatin,Endothelial,train
 14323,CTACCCACAGGGCTTC_D20-6409-0,GSE216146,D20-6409,D20,cisplatin,Astrocyte,train
-14468,GGGTAGATCATCTACT_D20-6409-0,GSE216146,D20-6409,D20,cisplatin,Microglia,train14414,GATGAGGAGTTACTCG_D20-6409-0,GSE216146,D20-6409,D20,cisplatin,Oligodendrocyte,train
+14468,GGGTAGATCATCTACT_D20-6409-0,GSE216146,D20-6409,D20,cisplatin,Microglia,train
+14414,GATGAGGAGTTACTCG_D20-6409-0,GSE216146,D20-6409,D20,cisplatin,Oligodendrocyte,train
 14496,GTAGCTAAGTGGCCTC_D20-6409-0,GSE216146,D20-6409,D20,cisplatin,Neuron,train
 14579,TCATACTCACTGAATC_D20-6409-0,GSE216146,D20-6409,D20,cisplatin,Microglia,train
 14267,CCATCACAGAATACAC_D20-6409-0,GSE216146,D20-6409,D20,cisplatin,Astrocyte,train
@@ -1996,7 +1997,8 @@ global_index,cell_id,study,sample_id,batch_group,original_drug,source_cell_type,
 3322,CTTCTAAAGAGGTATT_D21-2747-0,GSE216146,D21-2747,D21,control,Oligodendrocyte,train
 3240,CTAGACAGTGTAACGG_D21-2747-0,GSE216146,D21-2747,D21,control,Pericyte,train
 2599,AAGTACCAGCCATATC_D21-2747-0,GSE216146,D21-2747,D21,control,Microglia,train
-3190,CGGGTCAGTAACCCGC_D21-2747-0,GSE216146,D21-2747,D21,control,Microglia,train3402,GAGGCAACACATAGCT_D21-2747-0,GSE216146,D21-2747,D21,control,Neuron,train
+3190,CGGGTCAGTAACCCGC_D21-2747-0,GSE216146,D21-2747,D21,control,Microglia,train
+3402,GAGGCAACACATAGCT_D21-2747-0,GSE216146,D21-2747,D21,control,Neuron,train
 4189,TTGGTTTAGAAAGCGA_D21-2747-0,GSE216146,D21-2747,D21,control,Progenitor,train
 4019,TGCAGATTCTCCAAGA_D21-2747-0,GSE216146,D21-2747,D21,control,Oligodendrocyte,train
 3870,TCATTCATCCCGTAAA_D21-2747-0,GSE216146,D21-2747,D21,control,Oligodendrocyte,train
@@ -2995,7 +2997,8 @@ global_index,cell_id,study,sample_id,batch_group,original_drug,source_cell_type,
 9927,TCAGTCCAGAGCAAGA_D21-2750-0,GSE216146,D21-2750,D21,cisplatin,Oligodendrocyte,test
 9011,CGTCCATTCCATACTT_D21-2750-0,GSE216146,D21-2750,D21,cisplatin,Microglia,test
 8435,AGGTAGGCAGTATACC_D21-2750-0,GSE216146,D21-2750,D21,cisplatin,Endothelial,test
-10287,TTACCATCATGTGGTT_D21-2750-0,GSE216146,D21-2750,D21,cisplatin,Microglia,test10433,TTTGTTGAGAATTGCA_D21-2750-0,GSE216146,D21-2750,D21,cisplatin,Choroid Plexus,test
+10287,TTACCATCATGTGGTT_D21-2750-0,GSE216146,D21-2750,D21,cisplatin,Microglia,test
+10433,TTTGTTGAGAATTGCA_D21-2750-0,GSE216146,D21-2750,D21,cisplatin,Choroid Plexus,test
 11374,TTTGTTGTCCATCTCG_D21-2751-0,GSE216146,D21-2751,D21,cisplatin,Oligodendrocyte,train
 10855,GAAGCCCGTATCCCAA_D21-2751-0,GSE216146,D21-2751,D21,cisplatin,Astrocyte,train
 11022,GTAGGAGTCCAACTGA_D21-2751-0,GSE216146,D21-2751,D21,cisplatin,Endothelial,train
@@ -3994,7 +3997,8 @@ global_index,cell_id,study,sample_id,batch_group,original_drug,source_cell_type,
 15274,AAGCGAGCAGCAGAAC-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
 23037,TGAATGCGTCCGGATC-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
 21924,TACCTGCAGGAAGTGA-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
-22205,TATTGCTCAGGCGAAT-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train16877,ATCGTAGTCAAGAAAC-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
+22205,TATTGCTCAGGCGAAT-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
+16877,ATCGTAGTCAAGAAAC-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
 19765,GAGACTTAGAACTCCT-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
 18927,CTCAACCAGTAAAGCT-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
 22315,TCACGCTTCACCTTGC-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
@@ -4993,7 +4997,8 @@ global_index,cell_id,study,sample_id,batch_group,original_drug,source_cell_type,
 24163,TTGCTGCGTACAAGTA-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
 21592,GTTCCGTGTATGTCCA-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
 16539,AGTCAACGTAACGTTC-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
-23734,TTAATCCGTCACTACA-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train21651,GTTGCTCGTTGCCGCA-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
+23734,TTAATCCGTCACTACA-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
+21651,GTTGCTCGTTGCCGCA-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
 23870,TTCACGCAGTCCCAGC-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
 19982,GATGAGGAGGTACCTT-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
 16594,AGTGCCGGTAGACAAT-1_GSM8367861-1,GSE271055,GSM8367861,pooled_pair,control,unannotated,train
@@ -5992,7 +5997,8 @@ global_index,cell_id,study,sample_id,batch_group,original_drug,source_cell_type,
 30554,GCTTCACCACAAGCCC-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,train
 34107,TGTGCGGTCGTGCACG-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,train
 27382,CAGATTGTCCTACCGT-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,train
-31720,GTTACCCGTCTTGTCC-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,train31721,GTTACCCGTGTTTCTT-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,train
+31720,GTTACCCGTCTTGTCC-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,train
+31721,GTTACCCGTGTTTCTT-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,train
 27608,CATGAGTCATTAAGCC-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,train
 32661,TCAGGTATCCACAGCG-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,train
 33346,TCTGTCGCATGTCTAG-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,train
@@ -6991,7 +6997,8 @@ global_index,cell_id,study,sample_id,batch_group,original_drug,source_cell_type,
 28876,CTATAGGAGACTACGG-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,validation
 26544,ATCGGCGTCCGAGGCT-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,validation
 31994,TAAGTCGTCGGTCTAA-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,validation
-25607,AGAACAATCAAGCTGT-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,validation33084,TCGATTTTCGTGTTCC-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,validation
+25607,AGAACAATCAAGCTGT-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,validation
+33084,TCGATTTTCGTGTTCC-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,validation
 32101,TACCGGGGTACGCGTC-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,validation
 31419,GTCCTCATCTTCGTAT-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,validation
 29937,GAGTCTACATCAGCTA-1_GSM8367862-1,GSE271055,GSM8367862,pooled_pair,doxorubicin,unannotated,validation
