@@ -233,7 +233,14 @@ def main():
                 "hypergeom_p_scdisinfact_top100_overlap": p_scd,
             }
         )
-    pd.DataFrame(cross).to_csv(
+    cross_df = pd.DataFrame(cross)
+    cross_df["q_cisplatin_DE_overlap_bh"] = multipletests(
+        cross_df["hypergeom_p_cisplatin_DE_overlap"], method="fdr_bh"
+    )[1]
+    cross_df["q_scdisinfact_top100_overlap_bh"] = multipletests(
+        cross_df["hypergeom_p_scdisinfact_top100_overlap"], method="fdr_bh"
+    )[1]
+    cross_df.to_csv(
         OUT / "task7_cross_validation_summary.csv", index=False
     )
 
@@ -320,7 +327,7 @@ def main():
     )
 
     print("===== TASK 7 CROSS VALIDATION =====")
-    print(pd.DataFrame(cross).to_string(index=False))
+    print(cross_df.to_string(index=False))
     print("\n===== TASK 7 ENRICHMENT SUMMARY =====")
     print(sig.to_string(index=False))
     print("\n===== TASK 7 TOP TERMS =====")
