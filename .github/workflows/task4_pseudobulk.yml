@@ -83,7 +83,7 @@ jobs:
         if: always()
         run: |
           mkdir -p task4_pseudobulk
-          for f in             pseudobulk_task4_library_qc.csv             pseudobulk_task4_paired_results.csv.gz             pseudobulk_task4_summary.csv             pseudobulk_task4_skipped.csv             pseudobulk_task4_dox_descriptive.csv.gz             pseudobulk_task4_dox_summary.csv             pseudobulk_task4_method.json
+          for f in             pseudobulk_task4_library_qc.csv             pseudobulk_task4_paired_results.csv.gz             pseudobulk_task4_summary.csv             pseudobulk_task4_robustness.csv             pseudobulk_task4_top_hits.csv             pseudobulk_task4_skipped.csv             pseudobulk_task4_dox_descriptive.csv.gz             pseudobulk_task4_dox_summary.csv             pseudobulk_task4_method.json
           do
             if [ -f "analysis/corrected_20260920/$f" ]; then
               cp "analysis/corrected_20260920/$f" task4_pseudobulk/
