@@ -1,0 +1,29 @@
+{
+  "split_seed": 1729,
+  "per_library_split_counts": {
+    "GSE216146": {
+      "train": 500,
+      "validation": 50,
+      "test": 50
+    },
+    "GSE271055": {
+      "train": 1500,
+      "validation": 150,
+      "test": 150
+    }
+  },
+  "n_libraries": 8,
+  "n_train": 6000,
+  "n_validation": 600,
+  "n_test": 600,
+  "n_hvg": 1500,
+  "gene_source": "computed_from_label_independent_training_cells",
+  "n_exact_label_assignments": 24,
+  "primary_statistic": "mean pooled shared_fraction across seeds 0,1,2",
+  "exchangeability_constraints": {
+    "GSE216146_D20": "preserve 1 cisplatin and 1 control library",
+    "GSE216146_D21": "preserve 2 cisplatin and 2 control libraries",
+    "GSE271055": "preserve 1 doxorubicin and 1 control pooled library"
+  },
+  "inference_scope": "Exact upper-tail label-exchangeability reference distribution; conditional on exchangeability assumptions and not a randomized-trial biological significance test."
+}
