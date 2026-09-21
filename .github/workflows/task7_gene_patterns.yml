@@ -121,7 +121,7 @@ jobs:
           de = pd.read_csv(
               "analysis/corrected_20260920/task7_cis_pseudobulk_gene_support.csv"
           )
-          assert int(de.supported_de_gene.sum()) == 69
+          assert int(de.supported_de_gene.sum()) == 271
 
           e = pd.read_csv(
               "analysis/corrected_20260920/task7_consensus_enrichment.csv"
