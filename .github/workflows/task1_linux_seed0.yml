@@ -5,7 +5,7 @@ on:
 
 jobs:
   reproduce:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     env:
       OPENBLAS_NUM_THREADS: "1"
@@ -35,7 +35,13 @@ jobs:
         run: |
           python - <<'PY'
           import platform
-          import torch, numpy, pandas, scanpy, anndata, sklearn
+          import torch
+          import numpy
+          import pandas
+          import scanpy
+          import anndata
+          import sklearn
+
           print("Platform:", platform.platform())
           print("Machine:", platform.machine())
           print("Python:", platform.python_version())
@@ -55,28 +61,174 @@ jobs:
 
       - name: Verify recovered data hash
         run: |
-          sha256sum data/processed/recovered_counts.h5ad
+          ACTUAL=$(sha256sum data/processed/recovered_counts.h5ad | awk '{print $1}')
+          EXPECTED="62a5047e74d4ea704f2a10b5b91b35a4836ccefc99186d4c72101db78cbd8ac1"
+
+          echo "Actual:   $ACTUAL"
+          echo "Expected: $EXPECTED"
+
+          test "$ACTUAL" = "$EXPECTED"
 
       - name: Prepare benchmark
         run: python scripts/06_validation.py --prepare
 
-      - name: Verify benchmark gene universe
+      - name: Rebuild benchmark with committed gene universe
         run: |
-          git diff --exit-code analysis/corrected_20260920/benchmark_gene_universe.csv
+          cp runs/corrected_20260920/inputs.npz /tmp/prepared_inputs.npz
+
+          git restore analysis/corrected_20260920/benchmark_gene_universe.csv
+
+          python - <<'PY'
+          import numpy as np
+          import pandas as pd
+          import anndata as ad
+          import scanpy as sc
+
+          run = "runs/corrected_20260920"
+          gene_file = "analysis/corrected_20260920/benchmark_gene_universe.csv"
+
+          genes = pd.read_csv(gene_file)["gene"].astype(str).tolist()
+
+          old = np.load("/tmp/prepared_inputs.npz")
+          train = old["train"].copy()
+          val = old["val"].copy()
+          test = old["test"].copy()
+
+          a = ad.read_h5ad("data/processed/recovered_counts.h5ad")
+          obs = a.obs.copy()
+
+          missing = [g for g in genes if g not in a.var_names]
+          assert not missing, f"Missing committed genes: {missing}"
+
+          counts = a[:, genes].X.toarray().astype("float32")
+          library = np.asarray(a.X.sum(1)).ravel().astype("float32")
+
+          np.savez_compressed(
+              f"{run}/count_inputs.npz",
+              C=counts,
+              library=library
+          )
+
+          sc.pp.normalize_total(a, target_sum=1e4)
+          sc.pp.log1p(a)
+
+          X = a[:, genes].X.toarray().astype("float32")
+
+          d = obs.drug.map({
+              "control": 0,
+              "doxorubicin": 1,
+              "cisplatin": 2
+          }).values.astype("int64")
+
+          b = (obs.study == "GSE271055").values.astype("int64")
+
+          np.savez_compressed(
+              f"{run}/inputs.npz",
+              X=X,
+              d=d,
+              b=b,
+              train=train,
+              val=val,
+              test=test,
+              genes=np.asarray(genes, dtype="U")
+          )
+
+          print("X shape:", X.shape)
+          print("Canonical genes:", len(genes))
+          print("Contains Aspm:", "Aspm" in genes)
+          print("Contains Cebpd:", "Cebpd" in genes)
+          print("Contains Cyp2d22:", "Cyp2d22" in genes)
+          print("Contains Zic3:", "Zic3" in genes)
+          print(
+              "Train/val/test:",
+              len(train),
+              len(val),
+              len(test)
+          )
+
+          assert X.shape == (46857, 1500)
+          assert len(genes) == 1500
+          assert len(train) == 6000
+          assert len(val) == 2881
+          assert len(test) == 2881
+          PY
 
       - name: Train full model seed 0
-        run: python scripts/06_validation.py --mode full --seed 0 --epochs 100
+        run: |
+          python scripts/06_validation.py \
+            --mode full \
+            --seed 0 \
+            --epochs 100
 
       - name: Show metrics
-        run: cat runs/corrected_20260920/full_0_metrics.json
+        run: |
+          echo "===== NEW LINUX SEED 0 RESULT ====="
+          cat runs/corrected_20260920/full_0_metrics.json
+
+      - name: Compare with committed result
+        run: |
+          python - <<'PY'
+          import json
+          import subprocess
+
+          with open(
+              "runs/corrected_20260920/full_0_metrics.json"
+          ) as f:
+              new = json.load(f)
+
+          committed_text = subprocess.check_output(
+              [
+                  "git",
+                  "show",
+                  "HEAD:runs/corrected_20260920/full_0_metrics.json"
+              ],
+              text=True
+          )
+          old = json.loads(committed_text)
+
+          print("Committed shared_fraction:", old["shared_fraction"])
+          print("New Linux shared_fraction:", new["shared_fraction"])
+          print(
+              "Difference:",
+              new["shared_fraction"] - old["shared_fraction"]
+          )
+
+          print()
+          print("Committed test_mse:", old["test_mse"])
+          print("New Linux test_mse:", new["test_mse"])
+          print(
+              "MSE difference:",
+              new["test_mse"] - old["test_mse"]
+          )
+          PY
 
       - name: Collect reproduction outputs
         run: |
-          mkdir task1_linux_seed0
-          cp runs/corrected_20260920/full_0.pt task1_linux_seed0/
-          cp runs/corrected_20260920/full_0_latents.npz task1_linux_seed0/
-          cp runs/corrected_20260920/full_0_metrics.json task1_linux_seed0/
-          cp runs/corrected_20260920/full_0_history.csv task1_linux_seed0/
+          mkdir -p task1_linux_seed0
+
+          cp \
+            runs/corrected_20260920/full_0.pt \
+            task1_linux_seed0/
+
+          cp \
+            runs/corrected_20260920/full_0_latents.npz \
+            task1_linux_seed0/
+
+          cp \
+            runs/corrected_20260920/full_0_metrics.json \
+            task1_linux_seed0/
+
+          cp \
+            runs/corrected_20260920/full_0_history.csv \
+            task1_linux_seed0/
+
+          cp \
+            runs/corrected_20260920/inputs.npz \
+            task1_linux_seed0/
+
+          cp \
+            analysis/corrected_20260920/benchmark_gene_universe.csv \
+            task1_linux_seed0/
 
       - name: Upload outputs
         uses: actions/upload-artifact@v4
