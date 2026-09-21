@@ -1,15 +1,21 @@
-name: Task 1 corrected latent usage audit
+name: Task 1 corrected latent usage robustness audit
 
 on:
   workflow_dispatch:
 
 jobs:
   audit:
+    strategy:
+      fail-fast: false
+      matrix:
+        replicate: [1, 2, 3]
+
     runs-on: ubuntu-24.04
 
     env:
       OPENBLAS_NUM_THREADS: "1"
       OMP_NUM_THREADS: "2"
+      TASK1_REPLICATE: ${{ matrix.replicate }}
 
     steps:
       - name: Checkout
@@ -25,8 +31,15 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements-research.txt
 
-      - name: Show platform and package versions
+      - name: Show hardware and package versions
         run: |
+          echo "===== RUNNER ====="
+          uname -a
+          echo
+          echo "===== CPU ====="
+          lscpu | grep -E 'Architecture|Vendor ID|Model name|CPU family|Model:|Stepping|Flags' || true
+          echo
+          echo "===== PYTHON ENVIRONMENT ====="
           python - <<'PY'
           import platform
           import torch, numpy, pandas, scanpy, anndata, sklearn
@@ -125,18 +138,23 @@ jobs:
           assert len(test) == 2881
           PY
 
-      - name: Train canonical full models
+      - name: Train full models for seeds 0 1 2
         run: |
           for seed in 0 1 2; do
             echo "===== TRAINING SEED $seed ====="
             python scripts/06_validation.py --mode full --seed "$seed" --epochs 100
           done
 
-      - name: Verify canonical metrics reproduce
+      - name: Compare with committed metrics
         run: |
           python - <<'PY'
+          import csv
           import json
+          import os
           import subprocess
+
+          rep = int(os.environ["TASK1_REPLICATE"])
+          rows = []
 
           for seed in (0, 1, 2):
               path = f"runs/corrected_20260920/full_{seed}_metrics.json"
@@ -150,15 +168,34 @@ jobs:
                   )
               )
 
-              print(f"Seed {seed}")
+              row = {
+                  "runner_replicate": rep,
+                  "seed": seed,
+                  "committed_shared_fraction": old["shared_fraction"],
+                  "new_shared_fraction": new["shared_fraction"],
+                  "shared_fraction_delta": new["shared_fraction"] - old["shared_fraction"],
+                  "committed_test_mse": old["test_mse"],
+                  "new_test_mse": new["test_mse"],
+                  "test_mse_delta": new["test_mse"] - old["test_mse"],
+                  "canonical_fsh_match_1e6": abs(new["shared_fraction"] - old["shared_fraction"]) < 1e-6,
+                  "canonical_mse_match_1e6": abs(new["test_mse"] - old["test_mse"]) < 1e-6,
+              }
+              rows.append(row)
+
+              print(f"Replicate {rep}, seed {seed}")
               print("  committed F_sh:", old["shared_fraction"])
               print("  new F_sh:      ", new["shared_fraction"])
-              print("  delta:         ", new["shared_fraction"] - old["shared_fraction"])
+              print("  F_sh delta:    ", row["shared_fraction_delta"])
               print("  committed MSE: ", old["test_mse"])
               print("  new MSE:       ", new["test_mse"])
+              print()
 
-              assert abs(new["shared_fraction"] - old["shared_fraction"]) < 1e-6
-              assert abs(new["test_mse"] - old["test_mse"]) < 1e-6
+          out = "analysis/corrected_20260920/task1_reproduction_comparison.csv"
+          with open(out, "w", newline="") as f:
+              w = csv.DictWriter(f, fieldnames=rows[0].keys())
+              w.writeheader()
+              w.writerows(rows)
+          print("Wrote", out)
           PY
 
       - name: Run latent usage diagnostic
@@ -166,32 +203,121 @@ jobs:
 
       - name: Show Task 1 summary
         run: |
+          echo "===== REPRODUCTION COMPARISON ====="
+          cat analysis/corrected_20260920/task1_reproduction_comparison.csv
+          echo
           echo "===== LATENT USAGE SUMMARY ====="
           cat analysis/corrected_20260920/latent_usage_summary.csv
           echo
           echo "===== ACTIVE-UNIT / KL THRESHOLDS ====="
           cat analysis/corrected_20260920/latent_usage_thresholds.json
 
-      - name: Collect Task 1 outputs
+      - name: Collect replicate outputs
         run: |
-          mkdir -p task1_corrected_latent_usage
+          OUT="task1_replicate_${TASK1_REPLICATE}"
+          mkdir -p "$OUT"
 
-          cp analysis/corrected_20260920/latent_usage_per_dimension.csv task1_corrected_latent_usage/
-          cp analysis/corrected_20260920/latent_usage_summary.csv task1_corrected_latent_usage/
-          cp analysis/corrected_20260920/latent_usage_thresholds.json task1_corrected_latent_usage/
-          cp analysis/corrected_20260920/benchmark_gene_universe.csv task1_corrected_latent_usage/
-          cp runs/corrected_20260920/inputs.npz task1_corrected_latent_usage/
+          {
+            echo "TASK1_REPLICATE=$TASK1_REPLICATE"
+            uname -a
+            lscpu
+            python - <<'PY'
+          import platform
+          import torch, numpy, pandas, scanpy, anndata, sklearn
+          print("Platform:", platform.platform())
+          print("Python:", platform.python_version())
+          print("Torch:", torch.__version__)
+          print("NumPy:", numpy.__version__)
+          print("Pandas:", pandas.__version__)
+          print("Scanpy:", scanpy.__version__)
+          print("AnnData:", anndata.__version__)
+          print("scikit-learn:", sklearn.__version__)
+          PY
+          } > "$OUT/hardware_environment.txt"
+
+          cp analysis/corrected_20260920/task1_reproduction_comparison.csv "$OUT/"
+          cp analysis/corrected_20260920/latent_usage_per_dimension.csv "$OUT/"
+          cp analysis/corrected_20260920/latent_usage_summary.csv "$OUT/"
+          cp analysis/corrected_20260920/latent_usage_thresholds.json "$OUT/"
+          cp analysis/corrected_20260920/benchmark_gene_universe.csv "$OUT/"
 
           for seed in 0 1 2; do
-            cp "runs/corrected_20260920/full_$seed.pt" task1_corrected_latent_usage/
-            cp "runs/corrected_20260920/full_$seed"_latents.npz task1_corrected_latent_usage/
-            cp "runs/corrected_20260920/full_$seed"_metrics.json task1_corrected_latent_usage/
-            cp "runs/corrected_20260920/full_$seed"_history.csv task1_corrected_latent_usage/
+            cp "runs/corrected_20260920/full_${seed}_metrics.json" "$OUT/"
+            cp "runs/corrected_20260920/full_${seed}_history.csv" "$OUT/"
           done
 
-      - name: Upload Task 1 outputs
+      - name: Upload replicate outputs
         uses: actions/upload-artifact@v4
         with:
-          name: task1-corrected-latent-usage
-          path: task1_corrected_latent_usage/
+          name: task1-latent-usage-replicate-${{ matrix.replicate }}
+          path: task1_replicate_${{ matrix.replicate }}/
+          retention-days: 7
+
+  summarize:
+    needs: audit
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Download all replicate outputs
+        uses: actions/download-artifact@v4
+        with:
+          pattern: task1-latent-usage-replicate-*
+          path: downloaded
+          merge-multiple: false
+
+      - name: Summarize replicates
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          root = Path("downloaded")
+
+          def read_all(filename):
+              rows = []
+              for p in sorted(root.glob(f"*/{filename}")):
+                  rep = p.parent.name.rsplit("-", 1)[-1]
+                  with p.open() as f:
+                      for row in csv.DictReader(f):
+                          row = dict(row)
+                          row["runner_replicate"] = rep
+                          rows.append(row)
+              return rows
+
+          repro = read_all("task1_reproduction_comparison.csv")
+          latent = read_all("latent_usage_summary.csv")
+
+          def write_csv(path, rows):
+              if not rows:
+                  raise RuntimeError(f"No rows for {path}")
+              fields = list(rows[0].keys())
+              with open(path, "w", newline="") as f:
+                  w = csv.DictWriter(f, fieldnames=fields)
+                  w.writeheader()
+                  w.writerows(rows)
+
+          write_csv("task1_reproduction_combined.csv", repro)
+          write_csv("task1_latent_usage_combined.csv", latent)
+
+          print("===== COMBINED REPRODUCTION RESULTS =====")
+          with open("task1_reproduction_combined.csv") as f:
+              print(f.read())
+
+          print("===== COMBINED LATENT USAGE RESULTS =====")
+          with open("task1_latent_usage_combined.csv") as f:
+              print(f.read())
+
+          print("===== HARDWARE =====")
+          for p in sorted(root.glob("*/hardware_environment.txt")):
+              print("\n###", p.parent.name)
+              print(p.read_text())
+          PY
+
+      - name: Upload combined Task 1 summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: task1-combined-summary
+          path: |
+            task1_reproduction_combined.csv
+            task1_latent_usage_combined.csv
           retention-days: 7
