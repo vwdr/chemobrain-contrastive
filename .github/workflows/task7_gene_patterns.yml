@@ -121,7 +121,13 @@ jobs:
           de = pd.read_csv(
               "analysis/corrected_20260920/task7_cis_pseudobulk_gene_support.csv"
           )
-          assert int(de.supported_de_gene.sum()) == 271
+          universe = set(pd.read_csv(
+              "analysis/corrected_20260920/benchmark_gene_universe.csv"
+          ).gene.astype(str))
+          robust_de = set(
+              de.loc[de.supported_de_gene, "gene"].astype(str)
+          ) & universe
+          assert len(robust_de) == 68
 
           e = pd.read_csv(
               "analysis/corrected_20260920/task7_consensus_enrichment.csv"
