@@ -435,6 +435,87 @@ def main():
     summary.to_csv(T / "pseudobulk_task4_summary.csv", index=False)
     skipped.to_csv(T / "pseudobulk_task4_skipped.csv", index=False)
 
+    # Compact robustness summary for manuscript interpretation.
+    pair_cols = [
+        "replicate_1_log2cpm_difference",
+        "replicate_2_log2cpm_difference",
+        "replicate_3_log2cpm_difference",
+    ]
+    pair_sign = np.sign(results[pair_cols].to_numpy())
+    model_sign = np.sign(results.log2FoldChange.to_numpy())[:, None]
+    results["n_pairs_same_direction_as_model"] = (
+        pair_sign == model_sign
+    ).sum(axis=1)
+
+    robustness_rows = []
+    top_rows = []
+    for (cell_type, contrast), g in results.groupby(
+        ["cell_type", "contrast"], sort=True
+    ):
+        hits = g[g.wald_padj < 0.05].copy()
+        effect_spearman = g[
+            ["log2FoldChange", "paired_mean_log2cpm_difference"]
+        ].corr(method="spearman").iloc[0, 1]
+        effect_pearson = g[
+            ["log2FoldChange", "paired_mean_log2cpm_difference"]
+        ].corr(method="pearson").iloc[0, 1]
+        robustness_rows.append(
+            {
+                "cell_type": cell_type,
+                "contrast": contrast,
+                "n_genes_tested": int(len(g)),
+                "n_deseq2_fdr_005": int(len(hits)),
+                "n_deseq2_fdr_010": int((g.wald_padj < 0.10).sum()),
+                "n_exact_signflip_p_lt_005": int(
+                    (g.exact_two_sided_signflip_p < 0.05).sum()
+                ),
+                "minimum_exact_two_sided_p": float(
+                    g.exact_two_sided_signflip_p.min()
+                ),
+                "n_welch_fdr_005": int(
+                    (g.welch_q_sensitivity < 0.05).sum()
+                ),
+                "effect_spearman_deseq2_vs_paired_logcpm": float(
+                    effect_spearman
+                ),
+                "effect_pearson_deseq2_vs_paired_logcpm": float(
+                    effect_pearson
+                ),
+                "n_deseq2_hits_all3_pairs_same_direction": int(
+                    (hits.n_pairs_same_direction_as_model == 3).sum()
+                ),
+                "n_deseq2_hits_2of3_pairs_same_direction": int(
+                    (hits.n_pairs_same_direction_as_model == 2).sum()
+                ),
+            }
+        )
+        if len(hits):
+            top_rows.append(
+                hits.nsmallest(5, "wald_padj")[
+                    [
+                        "cell_type",
+                        "contrast",
+                        "gene",
+                        "log2FoldChange",
+                        "wald_padj",
+                        "paired_mean_log2cpm_difference",
+                        *pair_cols,
+                        "n_pairs_same_direction_as_model",
+                        "welch_q_sensitivity",
+                        "exact_two_sided_signflip_p",
+                    ]
+                ]
+            )
+
+    robustness = pd.DataFrame(robustness_rows)
+    robustness.to_csv(
+        T / "pseudobulk_task4_robustness.csv", index=False
+    )
+    if top_rows:
+        pd.concat(top_rows, ignore_index=True).to_csv(
+            T / "pseudobulk_task4_top_hits.csv", index=False
+        )
+
     dox = a[a.obs.study == "GSE271055"].copy()
     dox_groups = {
         k: v for k, v in groups.items()
