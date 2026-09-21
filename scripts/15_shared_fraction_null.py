@@ -6,7 +6,7 @@ all treatment-label permutations use exactly the same cells, feature set, split,
 and number of cells per library.
 
 Eight non-rescue deposited libraries are used:
-  * GSE216146: 6 libraries (cisplatin study), preserving D20/D21 batch counts.
+  * GSE216146: 6 libraries (cisplatin study), paired by the three GEO replicate blocks.
   * GSE271055: 2 pooled libraries (doxorubicin study).
 
 Cell sampling is fixed before any label permutation and is balanced both within
@@ -20,9 +20,10 @@ to select cells. Highly variable genes are selected from these fixed training
 cells using study as the batch key and are then held fixed across assignments.
 
 The exact label-exchangeability reference set has:
-  C(2,1) * C(4,2) * C(2,1) = 24 assignments,
-where the first two factors are the D20 and D21 cisplatin-study batches and the
-last is the two pooled doxorubicin-study libraries.
+  2^3 * C(2,1) = 16 assignments,
+where each of the three GSE216146 GEO replicate blocks contributes one
+control/cisplatin swap and the last factor exchanges the two pooled
+GSE271055 control/doxorubicin libraries.
 
 The primary statistic is the mean pooled shared posterior-mean variance fraction
 across fixed model seeds 0, 1, and 2. Exact upper-tail P values include the
@@ -83,13 +84,20 @@ def fast_hsic(x, y):
 mm.hsic = fast_hsic
 
 
-def _batch_group(study: str, sample_id: str) -> str:
+def _exchangeability_group(study: str, sample_id: str) -> str:
+    """Return the experimental replicate block documented in the GEO series record."""
     if study == "GSE216146":
-        if sample_id.startswith("D20-"):
-            return "D20"
-        if sample_id.startswith("D21-"):
-            return "D21"
-        raise ValueError(f"Unexpected GSE216146 sample: {sample_id}")
+        replicate_map = {
+            "D20-6407": "replicate_1",
+            "D20-6409": "replicate_1",
+            "D21-2746": "replicate_2",
+            "D21-2750": "replicate_2",
+            "D21-2747": "replicate_3",
+            "D21-2751": "replicate_3",
+        }
+        if sample_id not in replicate_map:
+            raise ValueError(f"Unexpected non-rescue GSE216146 sample: {sample_id}")
+        return replicate_map[sample_id]
     if study == "GSE271055":
         return "pooled_pair"
     raise ValueError(f"Unexpected study: {study}")
@@ -101,11 +109,12 @@ def _enumerate_assignments(lib_meta: pd.DataFrame) -> pd.DataFrame:
     dox = lib_meta[lib_meta.study == "GSE271055"].copy()
 
     cis_groups = []
-    for batch, g in cis.groupby("batch_group", sort=True):
+    for replicate, g in cis.groupby("exchangeability_group", sort=True):
         libs = tuple(sorted(g.sample_id.astype(str)))
         n_treated = int((g.original_drug == "cisplatin").sum())
+        assert len(libs) == 2 and n_treated == 1
         combos = list(itertools.combinations(libs, n_treated))
-        cis_groups.append((batch, combos))
+        cis_groups.append((replicate, combos))
 
     dox_libs = tuple(sorted(dox.sample_id.astype(str)))
     n_dox_treated = int((dox.original_drug == "doxorubicin").sum())
@@ -123,9 +132,9 @@ def _enumerate_assignments(lib_meta: pd.DataFrame) -> pd.DataFrame:
     cis_products = itertools.product(*(combos for _, combos in cis_groups))
     for cis_choice_tuple in cis_products:
         cis_treated = set().union(*(set(x) for x in cis_choice_tuple))
-        batch_choice = {
-            batch: "|".join(choice)
-            for (batch, _), choice in zip(cis_groups, cis_choice_tuple)
+        replicate_choice = {
+            replicate: "|".join(choice)
+            for (replicate, _), choice in zip(cis_groups, cis_choice_tuple)
         }
         for dox_choice in dox_combos:
             dox_treated = set(dox_choice)
@@ -139,16 +148,16 @@ def _enumerate_assignments(lib_meta: pd.DataFrame) -> pd.DataFrame:
                 "cis_matches_observed": cis_treated == observed_cis,
                 "dox_matches_observed": dox_treated == observed_dox,
             }
-            for batch, choice in batch_choice.items():
-                row[f"{batch}_cis_treated"] = choice
+            for replicate, choice in replicate_choice.items():
+                row[f"{replicate}_cis_treated"] = choice
             rows.append(row)
             assignment_index += 1
 
     out = pd.DataFrame(rows)
-    assert len(out) == 24, f"Expected 24 assignments, got {len(out)}"
+    assert len(out) == 16, f"Expected 16 assignments, got {len(out)}"
     assert out.is_observed.sum() == 1
     assert out.cis_matches_observed.sum() == 2
-    assert out.dox_matches_observed.sum() == 12
+    assert out.dox_matches_observed.sum() == 8
     return out
 
 
@@ -164,8 +173,8 @@ def prepare() -> None:
         .sort_values(["study", "sample_id"])
         .reset_index(drop=True)
     )
-    lib_meta["batch_group"] = [
-        _batch_group(study, sid)
+    lib_meta["exchangeability_group"] = [
+        _exchangeability_group(study, sid)
         for study, sid in zip(lib_meta.study.astype(str), lib_meta.sample_id.astype(str))
     ]
 
@@ -212,7 +221,7 @@ def prepare() -> None:
                         "cell_id": str(a.obs_names[gi]),
                         "study": str(obs.study.iloc[gi]),
                         "sample_id": str(obs.sample_id.iloc[gi]),
-                        "batch_group": _batch_group(
+                        "exchangeability_group": _exchangeability_group(
                             str(obs.study.iloc[gi]), str(obs.sample_id.iloc[gi])
                         ),
                         "original_drug": str(obs.drug.iloc[gi]),
@@ -301,9 +310,10 @@ def prepare() -> None:
         "n_exact_label_assignments": int(len(assignments)),
         "primary_statistic": "mean pooled shared_fraction across seeds 0,1,2",
         "exchangeability_constraints": {
-            "GSE216146_D20": "preserve 1 cisplatin and 1 control library",
-            "GSE216146_D21": "preserve 2 cisplatin and 2 control libraries",
-            "GSE271055": "preserve 1 doxorubicin and 1 control pooled library",
+            "GSE216146_replicate_1": "exchange control/cisplatin labels only within replicate 1",
+            "GSE216146_replicate_2": "exchange control/cisplatin labels only within replicate 2",
+            "GSE216146_replicate_3": "exchange control/cisplatin labels only within replicate 3",
+            "GSE271055": "exchange the control and doxorubicin pooled-library labels",
         },
         "inference_scope": (
             "Exact upper-tail label-exchangeability reference distribution; "
@@ -541,9 +551,9 @@ def summarize(fits: pd.DataFrame, assignments: pd.DataFrame) -> None:
     obs_value = float(observed.mean_shared_fraction.iloc[0])
 
     scopes = {
-        "combined_24": np.ones(len(grouped), dtype=bool),
-        "cis_only_dox_fixed": grouped.dox_matches_observed.to_numpy(dtype=bool),
-        "dox_only_cis_fixed": grouped.cis_matches_observed.to_numpy(dtype=bool),
+        "combined_16": np.ones(len(grouped), dtype=bool),
+        "cis_only_dox_fixed_8": grouped.dox_matches_observed.to_numpy(dtype=bool),
+        "dox_only_cis_fixed_2": grouped.cis_matches_observed.to_numpy(dtype=bool),
     }
 
     null_rows = []
@@ -575,9 +585,9 @@ def summarize(fits: pd.DataFrame, assignments: pd.DataFrame) -> None:
         f = fits[fits.seed == seed].copy()
         obs = float(f.loc[f.is_observed, "shared_fraction"].iloc[0])
         seed_scopes = {
-            "combined_24": np.ones(len(f), dtype=bool),
-            "cis_only_dox_fixed": f.dox_matches_observed.to_numpy(dtype=bool),
-            "dox_only_cis_fixed": f.cis_matches_observed.to_numpy(dtype=bool),
+            "combined_16": np.ones(len(f), dtype=bool),
+            "cis_only_dox_fixed_8": f.dox_matches_observed.to_numpy(dtype=bool),
+            "dox_only_cis_fixed_2": f.cis_matches_observed.to_numpy(dtype=bool),
         }
         for name, mask in seed_scopes.items():
             vals = f.loc[mask, "shared_fraction"].to_numpy()
