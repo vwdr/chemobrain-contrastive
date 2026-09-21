@@ -1,0 +1,10 @@
+axis,list_type,list_size,n_significant_sets_fdr_005,leading_library,leading_term,leading_overlap,leading_fold_enrichment,leading_q_value,leading_genes
+shared,consensus_mean_top50,50,34,Reactome,REACTOME_IMMUNE_SYSTEM,18,4.251968503937007,3.1425642145630637e-06,Bst2|C1qa|C1qc|C5ar1|Csf2rb2|Ctsd|Ctss|Ifitm3|Lyz2|Mrc1|Mylip|Pik3ap1|Psmb8|Ptprc|Siglech|Tnfsf12|Ttr|Tyrobp
+shared,top50_in_at_least_2_seeds,42,19,GO_BP,GOBP_RESPONSE_TO_BIOTIC_STIMULUS,19,3.833736884584342,5.8864434420749927e-05,Apoe|Bst2|C1qa|C1qc|C5ar1|Ccl4|Cd52|Cflar|Cxcl12|Ifi27l2a|Ifitm3|Laptm5|Lilrb4a|Ly6e|Lyz2|Mrc1|Pf4|Ptprc|Stab1
+shared,top50_in_all_3_seeds,15,0,,,0,,,
+drug0,consensus_mean_top50,50,46,GO_BP,GOBP_POSTSYNAPSE_ORGANIZATION,11,6.6,0.00041736803672262667,Apoe|C1ql3|Dclk1|Grin2a|Grin2b|Nrcam|Nrxn1|Nrxn3|Plppr4|Ppfia2|Ptprd
+drug0,top50_in_at_least_2_seeds,36,16,GO_BP,GOBP_REGULATION_OF_SYNAPSE_STRUCTURE_OR_ACTIVITY,11,7.768361581920904,6.157514270233485e-05,Apoe|C1ql3|Cttnbp2|Dclk1|Gpm6a|Grin2b|Map1b|Nrcam|Nrxn1|Plppr4|Ptprd
+drug0,top50_in_all_3_seeds,13,0,,,0,,,
+drug1,consensus_mean_top50,50,11,Reactome,REACTOME_DEGRADATION_OF_THE_EXTRACELLULAR_MATRIX,7,7.0,0.003851198976622668,Bsg|Col12a1|Col1a2|Col25a1|Col6a1|Col6a2|Fn1
+drug1,top50_in_at_least_2_seeds,45,2,Reactome,REACTOME_DEGRADATION_OF_THE_EXTRACELLULAR_MATRIX,6,6.666666666666666,0.01021934337376524,Bsg|Col1a2|Col25a1|Col6a1|Col6a2|Ctsd
+drug1,top50_in_all_3_seeds,9,4,GO_BP,GOBP_AEROBIC_RESPIRATION,3,33.333333333333336,0.03962634381514928,mt-Co2|mt-Co3|mt-Nd4
