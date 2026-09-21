@@ -66,14 +66,45 @@ CONSENSUS = {
     ],
 }
 
-CISPLATIN_DE = set("""
-A230001M10Rik Adamts1 Adm Agt Apod Apoe C4b Ccl9 Cdkn1a Chst2 Cited2 Crip1
-Crip2 Cxcl12 Egr3 Etnppl Fam107a Fam83d Fcna Gm20186 Gm34455 Gm42047 Gpr183
-Gstm1 H2-Eb1 Hist1h1e Htra1 Icam1 Ier3 Ifi27l2a Igfbp3 Il33 Itgad Itih5 Junb
-Kcna1 Map1b Mbp Mobp Mt1 Mt2 Nfkbia Ninj2 Nr4a1 Pim1 Plek Plp1 Ppp1r15a
-Ptgds Ptprd S1pr1 Sat1 Scrg1 Serpinb1a Slc6a1 Socs3 Sox2ot Spock3 Tagln2
-Tmsb10 Tppp3 Tspan7 Ttr Tubb3 Vcam1 Vim Vwf mt-Co2 mt-Co3
-""".split())
+def derive_cisplatin_de_support():
+    """Derive the Task 4 cisplatin support set from regenerated full results."""
+    path = OUT / "pseudobulk_task4_paired_results.csv.gz"
+    if not path.exists():
+        raise FileNotFoundError(
+            f"{path} missing; run scripts/16_pseudobulk_paired.py first"
+        )
+    x = pd.read_csv(path)
+    x = x[x.contrast == "cisplatin_vs_control"].copy()
+    pair_cols = [
+        "replicate_1_log2cpm_difference",
+        "replicate_2_log2cpm_difference",
+        "replicate_3_log2cpm_difference",
+    ]
+    pair_sign = np.sign(x[pair_cols].to_numpy())
+    model_sign = np.sign(x.log2FoldChange.to_numpy())[:, None]
+    x["all_three_pairs_same_direction"] = (pair_sign == model_sign).all(axis=1)
+    x["supported_row"] = (
+        (x.wald_padj < 0.05) & x.all_three_pairs_same_direction
+    )
+    support = set(x.loc[x.supported_row, "gene"].astype(str))
+
+    gene = x.groupby("gene", as_index=False).agg(
+        n_eligible_cell_types=("cell_type", "nunique"),
+        n_fdr005_cell_types=("wald_padj", lambda v: int((v < 0.05).sum())),
+        n_direction_consistent_fdr005_cell_types=(
+            "supported_row", lambda v: int(np.sum(v))
+        ),
+        minimum_padj=("wald_padj", "min"),
+        max_abs_log2FoldChange=(
+            "log2FoldChange", lambda v: float(np.max(np.abs(v)))
+        ),
+    )
+    gene["supported_de_gene"] = (
+        gene.n_direction_consistent_fdr005_cell_types > 0
+    )
+    gene.to_csv(OUT / "task7_cis_pseudobulk_gene_support.csv", index=False)
+    return support
+
 
 SCD_TOP100 = set("""
 Ttr mt-Co3 Plp1 Cldn11 Mobp Ptprd Bc1 Gstm1 Ttyh1 Ptgds Apoe Aldoc Mbp
@@ -160,7 +191,8 @@ def main():
         pd.read_csv(OUT / "benchmark_gene_universe.csv")["gene"].astype(str)
     )
     assert len(universe) == 1500
-    assert len(CISPLATIN_DE) == 69
+    cisplatin_de = derive_cisplatin_de_support() & universe
+    assert len(cisplatin_de) == 69, len(cisplatin_de)
     assert len(SCD_TOP100) == 100
 
     consensus_rows = []
@@ -187,7 +219,7 @@ def main():
     cross = []
     for axis, genes in CONSENSUS.items():
         selected = set(genes)
-        k_de, p_de, g_de = overlap_test(selected, CISPLATIN_DE, len(universe))
+        k_de, p_de, g_de = overlap_test(selected, cisplatin_de, len(universe))
         k_scd, p_scd, g_scd = overlap_test(selected, SCD_TOP100, len(universe))
         cross.append(
             {
@@ -261,10 +293,15 @@ def main():
         "set_size_filter": "10-500 genes after intersection with model universe",
         "test": "one-sided hypergeometric overrepresentation",
         "multiple_testing": "BH separately within axis x resource family",
+        "frozen_inputs": {
+            "attribution_table_sha256": ATTRIBUTION_SOURCE_SHA256,
+            "scdisinfact_top100": "derived from Task 6 across-seed mean condition-associated scores",
+        },
         "cross_checks": {
             "cisplatin_DE": (
-                "69 unique benchmark genes with PyDESeq2 adjusted P<0.05 "
-                "in at least one GSE216146 cell type for cisplatin vs control"
+                "69 unique benchmark genes with paired PyDESeq2 adjusted P<0.05 "
+                "in at least one GSE216146 cell type and all three paired "
+                "logCPM effects agreeing with the fitted effect direction"
             ),
             "scDisInFact": (
                 "top 100 mean condition-associated gene scores across Task 6 seeds"
