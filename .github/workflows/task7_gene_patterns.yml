@@ -85,7 +85,11 @@ jobs:
               "analysis/corrected_20260920/task7_cross_validation_summary.csv"
           )
           assert len(x) == 3
-          assert x.n_overlap_cisplatin_DE_unique_genes.to_list() == [5, 2, 7]
+          assert dict(zip(x.axis, x.n_overlap_cisplatin_DE_unique_genes)) == {
+              "shared": 7,
+              "doxorubicin": 2,
+              "cisplatin": 5,
+          }
 
           e = pd.read_csv(
               "analysis/corrected_20260920/task7_consensus_enrichment.csv"
