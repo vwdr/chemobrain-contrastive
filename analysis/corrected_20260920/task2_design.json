@@ -18,12 +18,14 @@
   "n_test": 600,
   "n_hvg": 1500,
   "gene_source": "computed_from_label_independent_training_cells",
-  "n_exact_label_assignments": 24,
+  "n_exact_label_assignments": 16,
   "primary_statistic": "mean pooled shared_fraction across seeds 0,1,2",
   "exchangeability_constraints": {
-    "GSE216146_D20": "preserve 1 cisplatin and 1 control library",
-    "GSE216146_D21": "preserve 2 cisplatin and 2 control libraries",
-    "GSE271055": "preserve 1 doxorubicin and 1 control pooled library"
+    "GSE216146_replicate_1": "exchange control/cisplatin labels only within replicate 1",
+    "GSE216146_replicate_2": "exchange control/cisplatin labels only within replicate 2",
+    "GSE216146_replicate_3": "exchange control/cisplatin labels only within replicate 3",
+    "GSE271055": "exchange the control and doxorubicin pooled-library labels"
   },
-  "inference_scope": "Exact upper-tail label-exchangeability reference distribution; conditional on exchangeability assumptions and not a randomized-trial biological significance test."
+  "inference_scope": "Exact upper-tail label-exchangeability reference distribution; conditional on exchangeability assumptions and not a randomized-trial biological significance test.",
+  "provenance_note": "Corrected audit: the original 24-assignment D20/D21 grouping was broader than the GEO replicate structure. The 16 primary assignments are the replicate-preserving subset; their 48 fits were already present in the original 72-fit run, and each fit resets the model and RNG seed, so no refitting is required."
 }
