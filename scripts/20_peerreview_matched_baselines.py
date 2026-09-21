@@ -242,18 +242,22 @@ def main():
             zsal_tr = model.get_latent_representation(atr, representation_kind="salient")
             zbg_te = model.get_latent_representation(ate, representation_kind="background")
             zsal_te = model.get_latent_representation(ate, representation_kind="salient")
-            pred = model.get_normalized_expression(
+            pred_parts = model.get_normalized_expression(
                 ate,
                 library_size=1e4,
                 n_samples=1,
                 return_mean=True,
                 return_numpy=True,
             )
-            obs_log = modeled_gene_log(ate.X)
-            pred_log = np.log1p(np.asarray(pred, dtype=np.float64)).astype(np.float32)
-            mse = float(np.mean((pred_log - obs_log) ** 2))
             ytr = (atr.obs["drug"].astype(str).to_numpy() == treated).astype(int)
             yte = (ate.obs["drug"].astype(str).to_numpy() == treated).astype(int)
+            pred_background = np.asarray(pred_parts["background"], dtype=np.float64)
+            pred_salient = np.asarray(pred_parts["salient"], dtype=np.float64)
+            pred = pred_background.copy()
+            pred[yte == 1] = pred_salient[yte == 1]
+            obs_log = modeled_gene_log(ate.X)
+            pred_log = np.log1p(pred).astype(np.float32)
+            mse = float(np.mean((pred_log - obs_log) ** 2))
 
             cvi_rows.append(
                 {
