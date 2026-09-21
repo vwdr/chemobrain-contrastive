@@ -1,0 +1,14 @@
+method,representation,metric,mean,sd_across_seeds,n_seeds,note
+MC-ContrastiveVI,canonical,test_log_expression_mse,0.16871078809102377,7.967809087629746e-05,3,Archived corrected full-model checkpoints; canonical held-out cells.
+MC-ContrastiveVI,canonical,condition_balanced_accuracy,0.5213178751275337,0.04816430216333014,3,Background factor; intended treatment-irrelevant component.
+MC-ContrastiveVI,canonical,study_balanced_accuracy,0.7865776308584915,0.06569470950910342,3,Background factor; study leakage diagnostic.
+MC-ContrastiveVI,canonical,raw_shared_condition_balanced_accuracy,0.50375602412221,0.041529634390861006,3,Raw treatment-shared posterior means; semantics differ from scDisInFact shared-bio.
+MC-ContrastiveVI,canonical,raw_drug_condition_balanced_accuracy,0.5740922212140752,0.04044240025462551,3,Raw drug-head posterior means before label gating.
+PCA(32),canonical,test_log_expression_mse,0.15524694323539734,,1,Canonical PCA reconstruction baseline.
+scDisInFact,canonical,test_log_expression_mse,0.2313351333141327,0.0021650249027283493,3,"Official upstream one-condition robustness configuration; same canonical train/test cells and 1,500 genes."
+scDisInFact,shared_bio,shared_bio_condition_balanced_accuracy,0.5597202709698287,0.023158488860303406,3,"Official upstream one-condition robustness configuration; same canonical train/test cells and 1,500 genes."
+scDisInFact,shared_bio,shared_bio_study_balanced_accuracy,0.894534492967864,0.03525709575807906,3,"Official upstream one-condition robustness configuration; same canonical train/test cells and 1,500 genes."
+scDisInFact,unshared_bio,unshared_bio_condition_balanced_accuracy,0.7557344277494108,0.008031477780765323,3,"Official upstream one-condition robustness configuration; same canonical train/test cells and 1,500 genes."
+scDisInFact,unshared_bio,unshared_bio_study_balanced_accuracy,0.9813562146517979,0.007593188280731136,3,"Official upstream one-condition robustness configuration; same canonical train/test cells and 1,500 genes."
+scDisInFact,combined,combined_condition_balanced_accuracy,0.7608133329962988,0.004511669280127524,3,"Official upstream one-condition robustness configuration; same canonical train/test cells and 1,500 genes."
+scDisInFact,combined,combined_study_balanced_accuracy,0.9859611404534018,0.005027770435231813,3,"Official upstream one-condition robustness configuration; same canonical train/test cells and 1,500 genes."
