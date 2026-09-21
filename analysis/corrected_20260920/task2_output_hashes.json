@@ -2,12 +2,12 @@
   "task2_design.json": "17b33e543fe5a96c6b5ef69bd1f0940d311e8d2b59983295c2371e970f7e761e",
   "task2_library_design.csv": "d8193c399de2eb75db4a9d6cb9a78aa289037e288d2a5f50cd02fa11841d256d",
   "task2_label_assignments.csv": "5d3c27c3585ed2212da0bda0f78f8ba4a1a97722ca28414f9a443aca71e21ee4",
-  "task2_permutation_fits.csv": "a724e3200f9c165c0465503aaca583c4c1ffa7001f8b549ddec59c5a729389f8",
+  "task2_permutation_fits.csv": "fd2864520b48472f809accec762e2666a7a2ff150c08b7ce6eed4fd1d785e5b2",
   "task2_assignment_summary.csv": "82fc565a9befc45aabb055a999f2d5165a1a774d4cd77ceaf85eda58b2b11de8",
   "task2_null_test_summary.csv": "7abd540cbe069d85db774368a9336ed30ec66fdd078f87fe51abeddd97b83b42",
   "task2_seedwise_null_summary.csv": "cacda506cf8e24b94805cb5aa71adc9716454d88776b4e36a0af62271bb7b638",
   "task2_gene_universe.csv": "f03d04ea06bd09e8e2c403fee66e82195de7c8bddedf13ade913d44b9e139eae",
   "task2_balanced_library_split.csv": "87d2e35197466e31caa4ce6e6930d46471be2b793e27abbe7d7484ab7429ba49",
   "task2_environment.txt": "a0f778326850d37fa4d3a9d73cf52d7c51dc4bde361a6c5939933de843c75bb7",
-  "provenance": "Hashes for the corrected replicate-block Task 2 products. The 48 primary fits are the replicate-preserving subset of the original 72-fit computation."
+  "provenance": "Hashes for the corrected replicate-block Task 2 products committed in the repository. The 48 primary fits are the replicate-preserving subset of the original 72-fit computation."
 }
