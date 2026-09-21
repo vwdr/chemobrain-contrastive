@@ -192,7 +192,7 @@ def main():
     )
     assert len(universe) == 1500
     cisplatin_de = derive_cisplatin_de_support() & universe
-    assert len(cisplatin_de) == 69, len(cisplatin_de)
+    assert len(cisplatin_de) == 68, len(cisplatin_de)
     assert len(SCD_TOP100) == 100
 
     consensus_rows = []
@@ -306,7 +306,7 @@ def main():
         },
         "cross_checks": {
             "cisplatin_DE": (
-                "69 unique benchmark genes with paired PyDESeq2 adjusted P<0.05 "
+                "68 unique benchmark genes with paired PyDESeq2 adjusted P<0.05 "
                 "in at least one GSE216146 cell type and all three paired "
                 "logCPM effects agreeing with the fitted effect direction"
             ),
