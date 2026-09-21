@@ -1,10 +1,10 @@
-name: Task 1 Linux seed 0 reproduction
+name: Task 1 corrected latent usage audit
 
 on:
   workflow_dispatch:
 
 jobs:
-  reproduce:
+  audit:
     runs-on: ubuntu-24.04
 
     env:
@@ -20,28 +20,16 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Show platform
-        run: |
-          python --version
-          uname -a
-          uname -m
-
       - name: Install research environment
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements-research.txt
 
-      - name: Show package versions
+      - name: Show platform and package versions
         run: |
           python - <<'PY'
           import platform
-          import torch
-          import numpy
-          import pandas
-          import scanpy
-          import anndata
-          import sklearn
-
+          import torch, numpy, pandas, scanpy, anndata, sklearn
           print("Platform:", platform.platform())
           print("Machine:", platform.machine())
           print("Python:", platform.python_version())
@@ -63,19 +51,16 @@ jobs:
         run: |
           ACTUAL=$(sha256sum data/processed/recovered_counts.h5ad | awk '{print $1}')
           EXPECTED="62a5047e74d4ea704f2a10b5b91b35a4836ccefc99186d4c72101db78cbd8ac1"
-
           echo "Actual:   $ACTUAL"
           echo "Expected: $EXPECTED"
-
           test "$ACTUAL" = "$EXPECTED"
 
-      - name: Prepare benchmark
+      - name: Prepare benchmark split
         run: python scripts/06_validation.py --prepare
 
       - name: Rebuild benchmark with committed gene universe
         run: |
           cp runs/corrected_20260920/inputs.npz /tmp/prepared_inputs.npz
-
           git restore analysis/corrected_20260920/benchmark_gene_universe.csv
 
           python - <<'PY'
@@ -85,9 +70,9 @@ jobs:
           import scanpy as sc
 
           run = "runs/corrected_20260920"
-          gene_file = "analysis/corrected_20260920/benchmark_gene_universe.csv"
-
-          genes = pd.read_csv(gene_file)["gene"].astype(str).tolist()
+          genes = pd.read_csv(
+              "analysis/corrected_20260920/benchmark_gene_universe.csv"
+          )["gene"].astype(str).tolist()
 
           old = np.load("/tmp/prepared_inputs.npz")
           train = old["train"].copy()
@@ -102,24 +87,21 @@ jobs:
 
           counts = a[:, genes].X.toarray().astype("float32")
           library = np.asarray(a.X.sum(1)).ravel().astype("float32")
-
           np.savez_compressed(
               f"{run}/count_inputs.npz",
               C=counts,
-              library=library
+              library=library,
           )
 
           sc.pp.normalize_total(a, target_sum=1e4)
           sc.pp.log1p(a)
-
           X = a[:, genes].X.toarray().astype("float32")
 
           d = obs.drug.map({
               "control": 0,
               "doxorubicin": 1,
-              "cisplatin": 2
+              "cisplatin": 2,
           }).values.astype("int64")
-
           b = (obs.study == "GSE271055").values.astype("int64")
 
           np.savez_compressed(
@@ -130,22 +112,12 @@ jobs:
               train=train,
               val=val,
               test=test,
-              genes=np.asarray(genes, dtype="U")
+              genes=np.asarray(genes, dtype="U"),
           )
 
           print("X shape:", X.shape)
           print("Canonical genes:", len(genes))
-          print("Contains Aspm:", "Aspm" in genes)
-          print("Contains Cebpd:", "Cebpd" in genes)
-          print("Contains Cyp2d22:", "Cyp2d22" in genes)
-          print("Contains Zic3:", "Zic3" in genes)
-          print(
-              "Train/val/test:",
-              len(train),
-              len(val),
-              len(test)
-          )
-
+          print("Train/val/test:", len(train), len(val), len(test))
           assert X.shape == (46857, 1500)
           assert len(genes) == 1500
           assert len(train) == 6000
@@ -153,86 +125,73 @@ jobs:
           assert len(test) == 2881
           PY
 
-      - name: Train full model seed 0
+      - name: Train canonical full models
         run: |
-          python scripts/06_validation.py \
-            --mode full \
-            --seed 0 \
-            --epochs 100
+          for seed in 0 1 2; do
+            echo "===== TRAINING SEED $seed ====="
+            python scripts/06_validation.py --mode full --seed "$seed" --epochs 100
+          done
 
-      - name: Show metrics
-        run: |
-          echo "===== NEW LINUX SEED 0 RESULT ====="
-          cat runs/corrected_20260920/full_0_metrics.json
-
-      - name: Compare with committed result
+      - name: Verify canonical metrics reproduce
         run: |
           python - <<'PY'
           import json
           import subprocess
 
-          with open(
-              "runs/corrected_20260920/full_0_metrics.json"
-          ) as f:
-              new = json.load(f)
+          for seed in (0, 1, 2):
+              path = f"runs/corrected_20260920/full_{seed}_metrics.json"
+              with open(path) as f:
+                  new = json.load(f)
 
-          committed_text = subprocess.check_output(
-              [
-                  "git",
-                  "show",
-                  "HEAD:runs/corrected_20260920/full_0_metrics.json"
-              ],
-              text=True
-          )
-          old = json.loads(committed_text)
+              old = json.loads(
+                  subprocess.check_output(
+                      ["git", "show", f"HEAD:{path}"],
+                      text=True,
+                  )
+              )
 
-          print("Committed shared_fraction:", old["shared_fraction"])
-          print("New Linux shared_fraction:", new["shared_fraction"])
-          print(
-              "Difference:",
-              new["shared_fraction"] - old["shared_fraction"]
-          )
+              print(f"Seed {seed}")
+              print("  committed F_sh:", old["shared_fraction"])
+              print("  new F_sh:      ", new["shared_fraction"])
+              print("  delta:         ", new["shared_fraction"] - old["shared_fraction"])
+              print("  committed MSE: ", old["test_mse"])
+              print("  new MSE:       ", new["test_mse"])
 
-          print()
-          print("Committed test_mse:", old["test_mse"])
-          print("New Linux test_mse:", new["test_mse"])
-          print(
-              "MSE difference:",
-              new["test_mse"] - old["test_mse"]
-          )
+              assert abs(new["shared_fraction"] - old["shared_fraction"]) < 1e-6
+              assert abs(new["test_mse"] - old["test_mse"]) < 1e-6
           PY
 
-      - name: Collect reproduction outputs
+      - name: Run latent usage diagnostic
+        run: python scripts/14_latent_usage.py
+
+      - name: Show Task 1 summary
         run: |
-          mkdir -p task1_linux_seed0
+          echo "===== LATENT USAGE SUMMARY ====="
+          cat analysis/corrected_20260920/latent_usage_summary.csv
+          echo
+          echo "===== ACTIVE-UNIT / KL THRESHOLDS ====="
+          cat analysis/corrected_20260920/latent_usage_thresholds.json
 
-          cp \
-            runs/corrected_20260920/full_0.pt \
-            task1_linux_seed0/
+      - name: Collect Task 1 outputs
+        run: |
+          mkdir -p task1_corrected_latent_usage
 
-          cp \
-            runs/corrected_20260920/full_0_latents.npz \
-            task1_linux_seed0/
+          cp analysis/corrected_20260920/latent_usage_per_dimension.csv task1_corrected_latent_usage/
+          cp analysis/corrected_20260920/latent_usage_summary.csv task1_corrected_latent_usage/
+          cp analysis/corrected_20260920/latent_usage_thresholds.json task1_corrected_latent_usage/
+          cp analysis/corrected_20260920/benchmark_gene_universe.csv task1_corrected_latent_usage/
+          cp runs/corrected_20260920/inputs.npz task1_corrected_latent_usage/
 
-          cp \
-            runs/corrected_20260920/full_0_metrics.json \
-            task1_linux_seed0/
+          for seed in 0 1 2; do
+            cp "runs/corrected_20260920/full_$seed.pt" task1_corrected_latent_usage/
+            cp "runs/corrected_20260920/full_$seed"_latents.npz task1_corrected_latent_usage/
+            cp "runs/corrected_20260920/full_$seed"_metrics.json task1_corrected_latent_usage/
+            cp "runs/corrected_20260920/full_$seed"_history.csv task1_corrected_latent_usage/
+          done
 
-          cp \
-            runs/corrected_20260920/full_0_history.csv \
-            task1_linux_seed0/
-
-          cp \
-            runs/corrected_20260920/inputs.npz \
-            task1_linux_seed0/
-
-          cp \
-            analysis/corrected_20260920/benchmark_gene_universe.csv \
-            task1_linux_seed0/
-
-      - name: Upload outputs
+      - name: Upload Task 1 outputs
         uses: actions/upload-artifact@v4
         with:
-          name: task1-linux-seed0
-          path: task1_linux_seed0/
+          name: task1-corrected-latent-usage
+          path: task1_corrected_latent_usage/
           retention-days: 7
