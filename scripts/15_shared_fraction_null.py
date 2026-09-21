@@ -9,10 +9,15 @@ Eight non-rescue deposited libraries are used:
   * GSE216146: 6 libraries (cisplatin study), preserving D20/D21 batch counts.
   * GSE271055: 2 pooled libraries (doxorubicin study).
 
-Each library contributes 600 cells selected without using treatment labels:
-450 train, 75 validation, 75 test. Highly variable genes are selected from the
-fixed training cells using study as the batch key and are then held fixed across
-all label assignments.
+Cell sampling is fixed before any label permutation and is balanced both within
+study and across study-by-treatment strata for every assignment. Each
+GSE216146 library contributes 500 train, 50 validation and 50 test cells; each
+GSE271055 pooled library contributes 1,500 train, 150 validation and 150 test
+cells. Consequently, every assignment contains 3,000 training cells per study
+and 1,500 training cells in each study-by-treatment stratum, matching the
+canonical benchmark's 6,000-cell training size without using treatment labels
+to select cells. Highly variable genes are selected from these fixed training
+cells using study as the batch key and are then held fixed across assignments.
 
 The exact label-exchangeability reference set has:
   C(2,1) * C(4,2) * C(2,1) = 24 assignments,
@@ -54,10 +59,10 @@ RUN.mkdir(parents=True, exist_ok=True)
 
 SPLIT_SEED = 1729
 SEEDS = (0, 1, 2)
-CELLS_PER_LIBRARY = 600
-TRAIN_PER_LIBRARY = 450
-VAL_PER_LIBRARY = 75
-TEST_PER_LIBRARY = 75
+SPLIT_COUNTS = {
+    "GSE216146": {"train": 500, "validation": 50, "test": 50},
+    "GSE271055": {"train": 1500, "validation": 150, "test": 150},
+}
 N_HVG = 1500
 AU_THRESHOLD = 0.01
 KL_THRESHOLD = 0.01
@@ -172,25 +177,28 @@ def prepare() -> None:
     train_global, val_global, test_global = [], [], []
 
     for sid in sorted(lib_meta.sample_id.astype(str)):
+        study_for_library = str(
+            lib_meta.loc[lib_meta.sample_id.astype(str) == sid, "study"].iloc[0]
+        )
+        counts = SPLIT_COUNTS[study_for_library]
+        n_required = sum(counts.values())
         idx = np.flatnonzero(
             (~obs.rescue.astype(bool).to_numpy())
             & (obs.sample_id.astype(str).to_numpy() == sid)
         )
-        assert len(idx) >= CELLS_PER_LIBRARY, (
+        assert len(idx) >= n_required, (
             f"{sid} has only {len(idx)} retained pure cells; "
-            f"{CELLS_PER_LIBRARY} required"
+            f"{n_required} required"
         )
-        chosen = rng.permutation(idx)[:CELLS_PER_LIBRARY]
+        chosen = rng.permutation(idx)[:n_required]
+        ntr = counts["train"]
+        nva = counts["validation"]
         parts = {
-            "train": chosen[:TRAIN_PER_LIBRARY],
-            "validation": chosen[
-                TRAIN_PER_LIBRARY : TRAIN_PER_LIBRARY + VAL_PER_LIBRARY
-            ],
-            "test": chosen[
-                TRAIN_PER_LIBRARY + VAL_PER_LIBRARY : CELLS_PER_LIBRARY
-            ],
+            "train": chosen[:ntr],
+            "validation": chosen[ntr : ntr + nva],
+            "test": chosen[ntr + nva : n_required],
         }
-        assert len(parts["test"]) == TEST_PER_LIBRARY
+        assert len(parts["test"]) == counts["test"]
 
         train_global.extend(parts["train"].tolist())
         val_global.extend(parts["validation"].tolist())
@@ -217,9 +225,9 @@ def prepare() -> None:
     val_global = np.asarray(val_global, dtype=np.int64)
     test_global = np.asarray(test_global, dtype=np.int64)
 
-    assert len(train_global) == 8 * TRAIN_PER_LIBRARY
-    assert len(val_global) == 8 * VAL_PER_LIBRARY
-    assert len(test_global) == 8 * TEST_PER_LIBRARY
+    assert len(train_global) == 6000
+    assert len(val_global) == 600
+    assert len(test_global) == 600
     assert len(set(train_global) & set(val_global)) == 0
     assert len(set(train_global) & set(test_global)) == 0
     assert len(set(val_global) & set(test_global)) == 0
@@ -283,10 +291,7 @@ def prepare() -> None:
 
     metadata = {
         "split_seed": SPLIT_SEED,
-        "cells_per_library": CELLS_PER_LIBRARY,
-        "train_per_library": TRAIN_PER_LIBRARY,
-        "validation_per_library": VAL_PER_LIBRARY,
-        "test_per_library": TEST_PER_LIBRARY,
+        "per_library_split_counts": SPLIT_COUNTS,
         "n_libraries": int(len(lib_meta)),
         "n_train": int(len(train)),
         "n_validation": int(len(val)),
@@ -614,10 +619,13 @@ def run(epochs: int) -> None:
         d_np = _labels_for_assignment(sample_id, assignment)
         d = torch.from_numpy(d_np)
 
-        # Equal cells per library guarantees fixed test counts under every assignment.
-        assert int((d[test] > 0).sum()) == 4 * TEST_PER_LIBRARY
-        assert int((d[test] == 1).sum()) == TEST_PER_LIBRARY
-        assert int((d[test] == 2).sum()) == 3 * TEST_PER_LIBRARY
+        # The label-independent split keeps every study-treatment stratum balanced.
+        assert int((d[train] == 0).sum()) == 3000
+        assert int((d[train] == 1).sum()) == 1500
+        assert int((d[train] == 2).sum()) == 1500
+        assert int((d[test] > 0).sum()) == 300
+        assert int((d[test] == 1).sum()) == 150
+        assert int((d[test] == 2).sum()) == 150
 
         for seed in SEEDS:
             counter += 1
