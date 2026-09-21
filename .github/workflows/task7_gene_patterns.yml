@@ -1,0 +1,118 @@
+name: Task 7 robust gene-pattern audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/19_gene_pattern_audit.py"
+      - "scripts/05_download_research_data.py"
+      - ".github/workflows/task7_gene_patterns.yml"
+
+jobs:
+  gene-patterns:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy pandas scipy statsmodels requests
+
+      - name: Download pinned mouse MSigDB gene sets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import requests
+
+          base = "https://data.broadinstitute.org/gsea-msigdb/msigdb/release/2025.1.Mm/"
+          names = [
+              "m2.cp.reactome.v2025.1.Mm.symbols.gmt",
+              "m5.go.bp.v2025.1.Mm.symbols.gmt",
+              "m8.all.v2025.1.Mm.symbols.gmt",
+          ]
+          out = Path("data/evidence")
+          out.mkdir(parents=True, exist_ok=True)
+          for name in names:
+              url = base + name
+              r = requests.get(url, timeout=180)
+              r.raise_for_status()
+              (out / name).write_bytes(r.content)
+              print(name, len(r.content))
+          PY
+
+      - name: Run Task 7 audit
+        run: python scripts/19_gene_pattern_audit.py
+
+      - name: Show Task 7 results
+        run: |
+          echo "===== CROSS VALIDATION ====="
+          cat analysis/corrected_20260920/task7_cross_validation_summary.csv
+          echo
+          echo "===== ENRICHMENT SUMMARY ====="
+          cat analysis/corrected_20260920/task7_enrichment_summary.csv
+          echo
+          echo "===== TOP TERMS ====="
+          cat analysis/corrected_20260920/task7_top_enrichment_terms.csv
+          echo
+          echo "===== DESIGN ====="
+          cat analysis/corrected_20260920/task7_gene_pattern_design.json
+
+      - name: Sanity checks
+        run: |
+          python - <<'PY'
+          import pandas as pd
+
+          g = pd.read_csv(
+              "analysis/corrected_20260920/task7_consensus_genes.csv"
+          )
+          assert g.groupby("axis").size().to_dict() == {
+              "cisplatin": 33,
+              "doxorubicin": 20,
+              "shared": 34,
+          }
+
+          x = pd.read_csv(
+              "analysis/corrected_20260920/task7_cross_validation_summary.csv"
+          )
+          assert len(x) == 3
+          assert x.n_overlap_cisplatin_DE_unique_genes.to_list() == [5, 2, 7]
+
+          e = pd.read_csv(
+              "analysis/corrected_20260920/task7_consensus_enrichment.csv"
+          )
+          assert set(e.library) == {"Reactome", "GO_BP", "M8_cell_type"}
+          assert set(e.axis) == {"shared", "doxorubicin", "cisplatin"}
+          assert ((e.q_value >= 0) & (e.q_value <= 1)).all()
+
+          print("PASS Task 7 gene-pattern output checks")
+          PY
+
+      - name: Collect Task 7 outputs
+        if: always()
+        run: |
+          mkdir -p task7_gene_patterns
+          for f in             task7_consensus_genes.csv             task7_cross_validation_summary.csv             task7_consensus_enrichment.csv             task7_top_enrichment_terms.csv             task7_enrichment_summary.csv             task7_gene_pattern_design.json
+          do
+            if [ -f "analysis/corrected_20260920/$f" ]; then
+              cp "analysis/corrected_20260920/$f" task7_gene_patterns/
+            fi
+          done
+          cp data/evidence/m8.all.v2025.1.Mm.symbols.gmt task7_gene_patterns/ || true
+
+      - name: Upload Task 7 outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: task7-gene-patterns
+          path: task7_gene_patterns/
+          retention-days: 7
