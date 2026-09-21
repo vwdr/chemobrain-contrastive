@@ -1,0 +1,26 @@
+{
+  "external_method": "scDisInFact",
+  "upstream_repository": "ZhangLabGT/scDisInFact",
+  "upstream_commit": "9466ecf257d923f879cb39712c530d24826d88bc",
+  "upstream_publication": "Zhang et al., Nature Communications 15, 912 (2024)",
+  "canonical_split_seed": 1729,
+  "training_cells": 6000,
+  "validation_cells_not_used_by_scdisinfact": 2881,
+  "test_cells": 2881,
+  "genes": 1500,
+  "condition_key": "drug",
+  "batch_key": "study",
+  "condition_levels": ["cisplatin", "control", "doxorubicin"],
+  "batch_levels": ["GSE216146", "GSE271055"],
+  "scdisinfact_Ks": [8, 2],
+  "scdisinfact_epochs": 50,
+  "scdisinfact_batch_size": 64,
+  "scdisinfact_lr": 0.0005,
+  "scdisinfact_seeds": [0, 1, 2],
+  "reconstruction_evaluation": "Predicted raw HVG counts were transformed using each cell's original full-library size into the same log1p(1e4-normalized) gene-expression target used by the canonical benchmark.",
+  "interpretation_limitations": [
+    "Drug identity is partially confounded with study: cisplatin occurs only in GSE216146 and doxorubicin only in GSE271055.",
+    "scDisInFact shared-bio is defined as condition-irrelevant; it is not semantically equivalent to MC-ContrastiveVI's treatment-shared latent block.",
+    "The comparison is therefore descriptive and does not provide an external validation of the MC shared-fraction statistic."
+  ]
+}
