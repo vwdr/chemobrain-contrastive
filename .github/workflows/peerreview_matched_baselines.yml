@@ -1,0 +1,86 @@
+name: Peer-review matched baselines
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/20_peerreview_matched_baselines.py"
+      - "requirements-peerreview-baselines.txt"
+      - ".github/workflows/peerreview_matched_baselines.yml"
+
+jobs:
+  baselines:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install base environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-research.txt
+      - name: Install matched-baseline environment
+        run: python -m pip install -r requirements-peerreview-baselines.txt
+      - name: Show versions
+        run: |
+          python - <<'PY'
+          import scvi, torch, numpy, pandas, anndata
+          print("scvi-tools", scvi.__version__)
+          print("torch", torch.__version__)
+          print("numpy", numpy.__version__)
+          print("pandas", pandas.__version__)
+          print("anndata", anndata.__version__)
+          PY
+      - name: Download public inputs
+        run: python scripts/05_download_research_data.py
+      - name: Recover corrected cohort
+        run: python scripts/05_recover_cohort.py
+      - name: Verify recovered data hash
+        run: |
+          ACTUAL=$(sha256sum data/processed/recovered_counts.h5ad | awk '{print $1}')
+          EXPECTED="62a5047e74d4ea704f2a10b5b91b35a4836ccefc99186d4c72101db78cbd8ac1"
+          echo "Actual:   $ACTUAL"
+          echo "Expected: $EXPECTED"
+          test "$ACTUAL" = "$EXPECTED"
+      - name: Run matched baselines
+        run: python scripts/20_peerreview_matched_baselines.py
+      - name: Show results
+        run: |
+          echo "===== MATCHED BASELINE SUMMARY ====="
+          cat analysis/corrected_20260920/peerreview_matched_baseline_summary.csv
+          echo
+          echo "===== MATCHED BASELINE CKA ====="
+          cat analysis/corrected_20260920/peerreview_matched_baseline_cka.csv
+      - name: Sanity checks
+        run: |
+          python - <<'PY'
+          import pandas as pd
+          s=pd.read_csv("analysis/corrected_20260920/peerreview_matched_baseline_summary.csv")
+          c=pd.read_csv("analysis/corrected_20260920/peerreview_matched_baseline_cka.csv")
+          assert {"scVI","contrastiveVI"} <= set(s.method)
+          assert len(c)==15
+          assert c.linear_cka.between(0,1.000001).all()
+          print("PASS matched baseline checks")
+          PY
+      - name: Collect outputs
+        if: always()
+        run: |
+          mkdir -p peerreview_matched_baselines
+          cp analysis/corrected_20260920/peerreview_scvi_metrics.csv peerreview_matched_baselines/ || true
+          cp analysis/corrected_20260920/peerreview_contrastivevi_metrics.csv peerreview_matched_baselines/ || true
+          cp analysis/corrected_20260920/peerreview_matched_baseline_summary.csv peerreview_matched_baselines/ || true
+          cp analysis/corrected_20260920/peerreview_matched_baseline_cka.csv peerreview_matched_baselines/ || true
+          cp analysis/corrected_20260920/peerreview_matched_baseline_design.json peerreview_matched_baselines/ || true
+      - name: Upload outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: peerreview-matched-baselines
+          path: peerreview_matched_baselines/
+          retention-days: 7
