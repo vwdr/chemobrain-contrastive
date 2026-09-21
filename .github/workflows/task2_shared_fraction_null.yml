@@ -1,0 +1,128 @@
+name: Task 2 shared-fraction library-label null
+
+on:
+  workflow_dispatch:
+
+jobs:
+  exact-null:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "2"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install research environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-research.txt
+
+      - name: Record hardware and software
+        run: |
+          {
+            echo "===== RUNNER ====="
+            uname -a
+            echo
+            echo "===== CPU ====="
+            lscpu
+            echo
+            echo "===== PYTHON ENVIRONMENT ====="
+            python - <<'PY'
+          import platform
+          import torch, numpy, pandas, scanpy, anndata, sklearn
+          print("Platform:", platform.platform())
+          print("Machine:", platform.machine())
+          print("Python:", platform.python_version())
+          print("Torch:", torch.__version__)
+          print("NumPy:", numpy.__version__)
+          print("Pandas:", pandas.__version__)
+          print("Scanpy:", scanpy.__version__)
+          print("AnnData:", anndata.__version__)
+          print("scikit-learn:", sklearn.__version__)
+          PY
+          } | tee task2_environment.txt
+
+      - name: Download public inputs
+        run: python scripts/05_download_research_data.py
+
+      - name: Recover corrected cohort
+        run: python scripts/05_recover_cohort.py
+
+      - name: Verify recovered data hash
+        run: |
+          ACTUAL=$(sha256sum data/processed/recovered_counts.h5ad | awk '{print $1}')
+          EXPECTED="62a5047e74d4ea704f2a10b5b91b35a4836ccefc99186d4c72101db78cbd8ac1"
+          echo "Actual:   $ACTUAL"
+          echo "Expected: $EXPECTED"
+          test "$ACTUAL" = "$EXPECTED"
+
+      - name: Prepare label-independent balanced benchmark
+        run: |
+          python scripts/15_shared_fraction_null.py --prepare
+
+      - name: Show Task 2 design
+        run: |
+          echo "===== DESIGN ====="
+          cat analysis/corrected_20260920/task2_design.json
+          echo
+          echo "===== LIBRARIES ====="
+          cat analysis/corrected_20260920/task2_library_design.csv
+          echo
+          echo "===== ASSIGNMENTS ====="
+          cat analysis/corrected_20260920/task2_label_assignments.csv
+
+      - name: Run exact 24-assignment reference distribution
+        run: |
+          python scripts/15_shared_fraction_null.py --run --epochs 100
+
+      - name: Show Task 2 results
+        run: |
+          echo "===== PRIMARY NULL TEST ====="
+          cat analysis/corrected_20260920/task2_null_test_summary.csv
+          echo
+          echo "===== SEEDWISE NULL TEST ====="
+          cat analysis/corrected_20260920/task2_seedwise_null_summary.csv
+          echo
+          echo "===== OBSERVED ASSIGNMENT FITS ====="
+          python - <<'PY'
+          import pandas as pd
+          p="analysis/corrected_20260920/task2_permutation_fits.csv"
+          x=pd.read_csv(p)
+          cols=[
+              "assignment_index","seed","shared_fraction","test_mse",
+              "shared_var_sum","drug_var_sum","shared_active_units",
+              "dox_active_units","cis_active_units"
+          ]
+          print(x.loc[x.is_observed,cols].to_string(index=False))
+          PY
+
+      - name: Collect Task 2 outputs
+        if: always()
+        run: |
+          mkdir -p task2_shared_fraction_null
+
+          cp task2_environment.txt task2_shared_fraction_null/ || true
+
+          for f in             task2_design.json             task2_gene_universe.csv             task2_balanced_library_split.csv             task2_library_design.csv             task2_label_assignments.csv             task2_permutation_fits.csv             task2_permutation_fits_partial.csv             task2_assignment_summary.csv             task2_null_test_summary.csv             task2_seedwise_null_summary.csv
+          do
+            if [ -f "analysis/corrected_20260920/$f" ]; then
+              cp "analysis/corrected_20260920/$f" task2_shared_fraction_null/
+            fi
+          done
+
+      - name: Upload Task 2 outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: task2-shared-fraction-null
+          path: task2_shared_fraction_null/
+          retention-days: 7
