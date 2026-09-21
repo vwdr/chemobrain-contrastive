@@ -1,0 +1,141 @@
+name: Task 6 scDisInFact external comparison
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/18_scdisinfact_comparison.py"
+      - "requirements-task6.txt"
+      - ".github/workflows/task6_scdisinfact.yml"
+
+jobs:
+  scdisinfact:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "2"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install canonical research environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-research.txt
+
+      - name: Install pinned scDisInFact
+        run: |
+          python -m pip install -r requirements-task6.txt
+
+      - name: Show environment
+        run: |
+          python - <<'PY'
+          import platform
+          import torch, numpy, pandas, scipy, sklearn
+          import scDisInFact
+          print("Platform:", platform.platform())
+          print("Machine:", platform.machine())
+          print("Python:", platform.python_version())
+          print("Torch:", torch.__version__)
+          print("NumPy:", numpy.__version__)
+          print("Pandas:", pandas.__version__)
+          print("SciPy:", scipy.__version__)
+          print("scikit-learn:", sklearn.__version__)
+          print("scDisInFact module:", scDisInFact.__file__)
+          PY
+
+      - name: Download public inputs
+        run: python scripts/05_download_research_data.py
+
+      - name: Recover corrected cohort
+        run: python scripts/05_recover_cohort.py
+
+      - name: Verify recovered data hash
+        run: |
+          ACTUAL=$(sha256sum data/processed/recovered_counts.h5ad | awk '{print $1}')
+          EXPECTED="62a5047e74d4ea704f2a10b5b91b35a4836ccefc99186d4c72101db78cbd8ac1"
+          echo "Actual:   $ACTUAL"
+          echo "Expected: $EXPECTED"
+          test "$ACTUAL" = "$EXPECTED"
+
+      - name: Run scDisInFact comparison
+        run: python scripts/18_scdisinfact_comparison.py
+
+      - name: Show Task 6 results
+        run: |
+          echo "===== SCDISINFACT SUMMARY ====="
+          cat analysis/corrected_20260920/task6_scdisinfact_summary.csv
+          echo
+          echo "===== EXTERNAL METHOD COMPARISON ====="
+          cat analysis/corrected_20260920/task6_external_method_comparison.csv
+          echo
+          echo "===== LATENT CKA ====="
+          cat analysis/corrected_20260920/task6_scdisinfact_seed_cka.csv
+          echo
+          echo "===== GENE SCORE STABILITY ====="
+          cat analysis/corrected_20260920/task6_scdisinfact_gene_score_stability.csv
+          echo
+          echo "===== DESIGN ====="
+          cat analysis/corrected_20260920/task6_external_method_design.json
+
+      - name: Sanity checks
+        run: |
+          python - <<'PY'
+          import pandas as pd
+
+          m = pd.read_csv(
+              "analysis/corrected_20260920/task6_scdisinfact_metrics.csv"
+          )
+          assert list(m.seed) == [0, 1, 2]
+          assert (m.test_log_expression_mse > 0).all()
+
+          acc_cols = [c for c in m.columns if c.endswith("balanced_accuracy")]
+          for c in acc_cols:
+              assert ((m[c] >= 0) & (m[c] <= 1)).all(), c
+
+          cka = pd.read_csv(
+              "analysis/corrected_20260920/task6_scdisinfact_seed_cka.csv"
+          )
+          assert len(cka) == 6
+          assert ((cka.linear_cka >= 0) & (cka.linear_cka <= 1.000001)).all()
+
+          gs = pd.read_csv(
+              "analysis/corrected_20260920/task6_scdisinfact_gene_score_stability.csv"
+          )
+          assert len(gs) == 3
+          print("PASS Task 6 external-comparison output checks")
+          PY
+
+      - name: Collect Task 6 outputs
+        if: always()
+        run: |
+          mkdir -p task6_scdisinfact
+          for f in             task6_scdisinfact_metrics.csv             task6_scdisinfact_summary.csv             task6_scdisinfact_seed_cka.csv             task6_scdisinfact_gene_score_stability.csv             task6_scdisinfact_gene_scores.csv.gz             task6_external_method_comparison.csv             task6_external_method_design.json
+          do
+            if [ -f "analysis/corrected_20260920/$f" ]; then
+              cp "analysis/corrected_20260920/$f" task6_scdisinfact/
+            fi
+          done
+
+          for f in runs/corrected_20260920/task6_scdisinfact_gene_scores_seed*.csv                    runs/corrected_20260920/task6_scdisinfact_seed*_test_latents.npz; do
+            if [ -f "$f" ]; then
+              cp "$f" task6_scdisinfact/
+            fi
+          done
+
+      - name: Upload Task 6 outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: task6-scdisinfact
+          path: task6_scdisinfact/
+          retention-days: 7
