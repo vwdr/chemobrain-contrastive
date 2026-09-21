@@ -19,7 +19,7 @@ The recovered cohort contains 46,857 observations across 15 libraries. The bench
 | Negative-binomial sensitivity | Three seeds | 0.2109–0.2123 |
 | PCA with 32 components | One fit | 0.1552 |
 
-These comparisons do not establish reconstruction superiority for MC-ContrastiveVI. The shared posterior-mean variance fraction ranges from 92.1% to 95.7% across full Gaussian fits. It is a model-coordinate variance allocation, not a percentage of toxicity. Standard scVI and pairwise contrastiveVI were not run. See [research notes](docs/research_reanalysis.md) for interpretation and limitations.
+These comparisons do not establish reconstruction superiority for MC-ContrastiveVI. The three archived full Gaussian checkpoints have shared posterior-mean variance fractions of 92.1%–95.7%, but a latent-utilization audit found 0, 0 and 1 of 8 active shared dimensions across seeds using `Var_x[E_q(z_j|x)] > 0.01`, no active doxorubicin- or cisplatin-specific dimensions, and no salient coordinate with mean KL > 0.01 nats. Across nine fresh CPU reruns, the pooled shared fraction ranged from 75.0% to 98.1% while held-out MSE remained 0.1685–0.1688. The shared fraction is therefore an execution-sensitive coordinate-allocation statistic and can remain high when salient blocks are weakly utilized; it is not a percentage of toxicity or stable evidence of cross-drug biology. See the [Task 1 latent-utilization audit](analysis/corrected_20260920/TASK1_LATENT_USAGE_AUDIT.md) and [research notes](docs/research_reanalysis.md).
 
 ## Reproduce the research
 
@@ -39,8 +39,8 @@ The analysis target downloads pinned public inputs, corrects labels, performs QC
 
 ## Research outputs
 
-`analysis/corrected_20260920` contains cohort and label audits, annotation diagnostics, model comparisons, latent probes, seed stability, variance uncertainty, integration completeness, enrichment tests, pseudobulk summaries and rescue comparisons. `runs/corrected_20260920` contains per-fit metrics, epoch histories and computational logs. `data/evidence` contains source GEO records and checksums.
+`analysis/corrected_20260920` contains cohort and label audits, annotation diagnostics, model comparisons, latent probes, seed stability, latent-utilization and execution-context audits, variance uncertainty, integration completeness, enrichment tests, pseudobulk summaries and rescue comparisons. `runs/corrected_20260920` contains per-fit metrics, epoch histories and computational logs. `data/evidence` contains source GEO records and checksums.
 
-The workflow is implemented in scripts 05 through 13 and `scripts/run_research_analysis.sh`. The original `src/models/mc_contrastive_vi.py` supplies the Gaussian architecture. Scripts 01 and 02 retain the legacy workflow with corrected labels, rescue handling and unsupported-likelihood safeguards. Legacy Makefile targets remain available, but use `research-*` for the corrected analysis.
+The workflow is implemented in scripts 05 through 14 and `scripts/run_research_analysis.sh`. The original `src/models/mc_contrastive_vi.py` supplies the Gaussian architecture. Scripts 01 and 02 retain the legacy workflow with corrected labels, rescue handling and unsupported-likelihood safeguards. Legacy Makefile targets remain available, but use `research-*` for the corrected analysis.
 
 The supplied historical checkpoint did not match the designated historical run and lacked its original gene order. `analysis/corrected_20260920/checkpoint_audit.json` records this mismatch. The optional script `07_historical_check.py` requires that separate local checkpoint and is not part of the default reproduction command.
