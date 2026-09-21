@@ -1,0 +1,32 @@
+name: Training-only gene detection sensitivity
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/21_training_only_gene_detection.py"
+      - ".github/workflows/training_only_gene_detection.yml"
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-research.txt
+      - run: python scripts/05_download_research_data.py
+      - run: python scripts/05_recover_cohort.py
+      - name: Verify data hash
+        run: |
+          ACTUAL=$(sha256sum data/processed/recovered_counts.h5ad | awk '{print $1}')
+          test "$ACTUAL" = "62a5047e74d4ea704f2a10b5b91b35a4836ccefc99186d4c72101db78cbd8ac1"
+      - run: python scripts/21_training_only_gene_detection.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: training-only-gene-detection
+          path: analysis/corrected_20260920/training_only_gene_detection_*.csv
+          retention-days: 7
