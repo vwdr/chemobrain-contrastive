@@ -1,0 +1,7 @@
+seed_a,seed_b,representation,linear_cka
+0,1,shared_bio,0.7961137890815735
+0,1,unshared_bio,0.8631914854049683
+0,2,shared_bio,0.8537284135818481
+0,2,unshared_bio,0.8807849287986755
+1,2,shared_bio,0.7940478324890137
+1,2,unshared_bio,0.7809308171272278
