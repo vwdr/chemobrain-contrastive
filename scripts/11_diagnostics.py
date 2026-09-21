@@ -34,16 +34,41 @@ for mode in ['full','no_hsic','no_gating','gaussian_vae']:
    for it in range(200):jj=rng.integers(len(ii),size=len(ii));vals.append(frac(sh[jj],dr[jj]))
    var.append(dict(seed=seed,drug=drug,n_test_cells=len(ii),fraction=frac(sh,dr),cell_bootstrap_low=np.quantile(vals,.025),cell_bootstrap_high=np.quantile(vals,.975)))
 for name,data in [('latent_probes',rows),('latent_dependence',dep),('variance_robustness',var),('rescue_library_projection',samples),('ablation_diagnostics',ab)]:pd.DataFrame(data).to_csv(T/f'{name}.csv',index=False)
-sdf=pd.DataFrame(samples).groupby(['study','sample_id','arm']).mean(numeric_only=True).reset_index();rr=[]
-for study,treat,rescue in [('GSE216146','cisplatin','cisplatin_GENUS'),('GSE271055','doxorubicin','doxorubicin_ACY1083')]:
- sub=sdf[(sdf.study==study)&sdf.arm.isin([treat,rescue])].copy();A=sub[sub.arm==rescue].mean_distance.values;B=sub[sub.arm==treat].mean_distance.values;effect=A.mean()-B.mean();row=dict(study=study,contrast=rescue+'_vs_'+treat,mean_difference=effect,n_rescue_libraries=len(A),n_treated_libraries=len(B),batch_stratified_permutation_p=None,n_label_permutations=None)
- if len(A)==3 and len(B)==3:
-  sub['batch']=sub.sample_id.str.split('-').str[0];groups=[]
-  for batch,g in sub.groupby('batch'):
-   vals=g.mean_distance.to_numpy();n=(g.arm==rescue).sum();groups.append([(vals[list(c)].sum(),np.delete(vals,c).sum()) for c in itertools.combinations(range(len(vals)),n)])
-  perms=[sum(a for a,b in c)/3-sum(b for a,b in c)/3 for c in itertools.product(*groups)];row['batch_stratified_permutation_p']=sum(abs(v)>=abs(effect)-1e-12 for v in perms)/len(perms);row['n_label_permutations']=len(perms)
- rr.append(row)
-pd.DataFrame(rr).to_csv(T/'rescue_exploratory_comparisons.csv',index=False);st=[]
+samp=pd.DataFrame(samples)
+sdf=samp.groupby(['study','sample_id','arm']).mean(numeric_only=True).reset_index()
+rr=[];pair_rows=[];perm_rows=[];seed_rows=[]
+# GSE216146 GEO replicate pairs: cisplatin nonstim -> cisplatin + GENUS.
+pairs=[
+ ('replicate_1','D20-6409','D20-6410'),
+ ('replicate_2','D21-2750','D21-2752'),
+ ('replicate_3','D21-2751','D21-2753'),
+]
+cis=sdf[(sdf.study=='GSE216146')&sdf.arm.isin(['cisplatin','cisplatin_GENUS'])].copy()
+lookup=dict(zip(cis.sample_id,cis.mean_distance))
+diffs=[]
+for rep,treat_sid,rescue_sid in pairs:
+ assert treat_sid in lookup and rescue_sid in lookup,(rep,treat_sid,rescue_sid)
+ d=float(lookup[rescue_sid]-lookup[treat_sid]);diffs.append(d)
+ pair_rows.append(dict(replicate=rep,treated_library=treat_sid,rescue_library=rescue_sid,treated_mean_distance=float(lookup[treat_sid]),rescue_mean_distance=float(lookup[rescue_sid]),rescue_minus_treatment=d))
+effect=float(np.mean(diffs));vals=[]
+for signs in itertools.product([-1,1],repeat=3):
+ stat=float(np.mean(np.asarray(diffs)*np.asarray(signs)));vals.append(stat)
+ perm_rows.append(dict(sign_replicate_1=signs[0],sign_replicate_2=signs[1],sign_replicate_3=signs[2],mean_difference=stat,absolute_ge_observed=abs(stat)>=abs(effect)-1e-12))
+p=float(sum(abs(v)>=abs(effect)-1e-12 for v in vals)/len(vals))
+rr.append(dict(study='GSE216146',contrast='cisplatin_GENUS_vs_cisplatin',mean_difference=effect,n_rescue_libraries=3,n_treated_libraries=3,batch_stratified_permutation_p=p,n_label_permutations=len(vals),reference_design='paired_GEO_replicate_sign_flip',exact_two_sided_p=p,n_sign_assignments=len(vals),minimum_attainable_two_sided_p=2/len(vals),minimum_attainable_one_sided_p=1/len(vals)))
+for seed in [0,1,2]:
+ q=samp[(samp.seed==seed)&(samp.study=='GSE216146')]
+ lk=dict(zip(q.sample_id,q.mean_distance));dd=np.asarray([float(lk[r]-lk[t]) for _,t,r in pairs]);ef=float(dd.mean());pv=[]
+ for signs in itertools.product([-1,1],repeat=3):pv.append(float(np.mean(dd*np.asarray(signs))))
+ seed_rows.append(dict(seed=seed,mean_difference=ef,exact_two_sided_p=sum(abs(v)>=abs(ef)-1e-12 for v in pv)/len(pv),replicate_1_difference=dd[0],replicate_2_difference=dd[1],replicate_3_difference=dd[2]))
+# GSE271055 contains one pooled treated library and one pooled rescue library; descriptive only.
+dox=sdf[(sdf.study=='GSE271055')&sdf.arm.isin(['doxorubicin','doxorubicin_ACY1083'])].copy();A=dox[dox.arm=='doxorubicin_ACY1083'].mean_distance.values;B=dox[dox.arm=='doxorubicin'].mean_distance.values
+rr.append(dict(study='GSE271055',contrast='doxorubicin_ACY1083_vs_doxorubicin',mean_difference=float(A.mean()-B.mean()),n_rescue_libraries=len(A),n_treated_libraries=len(B),batch_stratified_permutation_p=None,n_label_permutations=None,reference_design='descriptive_one_pooled_library_per_arm',exact_two_sided_p=None,n_sign_assignments=None,minimum_attainable_two_sided_p=None,minimum_attainable_one_sided_p=None))
+pd.DataFrame(rr).to_csv(T/'rescue_exploratory_comparisons.csv',index=False)
+pd.DataFrame(pair_rows).to_csv(T/'rescue_replicate_pairs.csv',index=False)
+pd.DataFrame(perm_rows).to_csv(T/'rescue_signflip_distribution.csv',index=False)
+pd.DataFrame(seed_rows).to_csv(T/'rescue_seedwise_signflip.csv',index=False)
+st=[]
 for s,t in itertools.combinations([0,1,2],2):
  A=np.load(RUN/f'full_{s}_latents.npz');B=np.load(RUN/f'full_{t}_latents.npz')
  for key in ['bg','shared','drug']:st.append(dict(seed_a=s,seed_b=t,space=key,test_cka=cka(A[key][te],B[key][te])))
