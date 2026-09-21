@@ -6,13 +6,17 @@ on:
     branches: [main]
     paths:
       - "scripts/19_gene_pattern_audit.py"
-      - "scripts/05_download_research_data.py"
+      - "requirements-task4.txt"
       - ".github/workflows/task7_gene_patterns.yml"
 
 jobs:
   gene-patterns:
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    timeout-minutes: 180
+
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "2"
 
     steps:
       - name: Checkout
@@ -26,13 +30,32 @@ jobs:
       - name: Install analysis dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install numpy pandas scipy statsmodels requests
+          python -m pip install -r requirements-research.txt
+          python -m pip install -r requirements-task4.txt
+          python -m pip install requests
+
+      - name: Download public cohort inputs
+        run: python scripts/05_download_research_data.py
+
+      - name: Recover corrected cohort
+        run: python scripts/05_recover_cohort.py
+
+      - name: Verify recovered data hash
+        run: |
+          ACTUAL=$(sha256sum data/processed/recovered_counts.h5ad | awk '{print $1}')
+          EXPECTED="62a5047e74d4ea704f2a10b5b91b35a4836ccefc99186d4c72101db78cbd8ac1"
+          echo "Actual:   $ACTUAL"
+          echo "Expected: $EXPECTED"
+          test "$ACTUAL" = "$EXPECTED"
+
+      - name: Regenerate paired Task 4 pseudobulk support
+        run: python scripts/16_pseudobulk_paired.py
 
       - name: Download pinned mouse MSigDB gene sets
         run: |
           python - <<'PY'
           from pathlib import Path
-          import requests
+          import hashlib, requests
 
           base = "https://data.broadinstitute.org/gsea-msigdb/msigdb/release/2025.1.Mm/"
           names = [
@@ -46,8 +69,9 @@ jobs:
               url = base + name
               r = requests.get(url, timeout=180)
               r.raise_for_status()
-              (out / name).write_bytes(r.content)
-              print(name, len(r.content))
+              path = out / name
+              path.write_bytes(r.content)
+              print(name, len(r.content), hashlib.sha256(r.content).hexdigest())
           PY
 
       - name: Run Task 7 audit
@@ -63,6 +87,9 @@ jobs:
           echo
           echo "===== TOP TERMS ====="
           cat analysis/corrected_20260920/task7_top_enrichment_terms.csv
+          echo
+          echo "===== ZERO-BASELINE PATHWAY ROBUSTNESS ====="
+          cat analysis/corrected_20260920/task7_pathway_robustness_summary.csv
           echo
           echo "===== DESIGN ====="
           cat analysis/corrected_20260920/task7_gene_pattern_design.json
@@ -91,6 +118,11 @@ jobs:
               "cisplatin": 5,
           }
 
+          de = pd.read_csv(
+              "analysis/corrected_20260920/task7_cis_pseudobulk_gene_support.csv"
+          )
+          assert int(de.supported_de_gene.sum()) == 69
+
           e = pd.read_csv(
               "analysis/corrected_20260920/task7_consensus_enrichment.csv"
           )
@@ -105,7 +137,7 @@ jobs:
         if: always()
         run: |
           mkdir -p task7_gene_patterns
-          for f in             task7_consensus_genes.csv             task7_cross_validation_summary.csv             task7_consensus_enrichment.csv             task7_top_enrichment_terms.csv             task7_enrichment_summary.csv             task7_gene_pattern_design.json
+          for f in             task7_consensus_genes.csv             task7_cross_validation_summary.csv             task7_cis_pseudobulk_gene_support.csv             task7_consensus_enrichment.csv             task7_top_enrichment_terms.csv             task7_enrichment_summary.csv             task7_pathway_robustness_summary.csv             task7_gene_pattern_design.json
           do
             if [ -f "analysis/corrected_20260920/$f" ]; then
               cp "analysis/corrected_20260920/$f" task7_gene_patterns/
