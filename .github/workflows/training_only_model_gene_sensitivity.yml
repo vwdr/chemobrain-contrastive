@@ -1,0 +1,44 @@
+name: Training-only model gene sensitivity
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/22_training_only_model_gene_sensitivity.py"
+      - ".github/workflows/training_only_model_gene_sensitivity.yml"
+jobs:
+  sensitivity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-research.txt
+      - run: python scripts/05_download_research_data.py
+      - run: python scripts/05_recover_cohort.py
+      - name: Verify data hash
+        run: |
+          ACTUAL=$(sha256sum data/processed/recovered_counts.h5ad | awk '{print $1}')
+          test "$ACTUAL" = "62a5047e74d4ea704f2a10b5b91b35a4836ccefc99186d4c72101db78cbd8ac1"
+      - run: python scripts/22_training_only_model_gene_sensitivity.py
+      - name: Show result
+        run: |
+          cat analysis/corrected_20260920/training_only_model_gene_design.json
+          cat analysis/corrected_20260920/training_only_model_gene_sensitivity_summary.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: training-only-model-gene-sensitivity
+          path: |
+            analysis/corrected_20260920/training_only_model_gene_filter_by_study.csv
+            analysis/corrected_20260920/training_only_model_gene_universe.csv
+            analysis/corrected_20260920/training_only_model_gene_design.json
+            analysis/corrected_20260920/training_only_model_gene_sensitivity.csv
+            analysis/corrected_20260920/training_only_model_gene_sensitivity_summary.csv
+          retention-days: 7
