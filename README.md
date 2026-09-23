@@ -46,16 +46,8 @@ The canonical workflow is implemented in scripts 05 through 14 plus `scripts/16_
 
 The supplied historical checkpoint did not match the designated historical run and lacked its original gene order. `analysis/corrected_20260920/checkpoint_audit.json` records this mismatch. The optional script `07_historical_check.py` requires that separate local checkpoint and is not part of the default reproduction command.
 
-### Task 7 robust gene-pattern interpretation
+### Gene-pattern interpretation
 
 The biological interpretation was tightened by replacing single-baseline top-50 attribution lists with a seed-and-baseline consensus. A gene must appear in the top 50 squared-norm integrated-gradient ranking in at least four of six analyses (three seeds x zero/control-median baselines). This yields 34 shared, 20 doxorubicin-associated and 33 cisplatin-associated consensus genes. Mouse MSigDB 2025.1 Reactome, GO Biological Process and M8 tests over the exact 1,500-gene model universe retain immune/myeloid expression-pattern associations for the shared list and stromal/pericyte/extracellular-matrix associations for the cisplatin list. The doxorubicin consensus has no FDR<0.05 Reactome, GO or M8 term, so the earlier zero-baseline synaptic theme is treated as non-robust.
 
-Within the model universe, 68 cisplatin-vs-control pseudobulk genes have adjusted P<0.05 in at least one eligible source cell type with all three paired logCPM effects agreeing with the fitted direction. Five of 33 cisplatin-consensus genes overlap that set (BH q approximately 0.0219 across latent-axis overlap tests). This is limited within-study support only; there is no matched replicated doxorubicin gene-wise test. See the [Task 7 gene-pattern audit](analysis/corrected_20260920/TASK7_GENE_PATTERN_AUDIT.md).
-
-### Task 8 related-work positioning
-
-The manuscript's related-work framing was updated through September 2026. It now distinguishes integration/representation learning, shared or condition-specific disentanglement, and counterfactual perturbation prediction rather than treating those objectives as interchangeable. Added context includes scGen, trVAE, multiGroupVI, CPA, biolord and recent perturbation-prediction benchmarks. The revised framing emphasizes that reconstruction or counterfactual prediction does not by itself identify a latent program as a shared drug mechanism, and that simple baselines and claim-matched out-of-distribution evaluation remain necessary. scDisInFact remains the fitted external comparator because it is the closest structural match for joint batch/condition disentanglement. See the [Task 8 related-work audit](analysis/corrected_20260920/TASK8_RELATED_WORK_AUDIT.md).
-
-### Final audit status
-
-Tasks 1-8 and the manuscript-wide consistency audit are complete. Numerical and scientific consistency passed the final compact-source checks. The remaining pre-submission items are administrative/journal-specific: corresponding-author details, author contributions, funding, competing interests, final data-reuse wording, journal formatting/reporting requirements and any required ethics statement for secondary computational analysis of public animal data. See the [final submission-readiness audit](analysis/corrected_20260920/FINAL_SUBMISSION_READINESS_AUDIT.md).
+Within the model universe, 68 cisplatin-vs-control pseudobulk genes have adjusted P<0.05 in at least one eligible source cell type with all three paired logCPM effects agreeing with the fitted direction. Five of 33 cisplatin-consensus genes overlap that set (BH q approximately 0.0219 across latent-axis overlap tests). This is limited within-study support only; there is no matched replicated doxorubicin gene-wise test. 
