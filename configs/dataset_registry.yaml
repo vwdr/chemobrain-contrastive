@@ -146,10 +146,7 @@ mvp:
   minimum_drugs: 2
   target_drugs: 3
   stretch_drugs: 5
-
-# =============================================================================
-# PREPROCESSING DEFAULTS (override in configs/default.yaml if needed)
-# =============================================================================
+  
 preprocessing:
   min_genes_per_cell: 500
   min_cells_per_gene: 10
