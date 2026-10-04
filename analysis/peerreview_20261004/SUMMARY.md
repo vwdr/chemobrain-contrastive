@@ -1,6 +1,6 @@
 # Run A summary (outputs `analysis/peerreview_20261004/`, `runs/peerreview_20261004/`)
 
-Instructions: `D:/chemobrain-contrastive-main/CLAUDE_CODE_PROMPT_RUN_A.md`. Branch `peerreview-20261003` (started at commit
+Branch `peerreview-20261003` (started at commit
 e82fc38). Run 2026-10-04 13:18–16:20 EDT, Windows 11, Intel i5-10400, CPU only, at most 3 concurrent fits with ≤ 3 threads.
 No push. No stop condition (T1–T4) was triggered. No figures were produced. Step log: `PROGRESS.md`; file index: `INDEX.md`;
 environments: `environment_notes.md`.
