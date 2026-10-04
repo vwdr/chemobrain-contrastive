@@ -59,9 +59,10 @@ def mccvi():
 
 
 def collect():
-    ig = [pd.read_csv(R4 / 'mccvi' / 'mccvi_ig_recovery.csv')]
-    ig += [pd.read_csv(p) for p in sorted((R4 / 'multigroupvi').glob('*_ig_recovery.csv'))]
-    ig += [pd.read_csv(p) for p in sorted((R4 / 'contrastivevi').glob('*_ig_recovery.csv'))]
+    rd = lambda p: pd.read_csv(p, keep_default_na=False, na_values=[''])   # keep the configuration name 'null' as a string
+    ig = [rd(R4 / 'mccvi' / 'mccvi_ig_recovery.csv')]
+    ig += [rd(p) for p in sorted((R4 / 'multigroupvi').glob('*_ig_recovery.csv'))]
+    ig += [rd(p) for p in sorted((R4 / 'contrastivevi').glob('*_ig_recovery.csv'))]
     ig = pd.concat(ig, ignore_index=True); ig.to_csv(OUT / 'R4_ig_recovery_per_fit.csv', index=False)
     mg = pd.DataFrame([json.loads(p.read_text()) for p in sorted((R4 / 'multigroupvi').glob('*_done.json'))])
     cv = pd.DataFrame([json.loads(p.read_text()) for p in sorted((R4 / 'contrastivevi').glob('*_done.json'))])

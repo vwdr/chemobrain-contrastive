@@ -24,3 +24,7 @@ Instructions: `D:/chemobrain-contrastive-main/CLAUDE_CODE_PROMPT_RUN_A.md`. Star
 
 ## R4 — queue launched 13:37 (21 multiGroupVI + 42 contrastiveVI fits, xargs -P 3); MC-ContrastiveVI attribution on grid checkpoints done 13:36 (scripts/44 --mccvi).
 - Smoke tests (2 epochs) of scripts/42 and 43 passed (outputs in runs/peerreview_20261004/r4/*/smoke/).
+
+## R4 — done (queue 13:36:15–16:10; 63/63 fits exit 0, first attempt)
+- multiGroupVI 21 fits (1,068–1,136 s), contrastiveVI 42 fits (87–93 s), MC-ContrastiveVI attribution on existing grid checkpoints.
+- scripts/44 --collect → R4_*.csv; note R4_baseline_positive_control.md. Fix in collect: configuration name "null" read as NaN by pandas; reads use keep_default_na=False.
