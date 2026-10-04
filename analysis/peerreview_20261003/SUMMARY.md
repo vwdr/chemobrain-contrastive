@@ -1,7 +1,6 @@
 # Peer-review run summary (branch `peerreview-20261003`)
 
-Branched from `main` at `7288dc88a3ebe95c5ab914d5228063eda44c786a`. Instructions:
-`D:/chemobrain-contrastive-main/CLAUDE_CODE_PROMPT.md`. Run: 2026-10-03 21:49 to 2026-10-04 (EDT), Windows 11, Intel
+Branched from `main` at `7288dc88a3ebe95c5ab914d5228063eda44c786a`. Windows 11, Intel
 i5-10400 (12 logical CPUs), CPU only. Step log with commands and times: `PROGRESS.md`. Environment: `environment.json`
 (main venv) and `C4_mgvi_pip_freeze.txt` (multiGroupVI venv). No push, merge, rebase, reset, stash or remote change.
 No stop condition was triggered.
