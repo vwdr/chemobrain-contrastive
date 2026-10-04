@@ -38,3 +38,10 @@ Instructions: `D:/chemobrain-contrastive-main/CLAUDE_CODE_PROMPT.md`.
   F_sh 0.7542 vs 0.9206; NLL 187.05 vs 181.08). full_0_latents.npz: consistent with ved full_0.pt, differs from committed.
 - HVG reselection on this machine: 1,499/1,500 overlap (Cebpd in, Aspm out); committed universe used.
 - Output: `A0_ved_archive_check.md` + 5 CSVs.
+
+## Phase 2 — Fresh canonical fits — done (22:20–22:40)
+- `scripts/24_canonical_fits.py --fit --seed {0,1,2} --threads=2` (3 concurrent; 178–179 s/fit, IG 4–6 s), then `--analyze`.
+- Outputs: `runs/peerreview_20261003/canonical/`; `A1_*.csv`, `A1_fresh_canonical_fits.md`.
+- S4: test MSE 0.168857 / 0.168697 / 0.168616 → pass.
+- Fresh F_sh pooled 0.9237/0.9679/0.9705; consensus sizes shared 40, dox 27, cis 31; Jaccard vs frozen 0.644/0.205/0.362.
+- Deviation: openpyxl 3.1.5 installed into .venv (needed to read supplementary .xlsx for C1; not in requirements).
