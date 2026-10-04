@@ -122,7 +122,7 @@ compatible versions of transitive dependencies chosen by hand (`C4_mgvi_pip_free
 ## Final git status check
 
 Before the final commit, `git status` showed no modified tracked file outside the new locations, and
-`git diff main --name-only` lists only `analysis/peerreview_20261003/`, `scripts/23_*`–`scripts/35_*`, `src/peerreview/`
+`git diff main --name-only` lists only `analysis/peerreview_20261003/`, `runs/peerreview_20261003/` (small text outputs), `scripts/23_*`–`scripts/35_*`, `src/peerreview/`
 and `tests/test_peerreview_thinning.py`. Restore-procedure events: `data/evidence/GSE216146.soft`, `GSE271055.soft`,
 `GSE286221.soft` were overwritten by `05_download_research_data.py` (identical except line endings) and restored with
 `git checkout --`; the three CSVs rewritten by `05_recover_cohort.py` were identical to the committed versions.
