@@ -100,3 +100,20 @@ Note: times above are wall-clock (EDT) taken from file modification times; earli
 - `scripts/32_c6_ttr_distribution.py` → `C6_ttr_by_celltype_arm.csv`, `C6_ttr_choroid_plexus_vs_other.csv`, `C6_ttr_distribution.md`.
 
 ## Phase 4 — timing batch started 22:26:49 (null seeds 0-2, 3 concurrent × 3 threads)
+- Timing batch finished 22:30:06: 197 s wall for 3 concurrent fits incl. IG (fit 169–170 s, IG 4–8 s each).
+  Null F_sh 0.7054 / 0.8688 / 0.8016; test MSE 0.1638 / 0.1633 / 0.1630.
+- Projection: 72 grid fits ≈ 24 batches × 197 s ≈ 79 min; 200 permutation fits (no IG) ≈ 67 batches × ~185 s ≈ 3.4 h;
+  total ≈ 4.8 h < 48 h → no pre-decided reductions applied (100 permutations kept; full grid kept).
+- Grid + permutation queue launched (xargs -P 3, 3 threads per fit; job list runs/peerreview_20261003/scratch/jobs.txt;
+  each fit resumable via done.json). Logs: runs/peerreview_20261003/logs/31_*.log.
+
+## Task C4 — installation (started during the Phase 4 queue; no training until slots free)
+- Official implementation: github.com/Genentech/multiGroupVI @ 3d001dbe6905803195165f936f879a1a166a6fc8 (setup.cfg pins
+  scvi-tools==0.18.0, protobuf<=3.20.1, scanpy>=1.8.1). Cloned to runs/peerreview_20261003/scratch/multiGroupVI (not committed).
+- Separate venv `.venv-mgvi` (Python 3.12.10; only Python available). Attempts (logs `runs/peerreview_20261003/logs/c4_pip_attempt*.log`):
+  1. scvi-tools 0.18.0 resolved with latest deps (torch 2.14.1, numpy 2.5, anndata 0.13, pytorch-lightning 1.6.5) → import error (pkg_resources missing; PL too old for scvi 0.18 logger import).
+  2–5. pinned setuptools<70, torch 2.5.1+cpu, numpy 1.26.4, scipy<1.14, pandas<2.2, jax/jaxlib 0.4.30, flax 0.8.5, optax 0.2.3, numpyro 0.15.3, pyro-ppl 1.9.1, torchmetrics 0.11.4, zarr<3, anndata 0.9.2, mudata 0.2.3, scanpy 1.9.8.
+  6–7. pytorch-lightning 1.7.7 (scvi 0.18 requires >=1.6,<1.8 and imports `pytorch_lightning.loggers.logger`, added in 1.7) not installable with pip 26.
+  8. pip downgraded to 24.0 inside .venv-mgvi → pytorch-lightning 1.7.7 installed; `import scvi` (0.18.0) and `multigroup_vi` work.
+- No package source was modified. multigroup_vi installed `--no-deps`. Full freeze: `C4_mgvi_pip_freeze.txt`.
+- Time box: first install attempt 22:33; import + model init working 22:58 (≈25 min of effort). Clock paused while waiting for fit slots.
