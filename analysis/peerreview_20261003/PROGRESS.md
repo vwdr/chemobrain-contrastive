@@ -90,3 +90,13 @@ Note: times above are wall-clock (EDT) taken from file modification times; earli
 - `scripts/31_semisynthetic.py --prepare`: 14,285 base cells (PN 4,830; CNT 9,455); split 6,000/1,428/1,429;
   gene sets saved to `D1_gene_sets.csv` and committed before any fitting. Manual vs scanpy normalization max diff 9.5e-7.
 - Calibration (`scripts/30_calibration_pseudobulk.py`, script 16 logic redirected) running in background.
+
+## Task C3 — done (fits 22:17–22:26; collect 22:28)
+- 9 fits (scVI ×3: 144 s each; contrastiveVI 2 pairs ×3: 102–106 s), `--collect` → `C3_*.csv`, `C3_design.json`, `C3_baselines.md`.
+- Canonical MSE: MC-CVI 0.1687, scVI 0.2061, cVI cis-pair 0.1260 / dox-pair 0.2622, PCA(32) 0.1552 (= committed).
+- contrastiveVI salient: 8/8 active units, all dims KL > 0.01 in every fit.
+
+## Task C6 — done (22:28) (run early while CPU was otherwise used by fits; CPU-light)
+- `scripts/32_c6_ttr_distribution.py` → `C6_ttr_by_celltype_arm.csv`, `C6_ttr_choroid_plexus_vs_other.csv`, `C6_ttr_distribution.md`.
+
+## Phase 4 — timing batch started 22:26:49 (null seeds 0-2, 3 concurrent × 3 threads)
