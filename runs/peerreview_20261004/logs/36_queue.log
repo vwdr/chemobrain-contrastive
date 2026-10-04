@@ -1,0 +1,14 @@
+launch 13:20:03
+13:22:31 mode gaussian_vae 0 exit=0
+13:23:02 mode no_gating 0 exit=0
+13:23:02 mode no_hsic 0 exit=0
+13:25:53 mode no_hsic 1 exit=0
+13:25:54 mode no_gating 1 exit=0
+13:27:31 nb x 0 exit=0
+13:28:06 mode gaussian_vae 1 exit=0
+13:30:10 mode no_hsic 2 exit=0
+13:30:38 nb x 1 exit=0
+13:30:40 mode no_gating 2 exit=0
+13:30:51 pca x 0 exit=0
+13:32:29 mode gaussian_vae 2 exit=0
+13:35:02 nb x 2 exit=0

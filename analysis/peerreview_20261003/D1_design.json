@@ -1,0 +1,40 @@
+{
+  "seed": 20261003,
+  "n_base_cells": 14285,
+  "n_train": 6000,
+  "n_val": 1428,
+  "n_test": 1429,
+  "max_abs_diff_manual_vs_scanpy_normalization_base": 9.5367431640625e-07,
+  "deltas": [
+    0.25,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "responder_fractions": [
+    1.0,
+    0.3
+  ],
+  "scenarios": {
+    "null": [],
+    "shared": [
+      "S"
+    ],
+    "specific": [
+      "A",
+      "B"
+    ],
+    "mixed": [
+      "S",
+      "A",
+      "B"
+    ]
+  },
+  "n_permutations": 100,
+  "permutation_configs": [
+    "null",
+    "shared_d1_rf1.0"
+  ],
+  "rng_streams": "separate numpy default_rng(20261003) generators for: library split, gene-set draw, responders (re-created per responder fraction), thinning draws (re-created per configuration), label permutations",
+  "decile_definition": "pandas.qcut of mean log-normalized expression (canonical normalization) over base cells, 10 bins"
+}

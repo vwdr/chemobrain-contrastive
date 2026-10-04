@@ -1,0 +1,9 @@
+Seed set to 2
+GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+\U0001f4a1 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+D:\chemobrain-contrastive-main\chemobrain-contrastive\.venv\Lib\site-packages\lightning\pytorch\trainer\connectors\data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=11` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+INFO     Input AnnData not setup with scvi-tools. attempting to transfer       
+         AnnData setup                                                         
+{'method': 'contrastiveVI', 'study_or_pair': 'cisplatin', 'seed': 2, 'n_train': 3000, 'n_test': 883, 'modeled_gene_log_mse': 0.7108935117721558, 'canonical_log_mse': 0.1269351691007614, 'background_condition_balanced_accuracy': 0.6496040372670808, 'salient_condition_balanced_accuracy': 0.6797412008281574, 'fit_seconds': 101.68612766265869, 'threads': 3, 'salient_target_test_active_units_var_gt_0p01': 8, 'salient_target_test_dims_kl_gt_0p01': 8, 'salient_target_test_total_kl_nats': 7.2971134378736355, 'salient_target_test_posterior_mean_var_sum': 4.6495041847229, 'salient_background_test_active_units_var_gt_0p01': 8, 'salient_background_test_dims_kl_gt_0p01': 8, 'salient_background_test_total_kl_nats': 5.953202766083818, 'salient_background_test_posterior_mean_var_sum': 3.2054834365844727}

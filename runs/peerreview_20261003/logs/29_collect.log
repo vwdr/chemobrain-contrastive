@@ -1,0 +1,36 @@
+method study_or_pair  seed  modeled_gene_log_mse  canonical_log_mse  condition_balanced_accuracy  study_balanced_accuracy  treatment_probe_cisplatin_within_GSE216146_balanced_accuracy  treatment_probe_doxorubicin_within_GSE271055_balanced_accuracy  fit_seconds  threads
+  scVI      combined     0              1.078256           0.204991                     0.656425                 0.945689                                                      0.792438                                                        0.621942   144.562520        3
+  scVI      combined     1              1.086980           0.208428                     0.699327                 0.929490                                                      0.842712                                                        0.639380   144.246397        3
+  scVI      combined     2              1.076707           0.204905                     0.681402                 0.928727                                                      0.793121                                                        0.622364   144.431401        3
+       method study_or_pair  seed  n_train  n_test  modeled_gene_log_mse  canonical_log_mse  background_condition_balanced_accuracy  salient_condition_balanced_accuracy  fit_seconds  threads  salient_target_test_active_units_var_gt_0p01  salient_target_test_dims_kl_gt_0p01  salient_target_test_total_kl_nats  salient_target_test_posterior_mean_var_sum  salient_background_test_active_units_var_gt_0p01  salient_background_test_dims_kl_gt_0p01  salient_background_test_total_kl_nats  salient_background_test_posterior_mean_var_sum
+contrastiveVI     cisplatin     0     3000     883              0.720768           0.127422                                0.711128                             0.724488   105.413388        3                                             8                                    8                           7.471067                                    4.784340                                                 8                                        8                               5.699652                                        3.041640
+contrastiveVI     cisplatin     1     3000     883              0.710797           0.123767                                0.689565                             0.695502   105.324186        3                                             8                                    8                           8.072512                                    4.986251                                                 8                                        8                               6.586759                                        3.559252
+contrastiveVI     cisplatin     2     3000     883              0.710894           0.126935                                0.649604                             0.679741   101.686128        3                                             8                                    8                           7.297113                                    4.649504                                                 8                                        8                               5.953203                                        3.205483
+contrastiveVI   doxorubicin     0     3000    1998              1.492193           0.260390                                0.568412                             0.524624   105.794448        3                                             8                                    8                           7.510838                                    4.229167                                                 8                                        8                               7.211101                                        4.049934
+contrastiveVI   doxorubicin     1     3000    1998              1.507894           0.263046                                0.560021                             0.612797   101.859141        3                                             8                                    8                           7.309785                                    4.052434                                                 8                                        8                               7.088731                                        3.963652
+contrastiveVI   doxorubicin     2     3000    1998              1.513172           0.263119                                0.576922                             0.559705   101.929188        3                                             8                                    8                           7.036210                                    4.101883                                                 8                                        8                               6.692649                                        3.855911
+                           method study_or_pair  n  canonical_mean  canonical_sd  modeled_mean  modeled_sd
+         MC-ContrastiveVI (fresh)     cisplatin  3        0.091716      0.000290      0.449616    0.000906
+         MC-ContrastiveVI (fresh)      combined  3        0.168723      0.000123      0.904167    0.006085
+         MC-ContrastiveVI (fresh)   doxorubicin  3        0.202756      0.000305      1.105051    0.008469
+   PCA(32) fit on canonical scale     cisplatin  1        0.085719           NaN      0.454030         NaN
+   PCA(32) fit on canonical scale      combined  1        0.155247           NaN      0.873536         NaN
+   PCA(32) fit on canonical scale   doxorubicin  1        0.185974           NaN      1.058934         NaN
+PCA(32) fit on modeled-gene scale     cisplatin  1             NaN           NaN      0.331658         NaN
+PCA(32) fit on modeled-gene scale      combined  1             NaN           NaN      0.550180         NaN
+PCA(32) fit on modeled-gene scale   doxorubicin  1             NaN           NaN      0.646755         NaN
+                    contrastiveVI     cisplatin  3        0.126042      0.001984      0.714153    0.005729
+                    contrastiveVI   doxorubicin  3        0.262185      0.001555      1.504420    0.010913
+                             scVI      combined  3        0.206108      0.002009      1.080648    0.005539
+                                                                      mean       min       max
+method                   study_or_pair representation                                         
+MC-ContrastiveVI (fresh) combined      bg                         0.643896  0.599686  0.700429
+                                       drug                       0.377210  0.176983  0.696773
+                                       shared                     0.578534  0.497162  0.691017
+contrastiveVI            cisplatin     background                 0.845720  0.837865  0.857558
+                                       salient                    0.444494  0.417828  0.461400
+                                       salient_target_cells_only  0.534696  0.499980  0.553311
+                         doxorubicin   background                 0.728923  0.726972  0.730655
+                                       salient                    0.124037  0.110731  0.134174
+                                       salient_target_cells_only  0.130329  0.120067  0.141379
+scVI                     combined      latent                     0.774160  0.765761  0.790900

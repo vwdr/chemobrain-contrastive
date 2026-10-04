@@ -1,0 +1,186 @@
+consensus_version,axis,rank,gene,n_marker_sets,marker_sets
+frozen_paper,shared,1,Mrc1,2,Border-associated macrophages|Macrophages
+frozen_paper,shared,2,Pf4,2,Border-associated macrophages|Microglia
+frozen_paper,shared,3,Ms4a7,2,Border-associated macrophages|Macrophages
+frozen_paper,shared,4,Cbr2,1,Microglia
+frozen_paper,shared,5,Cd163,1,Macrophages
+frozen_paper,shared,6,F13a1,2,Border-associated macrophages|Macrophages
+frozen_paper,shared,7,Gpx3,0,
+frozen_paper,shared,8,Dab2,2,Border-associated macrophages|Macrophages
+frozen_paper,shared,9,mt-Co3,0,
+frozen_paper,shared,10,Cd52,0,
+frozen_paper,shared,11,Stab1,2,Endothelial cells|Macrophages
+frozen_paper,shared,12,C5ar1,2,Macrophages|Microglia
+frozen_paper,shared,13,mt-Nd4,0,
+frozen_paper,shared,14,mt-Co2,0,
+frozen_paper,shared,15,Apoe,2,Astrocytes|Border-associated macrophages
+frozen_paper,shared,16,Ttr,2,Choroid plexus cells|Choroid plexus epithelium
+frozen_paper,shared,17,Laptm5,0,
+frozen_paper,shared,18,Lilrb4a,0,
+frozen_paper,shared,19,Ifi27l2a,1,Border-associated macrophages
+frozen_paper,shared,20,Bst2,0,
+frozen_paper,shared,21,Atp5g1,1,Choroid plexus epithelium
+frozen_paper,shared,22,Psmb8,0,
+frozen_paper,shared,23,Cpne2,0,
+frozen_paper,shared,24,Ifitm3,1,Border-associated macrophages
+frozen_paper,shared,25,Lgals1,1,Border-associated macrophages
+frozen_paper,shared,26,Ctsd,0,
+frozen_paper,shared,27,Tec,0,
+frozen_paper,shared,28,Junb,0,
+frozen_paper,shared,29,Cxcl12,0,
+frozen_paper,shared,30,Slc6a6,0,
+frozen_paper,shared,31,Ptprc,0,
+frozen_paper,shared,32,Ccl4,1,Microglia
+frozen_paper,shared,33,C1qa,0,
+frozen_paper,shared,34,Qk,0,
+frozen_paper,doxorubicin,1,Snhg11,2,Neurons|Nucleus-enriched transcripts
+frozen_paper,doxorubicin,2,Kcnq1ot1,1,Nucleus-enriched transcripts
+frozen_paper,doxorubicin,3,Meg3,2,Neurons|Nucleus-enriched transcripts
+frozen_paper,doxorubicin,4,Ttr,2,Choroid plexus cells|Choroid plexus epithelium
+frozen_paper,doxorubicin,5,Gria2,0,
+frozen_paper,doxorubicin,6,Rtn1,0,
+frozen_paper,doxorubicin,7,Grin2b,0,
+frozen_paper,doxorubicin,8,C1ql3,0,
+frozen_paper,doxorubicin,9,Opcml,0,
+frozen_paper,doxorubicin,10,Pcdh9,1,Nucleus-enriched transcripts
+frozen_paper,doxorubicin,11,Nrcam,0,
+frozen_paper,doxorubicin,12,Dclk1,0,
+frozen_paper,doxorubicin,13,Peg3,0,
+frozen_paper,doxorubicin,14,Mir100hg,0,
+frozen_paper,doxorubicin,15,Zeb2,1,Fibroblasts
+frozen_paper,doxorubicin,16,Pcsk2,1,Neurons
+frozen_paper,doxorubicin,17,Ptprd,1,Nucleus-enriched transcripts
+frozen_paper,doxorubicin,18,Zbtb20,0,
+frozen_paper,doxorubicin,19,Nfib,0,
+frozen_paper,doxorubicin,20,Miat,2,Neurons|Nucleus-enriched transcripts
+frozen_paper,cisplatin,1,Ccn3,0,
+frozen_paper,cisplatin,2,Col25a1,0,
+frozen_paper,cisplatin,3,Igfbp6,1,Fibroblasts
+frozen_paper,cisplatin,4,Mgp,3,Endothelial cells|Fibroblasts|Meningeal/perivascular fibroblasts
+frozen_paper,cisplatin,5,Foxc2,0,
+frozen_paper,cisplatin,6,Rspo3,0,
+frozen_paper,cisplatin,7,Col6a2,1,Fibroblasts
+frozen_paper,cisplatin,8,mt-Nd4,0,
+frozen_paper,cisplatin,9,Ogn,0,
+frozen_paper,cisplatin,10,Col6a1,0,
+frozen_paper,cisplatin,11,Adamtsl3,0,
+frozen_paper,cisplatin,12,Foxd1,0,
+frozen_paper,cisplatin,13,Efemp1,1,Fibroblasts
+frozen_paper,cisplatin,14,S100a10,1,Endothelial cells
+frozen_paper,cisplatin,15,Bsg,1,Choroid plexus epithelium
+frozen_paper,cisplatin,16,Hes1,0,
+frozen_paper,cisplatin,17,Fos,1,Microglia
+frozen_paper,cisplatin,18,Ttr,2,Choroid plexus cells|Choroid plexus epithelium
+frozen_paper,cisplatin,19,Ildr2,0,
+frozen_paper,cisplatin,20,Mt1,0,
+frozen_paper,cisplatin,21,Col1a2,1,Fibroblasts
+frozen_paper,cisplatin,22,Tmsb10,0,
+frozen_paper,cisplatin,23,Apoe,2,Astrocytes|Border-associated macrophages
+frozen_paper,cisplatin,24,Tsc22d1,0,
+frozen_paper,cisplatin,25,Anxa1,0,
+frozen_paper,cisplatin,26,Id3,1,Endothelial cells
+frozen_paper,cisplatin,27,Mbp,1,Oligodendrocytes
+frozen_paper,cisplatin,28,Cbr2,1,Microglia
+frozen_paper,cisplatin,29,Folr2,0,
+frozen_paper,cisplatin,30,Mrc1,2,Border-associated macrophages|Macrophages
+frozen_paper,cisplatin,31,Pf4,2,Border-associated macrophages|Microglia
+frozen_paper,cisplatin,32,F13a1,2,Border-associated macrophages|Macrophages
+frozen_paper,cisplatin,33,Cd163,1,Macrophages
+fresh_phase2,doxorubicin,1,Snhg11,2,Neurons|Nucleus-enriched transcripts
+fresh_phase2,doxorubicin,2,Meg3,2,Neurons|Nucleus-enriched transcripts
+fresh_phase2,doxorubicin,3,Ttr,2,Choroid plexus cells|Choroid plexus epithelium
+fresh_phase2,doxorubicin,4,Apoe,2,Astrocytes|Border-associated macrophages
+fresh_phase2,doxorubicin,5,Atp1b1,1,Choroid plexus epithelium
+fresh_phase2,doxorubicin,6,Kcnq1ot1,1,Nucleus-enriched transcripts
+fresh_phase2,doxorubicin,7,Nrxn1,0,
+fresh_phase2,doxorubicin,8,Opcml,0,
+fresh_phase2,doxorubicin,9,Arpp21,0,
+fresh_phase2,doxorubicin,10,Sptbn1,0,
+fresh_phase2,doxorubicin,11,Grm5,1,Neurons
+fresh_phase2,doxorubicin,12,Ptprn,0,
+fresh_phase2,doxorubicin,13,Bc1,0,
+fresh_phase2,doxorubicin,14,Dlgap1,1,Neurons
+fresh_phase2,doxorubicin,15,Zeb2,1,Fibroblasts
+fresh_phase2,doxorubicin,16,Ntng1,0,
+fresh_phase2,doxorubicin,17,R3hdm1,0,
+fresh_phase2,doxorubicin,18,Mir100hg,0,
+fresh_phase2,doxorubicin,19,Camk2a,0,
+fresh_phase2,doxorubicin,20,Snap25,1,Neurons
+fresh_phase2,doxorubicin,21,Slc17a7,1,Neurons
+fresh_phase2,doxorubicin,22,Pclo,1,Neurons
+fresh_phase2,doxorubicin,23,Sparcl1,1,Endothelial cells
+fresh_phase2,doxorubicin,24,Nrgn,1,Neurons
+fresh_phase2,doxorubicin,25,Peg3,0,
+fresh_phase2,doxorubicin,26,Ttyh1,0,
+fresh_phase2,doxorubicin,27,Slc1a2,1,Astrocytes
+fresh_phase2,cisplatin,1,Mrc1,2,Border-associated macrophages|Macrophages
+fresh_phase2,cisplatin,2,mt-Co2,0,
+fresh_phase2,cisplatin,3,Ttr,2,Choroid plexus cells|Choroid plexus epithelium
+fresh_phase2,cisplatin,4,Apoe,2,Astrocytes|Border-associated macrophages
+fresh_phase2,cisplatin,5,mt-Nd4,0,
+fresh_phase2,cisplatin,6,Ccn3,0,
+fresh_phase2,cisplatin,7,Mgp,3,Endothelial cells|Fibroblasts|Meningeal/perivascular fibroblasts
+fresh_phase2,cisplatin,8,Glul,0,
+fresh_phase2,cisplatin,9,Ctsd,0,
+fresh_phase2,cisplatin,10,Fos,1,Microglia
+fresh_phase2,cisplatin,11,Bsg,1,Choroid plexus epithelium
+fresh_phase2,cisplatin,12,Junb,0,
+fresh_phase2,cisplatin,13,Col25a1,0,
+fresh_phase2,cisplatin,14,Zbtb20,0,
+fresh_phase2,cisplatin,15,Mt1,0,
+fresh_phase2,cisplatin,16,Qk,0,
+fresh_phase2,cisplatin,17,Myl9,0,
+fresh_phase2,cisplatin,18,Igfbp6,1,Fibroblasts
+fresh_phase2,cisplatin,19,Mt3,1,Choroid plexus epithelium
+fresh_phase2,cisplatin,20,Ogn,0,
+fresh_phase2,cisplatin,21,Col6a2,1,Fibroblasts
+fresh_phase2,cisplatin,22,Rspo3,0,
+fresh_phase2,cisplatin,23,Klf4,1,Fibroblasts
+fresh_phase2,cisplatin,24,Foxc2,0,
+fresh_phase2,cisplatin,25,Foxd1,0,
+fresh_phase2,cisplatin,26,Slc38a2,0,
+fresh_phase2,cisplatin,27,Slc26a7,0,
+fresh_phase2,cisplatin,28,Adamtsl3,0,
+fresh_phase2,cisplatin,29,Chchd10,1,Choroid plexus epithelium
+fresh_phase2,cisplatin,30,Nbl1,0,
+fresh_phase2,cisplatin,31,Igfbp5,0,
+fresh_phase2,shared,1,Mrc1,2,Border-associated macrophages|Macrophages
+fresh_phase2,shared,2,Cbr2,1,Microglia
+fresh_phase2,shared,3,Pf4,2,Border-associated macrophages|Microglia
+fresh_phase2,shared,4,Ms4a7,2,Border-associated macrophages|Macrophages
+fresh_phase2,shared,5,F13a1,2,Border-associated macrophages|Macrophages
+fresh_phase2,shared,6,Cd163,1,Macrophages
+fresh_phase2,shared,7,Apoe,2,Astrocytes|Border-associated macrophages
+fresh_phase2,shared,8,Gpx3,0,
+fresh_phase2,shared,9,Cd52,0,
+fresh_phase2,shared,10,mt-Nd4,0,
+fresh_phase2,shared,11,Ttr,2,Choroid plexus cells|Choroid plexus epithelium
+fresh_phase2,shared,12,mt-Co2,0,
+fresh_phase2,shared,13,mt-Co3,0,
+fresh_phase2,shared,14,Dab2,2,Border-associated macrophages|Macrophages
+fresh_phase2,shared,15,Ifitm3,1,Border-associated macrophages
+fresh_phase2,shared,16,Stab1,2,Endothelial cells|Macrophages
+fresh_phase2,shared,17,Lilrb4a,0,
+fresh_phase2,shared,18,Lgals1,1,Border-associated macrophages
+fresh_phase2,shared,19,Laptm5,0,
+fresh_phase2,shared,20,Cflar,0,
+fresh_phase2,shared,21,Junb,0,
+fresh_phase2,shared,22,C1qa,0,
+fresh_phase2,shared,23,Ctsd,0,
+fresh_phase2,shared,24,Atp5g1,1,Choroid plexus epithelium
+fresh_phase2,shared,25,Ifi27l2a,1,Border-associated macrophages
+fresh_phase2,shared,26,Bst2,0,
+fresh_phase2,shared,27,Ly6e,0,
+fresh_phase2,shared,28,Ctss,1,Microglia
+fresh_phase2,shared,29,Pik3ap1,0,
+fresh_phase2,shared,30,Cxcl12,0,
+fresh_phase2,shared,31,Sparcl1,1,Endothelial cells
+fresh_phase2,shared,32,Slc6a6,0,
+fresh_phase2,shared,33,Psmb8,0,
+fresh_phase2,shared,34,Tec,0,
+fresh_phase2,shared,35,Mylip,0,
+fresh_phase2,shared,36,Sat1,0,
+fresh_phase2,shared,37,Tyrobp,1,Macrophages
+fresh_phase2,shared,38,Lyz2,2,Border-associated macrophages|Macrophages
+fresh_phase2,shared,39,Ctsc,0,
+fresh_phase2,shared,40,Maf,1,Macrophages

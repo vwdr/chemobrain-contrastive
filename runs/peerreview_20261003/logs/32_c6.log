@@ -1,0 +1,60 @@
+      cell_type             arm  n_cells  fraction_nonzero  mean_raw_counts  mean_log_normalized
+      Astrocyte       cisplatin      296          0.915541         8.287162             1.892780
+      Astrocyte cisplatin_GENUS      204          0.848039         2.607843             1.287792
+      Astrocyte         control      564          0.429078         0.611702             0.519359
+      Astrocyte   control_GENUS      373          0.600536         1.219839             0.915870
+ Choroid Plexus       cisplatin     1164          1.000000      1278.875430             7.290129
+ Choroid Plexus cisplatin_GENUS      475          1.000000       809.025263             6.890536
+ Choroid Plexus         control      253          1.000000       632.581028             6.655181
+ Choroid Plexus   control_GENUS      736          1.000000       543.758152             6.558521
+    Endothelial       cisplatin      398          0.859296         7.062814             1.724666
+    Endothelial cisplatin_GENUS      207          0.777778         2.227053             1.156284
+    Endothelial         control      399          0.388471         0.593985             0.539546
+    Endothelial   control_GENUS      286          0.566434         1.164336             1.001839
+      Ependymal       cisplatin       36          0.861111        10.833333             1.675832
+      Ependymal cisplatin_GENUS       11          0.909091         2.545455             1.298707
+      Ependymal         control       49          0.408163         0.510204             0.382431
+      Ependymal   control_GENUS       38          0.605263         1.105263             0.825760
+     Fibroblast       cisplatin        9          1.000000         5.444444             1.639859
+     Fibroblast cisplatin_GENUS        9          1.000000         2.444444             1.547984
+     Fibroblast         control        4          0.250000         0.250000             0.173914
+     Fibroblast   control_GENUS        4          1.000000         1.000000             1.931317
+         Immune       cisplatin       97          0.731959         2.567010             1.672984
+         Immune cisplatin_GENUS       58          0.706897         1.396552             1.230475
+         Immune         control      140          0.378571         0.521429             0.670444
+         Immune   control_GENUS      129          0.457364         0.728682             0.882316
+      Microglia       cisplatin      907          0.936053         8.450937             2.074430
+      Microglia cisplatin_GENUS      411          0.885645         2.927007             1.321677
+      Microglia         control     1494          0.432396         0.663989             0.504206
+      Microglia   control_GENUS     1253          0.629689         1.698324             0.987023
+         Neuron       cisplatin       22          1.000000         6.636364             2.080170
+         Neuron cisplatin_GENUS       21          0.857143         2.523810             1.662420
+         Neuron         control      135          0.377778         0.525926             0.512284
+         Neuron   control_GENUS      109          0.651376         1.467890             1.166557
+            OPC       cisplatin      122          0.942623        18.942623             1.730203
+            OPC cisplatin_GENUS       72          0.819444         3.055556             1.225348
+            OPC         control      280          0.371429         0.621429             0.433124
+            OPC   control_GENUS      161          0.571429         3.086957             0.805867
+Oligodendrocyte       cisplatin      855          0.918129         7.867836             1.884957
+Oligodendrocyte cisplatin_GENUS      486          0.847737         2.565844             1.186494
+Oligodendrocyte         control     1328          0.466114         1.890813             0.481856
+Oligodendrocyte   control_GENUS      870          0.643678         1.298851             0.896996
+       Pericyte       cisplatin       88          0.818182        22.818182             1.778005
+       Pericyte cisplatin_GENUS       73          0.849315         2.931507             1.241525
+       Pericyte         control      110          0.354545         0.500000             0.401618
+       Pericyte   control_GENUS       75          0.613333         2.400000             0.780966
+     Progenitor       cisplatin       11          0.909091         9.272727             1.841911
+     Progenitor cisplatin_GENUS        5          1.000000         2.800000             1.648299
+     Progenitor         control       74          0.405405         0.540541             0.438710
+     Progenitor   control_GENUS       64          0.671875         1.687500             1.184008
+            cp_group             arm  n_cells  fraction_nonzero  mean_raw_counts  mean_log_normalized
+All other cell types       cisplatin     2841          0.907075         8.768391             1.904530
+All other cell types cisplatin_GENUS     1557          0.843931         2.617213             1.248233
+All other cell types         control     4577          0.428228         0.988420             0.498527
+All other cell types   control_GENUS     3362          0.616597         1.526175             0.948674
+      Choroid Plexus       cisplatin     1164          1.000000      1278.875430             7.290129
+      Choroid Plexus cisplatin_GENUS      475          1.000000       809.025263             6.890536
+      Choroid Plexus         control      253          1.000000       632.581028             6.655181
+      Choroid Plexus   control_GENUS      736          1.000000       543.758152             6.558521
+All other cell types        all_arms    12337          0.642296         3.132123             1.039594
+      Choroid Plexus        all_arms     2628          1.000000       925.855023             6.951882

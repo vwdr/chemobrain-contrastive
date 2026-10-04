@@ -1,0 +1,177 @@
+ seed                        block         arm  n_train  n_test  n_classes_train  n_classes_test  balanced_accuracy  chance_level
+    0               shared_ungated control_PBS     1500     483               12              12           0.819192      0.083333
+    0               shared_ungated   cisplatin     1500     400               12              12           0.760164      0.083333
+    0 cisplatin_drug_block_ungated control_PBS     1500     483               12              12           0.548059      0.083333
+    0 cisplatin_drug_block_ungated   cisplatin     1500     400               12              12           0.618056      0.083333
+    0      drug_block_ungated_all8 control_PBS     1500     483               12              12           0.727903      0.083333
+    0      drug_block_ungated_all8   cisplatin     1500     400               12              12           0.814295      0.083333
+    1               shared_ungated control_PBS     1500     483               12              12           0.780403      0.083333
+    1               shared_ungated   cisplatin     1500     400               12              12           0.717772      0.083333
+    1 cisplatin_drug_block_ungated control_PBS     1500     483               12              12           0.436869      0.083333
+    1 cisplatin_drug_block_ungated   cisplatin     1500     400               12              12           0.392937      0.083333
+    1      drug_block_ungated_all8 control_PBS     1500     483               12              12           0.743712      0.083333
+    1      drug_block_ungated_all8   cisplatin     1500     400               12              12           0.715943      0.083333
+    2               shared_ungated control_PBS     1500     483               12              12           0.716562      0.083333
+    2               shared_ungated   cisplatin     1500     400               12              12           0.699752      0.083333
+    2 cisplatin_drug_block_ungated control_PBS     1500     483               12              12           0.658968      0.083333
+    2 cisplatin_drug_block_ungated   cisplatin     1500     400               12              12           0.638816      0.083333
+    2      drug_block_ungated_all8 control_PBS     1500     483               12              12           0.702460      0.083333
+    2      drug_block_ungated_all8   cisplatin     1500     400               12              12           0.737650      0.083333
+                       block       cell_type  seed  mean_norm_cisplatin  mean_norm_control_PBS  n_cells_cisplatin  n_cells_control_PBS  sd_norm_cisplatin  sd_norm_control_PBS  cisplatin_minus_control_mean_norm
+cisplatin_drug_block_ungated       Astrocyte     0             0.037159               0.037893              296.0                564.0           0.003298             0.003222                          -0.000734
+cisplatin_drug_block_ungated       Astrocyte     1             0.016841               0.017136              296.0                564.0           0.002434             0.002424                          -0.000295
+cisplatin_drug_block_ungated       Astrocyte     2             0.042070               0.042084              296.0                564.0           0.002755             0.002292                          -0.000014
+cisplatin_drug_block_ungated  Choroid Plexus     0             0.054268               0.055310             1164.0                253.0           0.009066             0.008445                          -0.001042
+cisplatin_drug_block_ungated  Choroid Plexus     1             0.023579               0.021959             1164.0                253.0           0.003494             0.003364                           0.001620
+cisplatin_drug_block_ungated  Choroid Plexus     2             0.039872               0.042402             1164.0                253.0           0.005687             0.005660                          -0.002530
+cisplatin_drug_block_ungated     Endothelial     0             0.032237               0.031937              398.0                399.0           0.007413             0.005631                           0.000299
+cisplatin_drug_block_ungated     Endothelial     1             0.023795               0.022860              398.0                399.0           0.016242             0.008983                           0.000934
+cisplatin_drug_block_ungated     Endothelial     2             0.054520               0.053998              398.0                399.0           0.010709             0.004670                           0.000523
+cisplatin_drug_block_ungated       Ependymal     0             0.235540               0.242390               36.0                 49.0           0.029026             0.019794                          -0.006850
+cisplatin_drug_block_ungated       Ependymal     1             0.143270               0.147041               36.0                 49.0           0.035143             0.033349                          -0.003771
+cisplatin_drug_block_ungated       Ependymal     2             0.123769               0.126342               36.0                 49.0           0.014022             0.011411                          -0.002573
+cisplatin_drug_block_ungated      Fibroblast     0             0.319938               0.244124                9.0                  4.0           0.143449             0.111414                           0.075813
+cisplatin_drug_block_ungated      Fibroblast     1             0.246580               0.184518                9.0                  4.0           0.081065             0.102633                           0.062063
+cisplatin_drug_block_ungated      Fibroblast     2             0.319525               0.262928                9.0                  4.0           0.079874             0.108831                           0.056597
+cisplatin_drug_block_ungated          Immune     0             0.226231               0.171964               97.0                140.0           0.232060             0.175120                           0.054267
+cisplatin_drug_block_ungated          Immune     1             0.055391               0.043490               97.0                140.0           0.030490             0.021436                           0.011900
+cisplatin_drug_block_ungated          Immune     2             0.060820               0.048012               97.0                140.0           0.063041             0.026815                           0.012808
+cisplatin_drug_block_ungated       Microglia     0             0.029591               0.028485              907.0               1494.0           0.009627             0.008761                           0.001106
+cisplatin_drug_block_ungated       Microglia     1             0.020874               0.020136              907.0               1494.0           0.002390             0.002715                           0.000738
+cisplatin_drug_block_ungated       Microglia     2             0.041078               0.041134              907.0               1494.0           0.001267             0.001313                          -0.000056
+cisplatin_drug_block_ungated          Neuron     0             0.047859               0.040675               22.0                135.0           0.028186             0.015682                           0.007185
+cisplatin_drug_block_ungated          Neuron     1             0.018714               0.017120               22.0                135.0           0.008122             0.003091                           0.001594
+cisplatin_drug_block_ungated          Neuron     2             0.053903               0.052255               22.0                135.0           0.020134             0.005880                           0.001648
+cisplatin_drug_block_ungated             OPC     0             0.036905               0.037809              122.0                280.0           0.003735             0.004020                          -0.000903
+cisplatin_drug_block_ungated             OPC     1             0.013663               0.013577              122.0                280.0           0.002865             0.002256                           0.000086
+cisplatin_drug_block_ungated             OPC     2             0.047567               0.049001              122.0                280.0           0.003115             0.003061                          -0.001434
+cisplatin_drug_block_ungated Oligodendrocyte     0             0.027561               0.027945              855.0               1328.0           0.003293             0.001843                          -0.000383
+cisplatin_drug_block_ungated Oligodendrocyte     1             0.023675               0.023936              855.0               1328.0           0.000974             0.000958                          -0.000261
+cisplatin_drug_block_ungated Oligodendrocyte     2             0.039723               0.039149              855.0               1328.0           0.001552             0.001361                           0.000574
+cisplatin_drug_block_ungated        Pericyte     0             0.060198               0.084563               88.0                110.0           0.048940             0.065693                          -0.024365
+cisplatin_drug_block_ungated        Pericyte     1             0.067335               0.084385               88.0                110.0           0.074371             0.087049                          -0.017050
+cisplatin_drug_block_ungated        Pericyte     2             0.096273               0.123526               88.0                110.0           0.073703             0.089092                          -0.027253
+cisplatin_drug_block_ungated      Progenitor     0             0.049263               0.041690               11.0                 74.0           0.025876             0.012969                           0.007573
+cisplatin_drug_block_ungated      Progenitor     1             0.030582               0.022734               11.0                 74.0           0.012131             0.008071                           0.007848
+cisplatin_drug_block_ungated      Progenitor     2             0.057121               0.053241               11.0                 74.0           0.013901             0.003753                           0.003880
+     drug_block_ungated_all8       Astrocyte     0             0.049974               0.050328              296.0                564.0           0.003598             0.003664                          -0.000354
+     drug_block_ungated_all8       Astrocyte     1             0.046714               0.047591              296.0                564.0           0.003257             0.003135                          -0.000877
+     drug_block_ungated_all8       Astrocyte     2             0.046934               0.047023              296.0                564.0           0.002995             0.002572                          -0.000089
+     drug_block_ungated_all8  Choroid Plexus     0             0.094691               0.096292             1164.0                253.0           0.013116             0.012731                          -0.001601
+     drug_block_ungated_all8  Choroid Plexus     1             0.051393               0.052029             1164.0                253.0           0.008444             0.010046                          -0.000636
+     drug_block_ungated_all8  Choroid Plexus     2             0.056906               0.059595             1164.0                253.0           0.007404             0.008765                          -0.002689
+     drug_block_ungated_all8     Endothelial     0             0.085493               0.085014              398.0                399.0           0.009190             0.008281                           0.000479
+     drug_block_ungated_all8     Endothelial     1             0.121466               0.122887              398.0                399.0           0.018518             0.018338                          -0.001420
+     drug_block_ungated_all8     Endothelial     2             0.142298               0.138929              398.0                399.0           0.024025             0.024194                           0.003369
+     drug_block_ungated_all8       Ependymal     0             0.262553               0.271719               36.0                 49.0           0.033734             0.023272                          -0.009166
+     drug_block_ungated_all8       Ependymal     1             0.145920               0.149750               36.0                 49.0           0.034370             0.032368                          -0.003831
+     drug_block_ungated_all8       Ependymal     2             0.131086               0.133548               36.0                 49.0           0.014275             0.011756                          -0.002462
+     drug_block_ungated_all8      Fibroblast     0             0.338240               0.315688                9.0                  4.0           0.135918             0.029086                           0.022552
+     drug_block_ungated_all8      Fibroblast     1             0.293870               0.260511                9.0                  4.0           0.068315             0.064644                           0.033359
+     drug_block_ungated_all8      Fibroblast     2             0.325390               0.273107                9.0                  4.0           0.078318             0.101052                           0.052282
+     drug_block_ungated_all8          Immune     0             0.354299               0.307530               97.0                140.0           0.171887             0.120450                           0.046769
+     drug_block_ungated_all8          Immune     1             0.145724               0.138651               97.0                140.0           0.040663             0.033628                           0.007073
+     drug_block_ungated_all8          Immune     2             0.122380               0.113077               97.0                140.0           0.060665             0.036560                           0.009303
+     drug_block_ungated_all8       Microglia     0             0.183045               0.189747              907.0               1494.0           0.027488             0.030181                          -0.006701
+     drug_block_ungated_all8       Microglia     1             0.115468               0.117729              907.0               1494.0           0.010420             0.011592                          -0.002261
+     drug_block_ungated_all8       Microglia     2             0.083028               0.086044              907.0               1494.0           0.009947             0.011545                          -0.003016
+     drug_block_ungated_all8          Neuron     0             0.052810               0.047577               22.0                135.0           0.026765             0.012434                           0.005233
+     drug_block_ungated_all8          Neuron     1             0.030708               0.029780               22.0                135.0           0.006794             0.003638                           0.000927
+     drug_block_ungated_all8          Neuron     2             0.058323               0.056571               22.0                135.0           0.019572             0.005966                           0.001752
+     drug_block_ungated_all8             OPC     0             0.045788               0.046276              122.0                280.0           0.004106             0.003809                          -0.000488
+     drug_block_ungated_all8             OPC     1             0.051793               0.052335              122.0                280.0           0.005432             0.004899                          -0.000542
+     drug_block_ungated_all8             OPC     2             0.048836               0.050401              122.0                280.0           0.003154             0.003072                          -0.001566
+     drug_block_ungated_all8 Oligodendrocyte     0             0.055071               0.054437              855.0               1328.0           0.005362             0.005044                           0.000633
+     drug_block_ungated_all8 Oligodendrocyte     1             0.046092               0.046330              855.0               1328.0           0.003871             0.003478                          -0.000238
+     drug_block_ungated_all8 Oligodendrocyte     2             0.048717               0.047885              855.0               1328.0           0.002307             0.002017                           0.000832
+     drug_block_ungated_all8        Pericyte     0             0.121722               0.143672               88.0                110.0           0.044588             0.058527                          -0.021950
+     drug_block_ungated_all8        Pericyte     1             0.175745               0.194713               88.0                110.0           0.056507             0.069950                          -0.018968
+     drug_block_ungated_all8        Pericyte     2             0.131678               0.152354               88.0                110.0           0.061153             0.072615                          -0.020675
+     drug_block_ungated_all8      Progenitor     0             0.052871               0.046518               11.0                 74.0           0.026904             0.013627                           0.006352
+     drug_block_ungated_all8      Progenitor     1             0.043066               0.036852               11.0                 74.0           0.012108             0.005661                           0.006215
+     drug_block_ungated_all8      Progenitor     2             0.061059               0.057880               11.0                 74.0           0.013343             0.004341                           0.003179
+              shared_ungated       Astrocyte     0             0.119842               0.123215              296.0                564.0           0.015933             0.016627                          -0.003372
+              shared_ungated       Astrocyte     1             0.082272               0.083037              296.0                564.0           0.014481             0.013961                          -0.000765
+              shared_ungated       Astrocyte     2             0.128930               0.131481              296.0                564.0           0.029071             0.023036                          -0.002551
+              shared_ungated  Choroid Plexus     0             0.056049               0.060634             1164.0                253.0           0.017668             0.015354                          -0.004585
+              shared_ungated  Choroid Plexus     1             0.059286               0.064040             1164.0                253.0           0.019987             0.019739                          -0.004754
+              shared_ungated  Choroid Plexus     2             0.088056               0.080952             1164.0                253.0           0.023928             0.025129                           0.007103
+              shared_ungated     Endothelial     0             0.160279               0.144836              398.0                399.0           0.077576             0.037716                           0.015443
+              shared_ungated     Endothelial     1             0.078856               0.074929              398.0                399.0           0.044450             0.026904                           0.003926
+              shared_ungated     Endothelial     2             0.217989               0.196686              398.0                399.0           0.271843             0.140041                           0.021302
+              shared_ungated       Ependymal     0             0.411122               0.421264               36.0                 49.0           0.062034             0.042983                          -0.010142
+              shared_ungated       Ependymal     1             0.264585               0.278676               36.0                 49.0           0.318372             0.220626                          -0.014091
+              shared_ungated       Ependymal     2             0.399987               0.408596               36.0                 49.0           0.129812             0.077785                          -0.008608
+              shared_ungated      Fibroblast     0             4.021916               3.713827                9.0                  4.0           1.665202             2.371298                           0.308089
+              shared_ungated      Fibroblast     1             2.974393               2.287812                9.0                  4.0           0.793461             1.366842                           0.686581
+              shared_ungated      Fibroblast     2             3.512933               2.885664                9.0                  4.0           0.474562             1.326072                           0.627269
+              shared_ungated          Immune     0             0.393411               0.275281               97.0                140.0           0.336813             0.215128                           0.118130
+              shared_ungated          Immune     1             0.533078               0.369151               97.0                140.0           0.695487             0.490787                           0.163927
+              shared_ungated          Immune     2             0.423053               0.304080               97.0                140.0           0.343917             0.224262                           0.118973
+              shared_ungated       Microglia     0             0.076263               0.077482              907.0               1494.0           0.012953             0.010433                          -0.001219
+              shared_ungated       Microglia     1             0.055079               0.056177              907.0               1494.0           0.005501             0.006339                          -0.001097
+              shared_ungated       Microglia     2             0.073635               0.074439              907.0               1494.0           0.017031             0.018030                          -0.000803
+              shared_ungated          Neuron     0             0.046403               0.063914               22.0                135.0           0.021090             0.039728                          -0.017511
+              shared_ungated          Neuron     1             0.053282               0.052425               22.0                135.0           0.007209             0.005559                           0.000857
+              shared_ungated          Neuron     2             0.090035               0.094986               22.0                135.0           0.028695             0.039153                          -0.004951
+              shared_ungated             OPC     0             0.109728               0.111606              122.0                280.0           0.009186             0.012420                          -0.001878
+              shared_ungated             OPC     1             0.087010               0.085621              122.0                280.0           0.026325             0.006570                           0.001389
+              shared_ungated             OPC     2             0.059697               0.062949              122.0                280.0           0.014762             0.013067                          -0.003252
+              shared_ungated Oligodendrocyte     0             0.050087               0.047740              855.0               1328.0           0.007778             0.004959                           0.002346
+              shared_ungated Oligodendrocyte     1             0.075666               0.078112              855.0               1328.0           0.016623             0.008477                          -0.002446
+              shared_ungated Oligodendrocyte     2             0.052249               0.052327              855.0               1328.0           0.012448             0.011529                          -0.000078
+              shared_ungated        Pericyte     0             0.256513               0.309377               88.0                110.0           0.240310             0.262031                          -0.052863
+              shared_ungated        Pericyte     1             0.231899               0.273758               88.0                110.0           0.220502             0.238573                          -0.041860
+              shared_ungated        Pericyte     2             0.596109               0.639261               88.0                110.0           0.922264             0.944250                          -0.043152
+              shared_ungated      Progenitor     0             0.131002               0.109809               11.0                 74.0           0.046273             0.031431                           0.021194
+              shared_ungated      Progenitor     1             0.083310               0.079414               11.0                 74.0           0.019041             0.016579                           0.003896
+              shared_ungated      Progenitor     2             0.334294               0.330218               11.0                 74.0           0.110532             0.102833                           0.004076
+        arm split       cell_type  n_cells
+control_PBS train       Microglia      455
+control_PBS train Oligodendrocyte      421
+control_PBS train       Astrocyte      172
+control_PBS train     Endothelial      130
+control_PBS train             OPC       87
+control_PBS train  Choroid Plexus       77
+control_PBS train          Immune       44
+control_PBS train          Neuron       44
+control_PBS train        Pericyte       32
+control_PBS train      Progenitor       26
+control_PBS train       Ependymal       10
+control_PBS train      Fibroblast        2
+control_PBS  test       Microglia      140
+control_PBS  test Oligodendrocyte      131
+control_PBS  test       Astrocyte       66
+control_PBS  test             OPC       33
+control_PBS  test     Endothelial       30
+control_PBS  test          Neuron       25
+control_PBS  test  Choroid Plexus       21
+control_PBS  test          Immune       15
+control_PBS  test        Pericyte       10
+control_PBS  test       Ependymal        7
+control_PBS  test      Progenitor        4
+control_PBS  test      Fibroblast        1
+  cisplatin train  Choroid Plexus      426
+  cisplatin train       Microglia      357
+  cisplatin train Oligodendrocyte      316
+  cisplatin train     Endothelial      125
+  cisplatin train       Astrocyte      123
+  cisplatin train             OPC       48
+  cisplatin train          Immune       39
+  cisplatin train        Pericyte       37
+  cisplatin train       Ependymal       12
+  cisplatin train          Neuron        9
+  cisplatin train      Progenitor        4
+  cisplatin train      Fibroblast        4
+  cisplatin  test  Choroid Plexus      120
+  cisplatin  test       Microglia       94
+  cisplatin  test Oligodendrocyte       82
+  cisplatin  test     Endothelial       42
+  cisplatin  test       Astrocyte       20
+  cisplatin  test             OPC       12
+  cisplatin  test          Immune       12
+  cisplatin  test        Pericyte       10
+  cisplatin  test       Ependymal        4
+  cisplatin  test      Fibroblast        2
+  cisplatin  test      Progenitor        1
+  cisplatin  test          Neuron        1

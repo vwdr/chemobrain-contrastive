@@ -1,0 +1,37 @@
+{
+  "n_supported_rows_all_genes": 292,
+  "n_supported_unique_genes_all": 266,
+  "median_abs_log2FC_supported_rows_all_genes": 0.7423859477427446,
+  "n_supported_rows_in_1500_universe": 80,
+  "n_supported_unique_genes_in_1500_universe": 69,
+  "median_abs_log2FC_supported_rows_in_1500_universe": 0.9808300113324678,
+  "median_of_per_gene_max_abs_log2FC_all": 0.7401869795822678,
+  "median_of_per_gene_max_abs_log2FC_in_1500_universe": 0.9952179284199364,
+  "quartiles_abs_log2FC_supported_rows_all_genes": [
+    0.5692872936028686,
+    0.7423859477427446,
+    1.0764791266672646
+  ],
+  "delta_grid": [
+    0.25,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "support_rule": "wald_padj < 0.05 and all three paired log2CPM differences share the sign of log2FoldChange",
+  "pydeseq2_outputs": "runs\\peerreview_20261003\\pseudobulk_task4",
+  "median_abs_log2FC_supported_rows_all_genes_grid_position": {
+    "nearest_grid_value": 0.5,
+    "between": [
+      0.5,
+      1.0
+    ]
+  },
+  "median_abs_log2FC_supported_rows_in_1500_universe_grid_position": {
+    "nearest_grid_value": 1.0,
+    "between": [
+      0.5,
+      1.0
+    ]
+  }
+}

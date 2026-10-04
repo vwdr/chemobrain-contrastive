@@ -1,0 +1,9 @@
+Seed set to 0
+GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+\U0001f4a1 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+D:\chemobrain-contrastive-main\chemobrain-contrastive\.venv\Lib\site-packages\lightning\pytorch\trainer\connectors\data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=11` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+INFO     Input AnnData not setup with scvi-tools. attempting to transfer       
+         AnnData setup                                                         
+{'method': 'scVI', 'study_or_pair': 'combined', 'seed': 0, 'modeled_gene_log_mse': 1.0782556533813477, 'canonical_log_mse': 0.2049909234046936, 'condition_balanced_accuracy': 0.6564250772296828, 'study_balanced_accuracy': 0.9456888938768893, 'treatment_probe_cisplatin_within_GSE216146_balanced_accuracy': 0.7924378881987577, 'treatment_probe_doxorubicin_within_GSE271055_balanced_accuracy': 0.6219422985715319, 'fit_seconds': 144.56252026557922, 'threads': 3}

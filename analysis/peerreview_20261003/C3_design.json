@@ -1,0 +1,15 @@
+{
+  "scvi_tools_version": "1.5.1",
+  "reused_script": "scripts/20_peerreview_matched_baselines.py (imported, unmodified)",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "epochs": 100,
+  "threads_per_fit": 2,
+  "canonical_scale_conversion": "log1p(rho*1e4 * L_model / L_full); L_model = observed modeled-gene count total, L_full = all-gene total",
+  "modeled_scale_conversion_for_canonical_predictions": "log1p(e/sum(e)*1e4), e = max(expm1(p), 0)",
+  "within_study_probe": "LogisticRegression(max_iter=800, class_weight='balanced'), canonical train -> test cells of the study, y = treated",
+  "salient_usage": "qs_m/qs_v from module._generic_inference on held-out pair test cells; KL to N(0,I); active unit Var[qs_m] > 0.01"
+}

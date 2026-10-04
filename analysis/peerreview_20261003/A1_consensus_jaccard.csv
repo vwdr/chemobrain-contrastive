@@ -1,0 +1,4 @@
+axis,n_fresh,n_frozen,n_overlap,jaccard,overlap_genes,fresh_only,frozen_only
+shared,40,34,29,0.6444444444444445,Apoe|Atp5g1|Bst2|C1qa|Cbr2|Cd163|Cd52|Ctsd|Cxcl12|Dab2|F13a1|Gpx3|Ifi27l2a|Ifitm3|Junb|Laptm5|Lgals1|Lilrb4a|Mrc1|Ms4a7|Pf4|Psmb8|Slc6a6|Stab1|Tec|Ttr|mt-Co2|mt-Co3|mt-Nd4,Cflar|Ctsc|Ctss|Ly6e|Lyz2|Maf|Mylip|Pik3ap1|Sat1|Sparcl1|Tyrobp,C5ar1|Ccl4|Cpne2|Ptprc|Qk
+doxorubicin,27,20,8,0.20512820512820512,Kcnq1ot1|Meg3|Mir100hg|Opcml|Peg3|Snhg11|Ttr|Zeb2,Apoe|Arpp21|Atp1b1|Bc1|Camk2a|Dlgap1|Grm5|Nrgn|Nrxn1|Ntng1|Pclo|Ptprn|R3hdm1|Slc17a7|Slc1a2|Snap25|Sparcl1|Sptbn1|Ttyh1,C1ql3|Dclk1|Gria2|Grin2b|Miat|Nfib|Nrcam|Pcdh9|Pcsk2|Ptprd|Rtn1|Zbtb20
+cisplatin,31,33,17,0.3617021276595745,Adamtsl3|Apoe|Bsg|Ccn3|Col25a1|Col6a2|Fos|Foxc2|Foxd1|Igfbp6|Mgp|Mrc1|Mt1|Ogn|Rspo3|Ttr|mt-Nd4,Chchd10|Ctsd|Glul|Igfbp5|Junb|Klf4|Mt3|Myl9|Nbl1|Qk|Slc26a7|Slc38a2|Zbtb20|mt-Co2,Anxa1|Cbr2|Cd163|Col1a2|Col6a1|Efemp1|F13a1|Folr2|Hes1|Id3|Ildr2|Mbp|Pf4|S100a10|Tmsb10|Tsc22d1

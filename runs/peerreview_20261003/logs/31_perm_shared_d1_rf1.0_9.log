@@ -1,0 +1,6 @@
+full seed=0 epoch=0 val_mse=0.28236 seconds=1
+full seed=0 epoch=20 val_mse=0.17350 seconds=33
+full seed=0 epoch=40 val_mse=0.16743 seconds=65
+full seed=0 epoch=60 val_mse=0.16528 seconds=96
+full seed=0 epoch=80 val_mse=0.16421 seconds=128
+perm009: done test_mse=0.162410 F_sh=0.7617 fit=157s ig=0s

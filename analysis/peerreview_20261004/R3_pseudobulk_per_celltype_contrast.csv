@@ -1,0 +1,17 @@
+cell_type,contrast,n_genes_tested_committed,n_genes_tested_regenerated,n_wald_padj_lt_0p05_committed,n_wald_padj_lt_0p05_regenerated,n_welch_q_lt_0p05_committed,n_welch_q_lt_0p05_regenerated
+Astrocyte,cisplatin_GENUS_vs_cisplatin,7968,7968,1,1,0,0
+Astrocyte,cisplatin_vs_control,8805,8805,15,15,0,0
+Astrocyte,control_GENUS_vs_control,8795,8795,0,0,0,0
+Choroid Plexus,cisplatin_GENUS_vs_cisplatin,6953,6953,7,7,0,0
+Choroid Plexus,cisplatin_vs_control,5955,5955,1,1,1,1
+Endothelial,cisplatin_GENUS_vs_cisplatin,8084,8084,0,0,0,0
+Endothelial,cisplatin_vs_control,8371,8371,23,23,0,0
+Immune,cisplatin_vs_control,2022,2022,6,6,0,0
+Microglia,cisplatin_GENUS_vs_cisplatin,9233,9233,11,11,0,0
+Microglia,cisplatin_vs_control,10048,10048,109,101,0,0
+Microglia,control_GENUS_vs_control,10086,10086,1,1,0,0
+OPC,cisplatin_vs_control,8220,8220,6,6,0,0
+OPC,control_GENUS_vs_control,8103,8103,1,1,0,0
+Oligodendrocyte,cisplatin_GENUS_vs_cisplatin,9214,9214,36,36,0,0
+Oligodendrocyte,cisplatin_vs_control,9963,9963,137,141,0,0
+Oligodendrocyte,control_GENUS_vs_control,9837,9837,0,0,0,0

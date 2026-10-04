@@ -1,0 +1,13 @@
+{
+  "model": "contrastiveVI",
+  "config": "mixed_d1_rf1.0",
+  "study": "GSE216146",
+  "seed": 0,
+  "fit_seconds": 91.46736001968384,
+  "canonical_log_mse": 0.11628107560396919,
+  "salient_active_units": 8,
+  "salient_total_kl_nats": 5.988023775939203,
+  "salient_dims_kl_gt_0p01": 8,
+  "probe_within_study_salient_ungated": 0.5590943383285896,
+  "seconds_total": 93.45609045028687
+}

@@ -1,0 +1,12 @@
+quantity,committed,regenerated,changed
+n_BH_findings_cisplatin_GENUS_vs_cisplatin,55.0,55.0,no
+n_BH_findings_cisplatin_vs_control,297.0,293.0,yes
+n_BH_findings_control_GENUS_vs_control,2.0,2.0,no
+n_cell_type_contrasts_analyzed,16.0,16.0,no
+n_findings_all3_pairs_same_direction,353.0,349.0,yes
+n_welch_fdr_005_total,1.0,1.0,no
+pooled_BH_findings_all_contrasts,354.0,350.0,yes
+spearman_deseq2_vs_paired_max_all_rows,0.9969531126313466,0.9969548284091596,no
+spearman_deseq2_vs_paired_max_rows_with_findings,0.9969531126313466,0.9969548284091596,no
+spearman_deseq2_vs_paired_min_all_rows,0.9324912491437868,0.9324910317330808,no
+spearman_deseq2_vs_paired_min_rows_with_findings,0.9324912491437868,0.9324910317330808,no

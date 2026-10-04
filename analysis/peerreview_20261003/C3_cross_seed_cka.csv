@@ -1,0 +1,31 @@
+method,study_or_pair,representation,seed_a,seed_b,linear_cka
+scVI,combined,latent,0,1,0.7908998131752014
+contrastiveVI,cisplatin,background,0,1,0.8417381048202515
+contrastiveVI,cisplatin,salient,0,1,0.46140024065971375
+contrastiveVI,cisplatin,salient_target_cells_only,0,1,0.5533106327056885
+contrastiveVI,doxorubicin,background,0,1,0.7269719839096069
+contrastiveVI,doxorubicin,salient,0,1,0.1341736763715744
+contrastiveVI,doxorubicin,salient_target_cells_only,0,1,0.14137879014015198
+MC-ContrastiveVI (fresh),combined,bg,0,1,0.5996857285499573
+MC-ContrastiveVI (fresh),combined,shared,0,1,0.6910168528556824
+MC-ContrastiveVI (fresh),combined,drug,0,1,0.1769828349351883
+scVI,combined,latent,0,2,0.7657612562179565
+contrastiveVI,cisplatin,background,0,2,0.8575578927993774
+contrastiveVI,cisplatin,salient,0,2,0.45425498485565186
+contrastiveVI,cisplatin,salient_target_cells_only,0,2,0.5507968068122864
+contrastiveVI,doxorubicin,background,0,2,0.7291408777236938
+contrastiveVI,doxorubicin,salient,0,2,0.1107306107878685
+contrastiveVI,doxorubicin,salient_target_cells_only,0,2,0.12006654590368271
+MC-ContrastiveVI (fresh),combined,bg,0,2,0.6315733790397644
+MC-ContrastiveVI (fresh),combined,shared,0,2,0.5474224090576172
+MC-ContrastiveVI (fresh),combined,drug,0,2,0.25787362456321716
+scVI,combined,latent,1,2,0.7658191323280334
+contrastiveVI,cisplatin,background,1,2,0.8378649950027466
+contrastiveVI,cisplatin,salient,1,2,0.4178275763988495
+contrastiveVI,cisplatin,salient_target_cells_only,1,2,0.4999804198741913
+contrastiveVI,doxorubicin,background,1,2,0.730654776096344
+contrastiveVI,doxorubicin,salient,1,2,0.1272074431180954
+contrastiveVI,doxorubicin,salient_target_cells_only,1,2,0.12954255938529968
+MC-ContrastiveVI (fresh),combined,bg,1,2,0.7004286646842957
+MC-ContrastiveVI (fresh),combined,shared,1,2,0.4971623122692108
+MC-ContrastiveVI (fresh),combined,drug,1,2,0.6967726945877075

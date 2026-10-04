@@ -1,0 +1,7 @@
+consensus_version,axis,n_consensus_genes,n_support_genes_in_universe,n_overlap_cisplatin_DE,cisplatin_DE_overlap_genes,hypergeom_p_cisplatin_DE,n_overlap_scdisinfact_top100,scdisinfact_overlap_genes,hypergeom_p_scdisinfact_top100,q_cisplatin_DE_bh,q_scdisinfact_top100_bh
+fresh,doxorubicin,27,69,2,Apoe|Ttr,0.3551602961889691,9,Apoe|Bc1|Nrxn1|Ntng1|Peg3|Slc1a2|Snap25|Ttr|Ttyh1,3.1184956967861425e-05,0.3551602961889691,9.355487090358428e-05
+fresh,cisplatin,31,69,5,Apoe|Junb|Mt1|Ttr|mt-Co2,0.01189511326180458,6,Apoe|Col6a2|Mt1|Ttr|mt-Co2|mt-Nd4,0.014190917687391303,0.017842669892706872,0.014239335240501194
+fresh,shared,40,69,8,Apoe|Cxcl12|Ifi27l2a|Junb|Sat1|Ttr|mt-Co2|mt-Co3,0.0003147398484517148,7,Apoe|Sat1|Slc6a6|Ttr|mt-Co2|mt-Co3|mt-Nd4,0.014239335240501194,0.0009442195453551443,0.014239335240501194
+frozen,shared,34,69,7,Apoe|Cxcl12|Ifi27l2a|Junb|Ttr|mt-Co2|mt-Co3,0.000639581594640174,6,Apoe|Slc6a6|Ttr|mt-Co2|mt-Co3|mt-Nd4,0.022030040488914725,0.001918744783920522,0.022030040488914725
+frozen,doxorubicin,20,69,2,Ptprd|Ttr,0.23374746052818499,6,Dclk1|Gria2|Pcdh9|Peg3|Ptprd|Ttr,0.00136223040244832,0.23374746052818499,0.0020433456036724803
+frozen,cisplatin,33,69,5,Apoe|Mbp|Mt1|Tmsb10|Ttr,0.01547012484044647,9,Apoe|Col6a2|Mbp|Mt1|S100a10|Tmsb10|Tsc22d1|Ttr|mt-Nd4,0.00018290238947671,0.023205187260669707,0.00054870716843013

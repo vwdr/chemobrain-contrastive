@@ -1,0 +1,19 @@
+{
+  "model": "multiGroupVI",
+  "config": "shared_d2_rf1.0",
+  "seed": 1,
+  "epochs": 400,
+  "fit_seconds": 1121.2380034923553,
+  "canonical_log_mse": 0.23101694105420856,
+  "cisplatin_private_active_units": 10,
+  "cisplatin_private_total_kl_nats": 9.374447950405523,
+  "cisplatin_private_dims_kl_gt_0p01": 10,
+  "probe_within_cisplatin_study_private_ungated": 0.7019478070025034,
+  "probe_within_cisplatin_study_all_private_ungated": 0.7929597750420081,
+  "doxorubicin_private_active_units": 8,
+  "doxorubicin_private_total_kl_nats": 6.086769448460903,
+  "doxorubicin_private_dims_kl_gt_0p01": 10,
+  "probe_within_doxorubicin_study_private_ungated": 0.6712473572938689,
+  "probe_within_doxorubicin_study_all_private_ungated": 0.7505285412262157,
+  "seconds_total": 1124.1021330356598
+}

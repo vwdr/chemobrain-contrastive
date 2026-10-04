@@ -1,0 +1,15 @@
+Processing .\runs\peerreview_20261003\scratch\multiGroupVI
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: multigroup-vi
+  Building wheel for multigroup-vi (pyproject.toml): started
+  Building wheel for multigroup-vi (pyproject.toml): finished with status 'done'
+  Created wheel for multigroup-vi: filename=multigroup_vi-0.2.0-py3-none-any.whl size=18262 sha256=d5050be434a0247f911285e297db50b78d7d69dd5cc7db44ce3d39d7ce762e86
+  Stored in directory: C:\Users\manan\AppData\Local\Temp\pip-ephem-wheel-cache-wq9n4q7f\wheels\b8\22\cc\6d554422d615f27e1be6b6e5506f25d735ca5b2beb1184cda7
+Successfully built multigroup-vi
+Installing collected packages: multigroup-vi
+Successfully installed multigroup-vi-0.2.0

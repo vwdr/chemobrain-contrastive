@@ -1,0 +1,274 @@
+Looking in indexes: https://pypi.org/simple, https://download.pytorch.org/whl/cpu
+Collecting setuptools<70
+  Downloading setuptools-69.5.1-py3-none-any.whl.metadata (6.2 kB)
+Collecting torch==2.5.1+cpu
+  Using cached torch-2.5.1%2Bcpu-cp312-cp312-win_amd64.whl (205.4 MB)
+Collecting numpy<2
+  Downloading numpy-1.26.4-cp312-cp312-win_amd64.whl.metadata (61 kB)
+Collecting anndata==0.10.9
+  Downloading anndata-0.10.9-py3-none-any.whl.metadata (6.9 kB)
+Collecting scanpy==1.10.4
+  Downloading scanpy-1.10.4-py3-none-any.whl.metadata (9.3 kB)
+Collecting pandas<2.2
+  Downloading pandas-2.1.4-cp312-cp312-win_amd64.whl.metadata (18 kB)
+Collecting scipy<1.14
+  Downloading scipy-1.13.1-cp312-cp312-win_amd64.whl.metadata (60 kB)
+Collecting jax==0.4.30
+  Downloading jax-0.4.30-py3-none-any.whl.metadata (22 kB)
+Collecting jaxlib==0.4.30
+  Downloading jaxlib-0.4.30-cp312-cp312-win_amd64.whl.metadata (1.1 kB)
+Collecting flax==0.8.5
+  Downloading flax-0.8.5-py3-none-any.whl.metadata (10 kB)
+Collecting optax==0.2.3
+  Downloading optax-0.2.3-py3-none-any.whl.metadata (8.3 kB)
+Collecting chex==0.1.86
+  Downloading chex-0.1.86-py3-none-any.whl.metadata (17 kB)
+Collecting numpyro==0.15.3
+  Downloading numpyro-0.15.3-py3-none-any.whl.metadata (36 kB)
+Collecting pyro-ppl==1.9.1
+  Downloading pyro_ppl-1.9.1-py3-none-any.whl.metadata (7.8 kB)
+Collecting torchmetrics==0.11.4
+  Downloading torchmetrics-0.11.4-py3-none-any.whl.metadata (15 kB)
+Collecting mudata==0.2.4
+  Downloading mudata-0.2.4-py3-none-any.whl.metadata (5.6 kB)
+Collecting numba<0.61
+  Downloading numba-0.60.0-cp312-cp312-win_amd64.whl.metadata (2.8 kB)
+Collecting orbax-checkpoint==0.5.20
+  Downloading orbax_checkpoint-0.5.20-py3-none-any.whl.metadata (1.8 kB)
+Collecting tensorstore==0.1.65
+  Downloading tensorstore-0.1.65-cp312-cp312-win_amd64.whl.metadata (3.0 kB)
+Collecting scikit-learn<1.6
+  Downloading scikit_learn-1.5.2-cp312-cp312-win_amd64.whl.metadata (13 kB)
+Collecting matplotlib<3.10
+  Downloading matplotlib-3.9.4-cp312-cp312-win_amd64.whl.metadata (11 kB)
+Collecting h5py<3.13
+  Downloading h5py-3.12.1-cp312-cp312-win_amd64.whl.metadata (2.5 kB)
+Requirement already satisfied: filelock in .\.venv-mgvi\Lib\site-packages (from torch==2.5.1+cpu) (4.0.10)
+Requirement already satisfied: typing-extensions>=4.8.0 in .\.venv-mgvi\Lib\site-packages (from torch==2.5.1+cpu) (4.16.0)
+Requirement already satisfied: networkx in .\.venv-mgvi\Lib\site-packages (from torch==2.5.1+cpu) (3.7)
+Requirement already satisfied: jinja2 in .\.venv-mgvi\Lib\site-packages (from torch==2.5.1+cpu) (3.1.6)
+Requirement already satisfied: fsspec in .\.venv-mgvi\Lib\site-packages (from torch==2.5.1+cpu) (2026.9.0)
+Collecting sympy==1.13.1 (from torch==2.5.1+cpu)
+  Using cached sympy-1.13.1-py3-none-any.whl.metadata (12 kB)
+Requirement already satisfied: array-api-compat!=1.5,>1.4 in .\.venv-mgvi\Lib\site-packages (from anndata==0.10.9) (1.15.0)
+Requirement already satisfied: natsort in .\.venv-mgvi\Lib\site-packages (from anndata==0.10.9) (8.4.0)
+Requirement already satisfied: packaging>=20.0 in .\.venv-mgvi\Lib\site-packages (from anndata==0.10.9) (26.3)
+Requirement already satisfied: joblib in .\.venv-mgvi\Lib\site-packages (from scanpy==1.10.4) (1.6.0)
+Requirement already satisfied: legacy-api-wrap>=1.4 in .\.venv-mgvi\Lib\site-packages (from scanpy==1.10.4) (1.5)
+Requirement already satisfied: patsy!=1.0.0 in .\.venv-mgvi\Lib\site-packages (from scanpy==1.10.4) (1.0.3)
+Requirement already satisfied: pynndescent>=0.5 in .\.venv-mgvi\Lib\site-packages (from scanpy==1.10.4) (0.6.0)
+Requirement already satisfied: seaborn>=0.13 in .\.venv-mgvi\Lib\site-packages (from scanpy==1.10.4) (0.13.2)
+Collecting session-info (from scanpy==1.10.4)
+  Using cached session_info-1.0.1-py3-none-any.whl.metadata (5.1 kB)
+Requirement already satisfied: statsmodels>=0.13 in .\.venv-mgvi\Lib\site-packages (from scanpy==1.10.4) (0.15.0)
+Requirement already satisfied: tqdm in .\.venv-mgvi\Lib\site-packages (from scanpy==1.10.4) (4.70.1)
+Requirement already satisfied: umap-learn!=0.5.0,>=0.5 in .\.venv-mgvi\Lib\site-packages (from scanpy==1.10.4) (0.5.12)
+Requirement already satisfied: ml-dtypes>=0.2.0 in .\.venv-mgvi\Lib\site-packages (from jax==0.4.30) (0.6.0)
+Requirement already satisfied: opt-einsum in .\.venv-mgvi\Lib\site-packages (from jax==0.4.30) (3.4.0)
+Requirement already satisfied: msgpack in .\.venv-mgvi\Lib\site-packages (from flax==0.8.5) (1.2.3)
+Requirement already satisfied: rich>=11.1 in .\.venv-mgvi\Lib\site-packages (from flax==0.8.5) (15.0.0)
+Requirement already satisfied: PyYAML>=5.4.1 in .\.venv-mgvi\Lib\site-packages (from flax==0.8.5) (6.0.3)
+Requirement already satisfied: absl-py>=0.7.1 in .\.venv-mgvi\Lib\site-packages (from optax==0.2.3) (2.5.0)
+Requirement already satisfied: etils[epy] in .\.venv-mgvi\Lib\site-packages (from optax==0.2.3) (1.14.0)
+Collecting toolz>=0.9.0 (from chex==0.1.86)
+  Downloading toolz-1.1.0-py3-none-any.whl.metadata (5.1 kB)
+Requirement already satisfied: multipledispatch in .\.venv-mgvi\Lib\site-packages (from numpyro==0.15.3) (1.0.0)
+Requirement already satisfied: pyro-api>=0.1.1 in .\.venv-mgvi\Lib\site-packages (from pyro-ppl==1.9.1) (0.1.2)
+Requirement already satisfied: nest_asyncio in .\.venv-mgvi\Lib\site-packages (from orbax-checkpoint==0.5.20) (1.6.0)
+Requirement already satisfied: protobuf in .\.venv-mgvi\Lib\site-packages (from orbax-checkpoint==0.5.20) (3.20.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in .\.venv-mgvi\Lib\site-packages (from sympy==1.13.1->torch==2.5.1+cpu) (1.3.0)
+Requirement already satisfied: python-dateutil>=2.8.2 in .\.venv-mgvi\Lib\site-packages (from pandas<2.2) (2.9.0.post0)
+Collecting pytz>=2020.1 (from pandas<2.2)
+  Downloading pytz-2026.4-py2.py3-none-any.whl.metadata (22 kB)
+Requirement already satisfied: tzdata>=2022.1 in .\.venv-mgvi\Lib\site-packages (from pandas<2.2) (2026.5)
+Collecting llvmlite<0.44,>=0.43.0dev0 (from numba<0.61)
+  Downloading llvmlite-0.43.0-cp312-cp312-win_amd64.whl.metadata (4.9 kB)
+Requirement already satisfied: threadpoolctl>=3.1.0 in .\.venv-mgvi\Lib\site-packages (from scikit-learn<1.6) (3.7.0)
+Requirement already satisfied: contourpy>=1.0.1 in .\.venv-mgvi\Lib\site-packages (from matplotlib<3.10) (1.4.0)
+Requirement already satisfied: cycler>=0.10 in .\.venv-mgvi\Lib\site-packages (from matplotlib<3.10) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in .\.venv-mgvi\Lib\site-packages (from matplotlib<3.10) (4.66.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in .\.venv-mgvi\Lib\site-packages (from matplotlib<3.10) (1.5.1)
+Requirement already satisfied: pillow>=8 in .\.venv-mgvi\Lib\site-packages (from matplotlib<3.10) (12.3.0)
+Requirement already satisfied: pyparsing>=2.3.1 in .\.venv-mgvi\Lib\site-packages (from matplotlib<3.10) (3.3.3)
+INFO: pip is looking at multiple versions of contourpy to determine which version is compatible with other requirements. This could take a while.
+Collecting contourpy>=1.0.1 (from matplotlib<3.10)
+  Downloading contourpy-1.3.3-cp312-cp312-win_amd64.whl.metadata (5.5 kB)
+Requirement already satisfied: cloudpickle>=3.0 in .\.venv-mgvi\Lib\site-packages (from joblib->scanpy==1.10.4) (3.1.2)
+INFO: pip is looking at multiple versions of ml-dtypes to determine which version is compatible with other requirements. This could take a while.
+Collecting ml-dtypes>=0.2.0 (from jax==0.4.30)
+  Downloading ml_dtypes-0.5.4-cp312-cp312-win_amd64.whl.metadata (9.2 kB)
+Requirement already satisfied: six>=1.5 in .\.venv-mgvi\Lib\site-packages (from python-dateutil>=2.8.2->pandas<2.2) (1.17.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in .\.venv-mgvi\Lib\site-packages (from rich>=11.1->flax==0.8.5) (4.2.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in .\.venv-mgvi\Lib\site-packages (from rich>=11.1->flax==0.8.5) (2.21.0)
+Requirement already satisfied: mdurl~=0.1 in .\.venv-mgvi\Lib\site-packages (from markdown-it-py>=2.2.0->rich>=11.1->flax==0.8.5) (0.1.2)
+Requirement already satisfied: formulaic>=1.1.0 in .\.venv-mgvi\Lib\site-packages (from statsmodels>=0.13->scanpy==1.10.4) (1.2.2)
+Requirement already satisfied: interface-meta>=1.2.0 in .\.venv-mgvi\Lib\site-packages (from formulaic>=1.1.0->statsmodels>=0.13->scanpy==1.10.4) (2.0.1)
+Requirement already satisfied: narwhals>=1.17 in .\.venv-mgvi\Lib\site-packages (from formulaic>=1.1.0->statsmodels>=0.13->scanpy==1.10.4) (2.26.0)
+Requirement already satisfied: wrapt>=1.0 in .\.venv-mgvi\Lib\site-packages (from formulaic>=1.1.0->statsmodels>=0.13->scanpy==1.10.4) (2.5.0)
+Requirement already satisfied: colorama in .\.venv-mgvi\Lib\site-packages (from tqdm->scanpy==1.10.4) (0.4.6)
+INFO: pip is looking at multiple versions of umap-learn to determine which version is compatible with other requirements. This could take a while.
+Collecting umap-learn!=0.5.0,>=0.5 (from scanpy==1.10.4)
+  Downloading umap_learn-0.5.11-py3-none-any.whl.metadata (26 kB)
+  Downloading umap_learn-0.5.9.post2-py3-none-any.whl.metadata (25 kB)
+  Downloading umap_learn-0.5.8-py3-none-any.whl.metadata (23 kB)
+  Downloading umap_learn-0.5.7-py3-none-any.whl.metadata (21 kB)
+Requirement already satisfied: zipp in .\.venv-mgvi\Lib\site-packages (from etils[epath,epy]->orbax-checkpoint==0.5.20) (4.1.1)
+Requirement already satisfied: MarkupSafe>=2.0 in .\.venv-mgvi\Lib\site-packages (from jinja2->torch==2.5.1+cpu) (3.0.4)
+Collecting stdlib_list (from session-info->scanpy==1.10.4)
+  Using cached stdlib_list-0.12.0-py3-none-any.whl.metadata (3.3 kB)
+Downloading anndata-0.10.9-py3-none-any.whl (128 kB)
+Downloading scanpy-1.10.4-py3-none-any.whl (2.1 MB)
+   ---------------------------------------- 2.1/2.1 MB 29.4 MB/s  0:00:00
+Downloading jax-0.4.30-py3-none-any.whl (2.0 MB)
+   ---------------------------------------- 2.0/2.0 MB 37.2 MB/s  0:00:00
+Downloading jaxlib-0.4.30-cp312-cp312-win_amd64.whl (52.0 MB)
+   ---------------------------------------- 52.0/52.0 MB 21.6 MB/s  0:00:02
+Downloading flax-0.8.5-py3-none-any.whl (731 kB)
+   ---------------------------------------- 731.3/731.3 kB 31.3 MB/s  0:00:00
+Downloading optax-0.2.3-py3-none-any.whl (289 kB)
+Downloading chex-0.1.86-py3-none-any.whl (98 kB)
+Downloading numpyro-0.15.3-py3-none-any.whl (351 kB)
+Downloading pyro_ppl-1.9.1-py3-none-any.whl (755 kB)
+   ---------------------------------------- 756.0/756.0 kB 30.9 MB/s  0:00:00
+Downloading torchmetrics-0.11.4-py3-none-any.whl (519 kB)
+Downloading mudata-0.2.4-py3-none-any.whl (24 kB)
+Downloading orbax_checkpoint-0.5.20-py3-none-any.whl (222 kB)
+Downloading tensorstore-0.1.65-cp312-cp312-win_amd64.whl (11.5 MB)
+   ---------------------------------------- 11.5/11.5 MB 13.1 MB/s  0:00:00
+Using cached sympy-1.13.1-py3-none-any.whl (6.2 MB)
+Downloading setuptools-69.5.1-py3-none-any.whl (894 kB)
+   ---------------------------------------- 894.6/894.6 kB 19.8 MB/s  0:00:00
+Downloading numpy-1.26.4-cp312-cp312-win_amd64.whl (15.5 MB)
+   ---------------------------------------- 15.5/15.5 MB 42.5 MB/s  0:00:00
+Downloading pandas-2.1.4-cp312-cp312-win_amd64.whl (10.5 MB)
+   ---------------------------------------- 10.5/10.5 MB 34.6 MB/s  0:00:00
+Downloading scipy-1.13.1-cp312-cp312-win_amd64.whl (45.9 MB)
+   ---------------------------------------- 45.9/45.9 MB 47.2 MB/s  0:00:00
+Downloading numba-0.60.0-cp312-cp312-win_amd64.whl (2.7 MB)
+   ---------------------------------------- 2.7/2.7 MB 52.0 MB/s  0:00:00
+Downloading scikit_learn-1.5.2-cp312-cp312-win_amd64.whl (11.0 MB)
+   ---------------------------------------- 11.0/11.0 MB 36.1 MB/s  0:00:00
+Downloading matplotlib-3.9.4-cp312-cp312-win_amd64.whl (7.8 MB)
+   ---------------------------------------- 7.8/7.8 MB 40.5 MB/s  0:00:00
+Downloading h5py-3.12.1-cp312-cp312-win_amd64.whl (3.0 MB)
+   ---------------------------------------- 3.0/3.0 MB 4.2 MB/s  0:00:00
+Downloading llvmlite-0.43.0-cp312-cp312-win_amd64.whl (28.1 MB)
+   ---------------------------------------- 28.1/28.1 MB 46.9 MB/s  0:00:00
+Downloading contourpy-1.3.3-cp312-cp312-win_amd64.whl (226 kB)
+Downloading ml_dtypes-0.5.4-cp312-cp312-win_amd64.whl (212 kB)
+Downloading pytz-2026.4-py2.py3-none-any.whl (506 kB)
+Downloading toolz-1.1.0-py3-none-any.whl (58 kB)
+Downloading umap_learn-0.5.7-py3-none-any.whl (88 kB)
+Using cached session_info-1.0.1-py3-none-any.whl (9.1 kB)
+Using cached stdlib_list-0.12.0-py3-none-any.whl (87 kB)
+Installing collected packages: pytz, toolz, sympy, stdlib_list, setuptools, numpy, llvmlite, torch, session-info, scipy, pandas, numba, ml-dtypes, h5py, contourpy, torchmetrics, tensorstore, scikit-learn, pyro-ppl, matplotlib, jaxlib, anndata, mudata, jax, umap-learn, orbax-checkpoint, numpyro, chex, scanpy, optax, flax
+  Attempting uninstall: sympy
+    Found existing installation: sympy 1.14.0
+    Uninstalling sympy-1.14.0:
+      Successfully uninstalled sympy-1.14.0
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 84.0.0
+    Uninstalling setuptools-84.0.0:
+      Successfully uninstalled setuptools-84.0.0
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.5.3
+    Uninstalling numpy-2.5.3:
+      Successfully uninstalled numpy-2.5.3
+  Attempting uninstall: llvmlite
+    Found existing installation: llvmlite 0.50.0
+    Uninstalling llvmlite-0.50.0:
+      Successfully uninstalled llvmlite-0.50.0
+  Attempting uninstall: torch
+    Found existing installation: torch 2.14.1
+    Uninstalling torch-2.14.1:
+      Successfully uninstalled torch-2.14.1
+  Attempting uninstall: scipy
+    Found existing installation: scipy 1.18.1
+    Uninstalling scipy-1.18.1:
+      Successfully uninstalled scipy-1.18.1
+  Attempting uninstall: pandas
+    Found existing installation: pandas 3.0.6
+    Uninstalling pandas-3.0.6:
+      Successfully uninstalled pandas-3.0.6
+  Attempting uninstall: numba
+    Found existing installation: numba 0.68.0
+    Uninstalling numba-0.68.0:
+      Successfully uninstalled numba-0.68.0
+  Attempting uninstall: ml-dtypes
+    Found existing installation: ml_dtypes 0.6.0
+    Uninstalling ml_dtypes-0.6.0:
+      Successfully uninstalled ml_dtypes-0.6.0
+  Attempting uninstall: h5py
+    Found existing installation: h5py 3.16.0
+    Uninstalling h5py-3.16.0:
+      Successfully uninstalled h5py-3.16.0
+  Attempting uninstall: contourpy
+    Found existing installation: contourpy 1.4.0
+    Uninstalling contourpy-1.4.0:
+      Successfully uninstalled contourpy-1.4.0
+  Attempting uninstall: torchmetrics
+    Found existing installation: torchmetrics 1.9.0
+    Uninstalling torchmetrics-1.9.0:
+      Successfully uninstalled torchmetrics-1.9.0
+  Attempting uninstall: tensorstore
+    Found existing installation: tensorstore 0.1.85
+    Uninstalling tensorstore-0.1.85:
+      Successfully uninstalled tensorstore-0.1.85
+  Attempting uninstall: scikit-learn
+    Found existing installation: scikit-learn 1.9.1
+    Uninstalling scikit-learn-1.9.1:
+      Successfully uninstalled scikit-learn-1.9.1
+  Attempting uninstall: pyro-ppl
+    Found existing installation: pyro-ppl 1.9.2
+    Uninstalling pyro-ppl-1.9.2:
+      Successfully uninstalled pyro-ppl-1.9.2
+  Attempting uninstall: matplotlib
+    Found existing installation: matplotlib 3.11.2
+    Uninstalling matplotlib-3.11.2:
+      Successfully uninstalled matplotlib-3.11.2
+  Attempting uninstall: jaxlib
+    Found existing installation: jaxlib 0.11.2
+    Uninstalling jaxlib-0.11.2:
+      Successfully uninstalled jaxlib-0.11.2
+  Attempting uninstall: anndata
+    Found existing installation: anndata 0.13.4
+    Uninstalling anndata-0.13.4:
+      Successfully uninstalled anndata-0.13.4
+  Attempting uninstall: mudata
+    Found existing installation: mudata 0.4.1
+    Uninstalling mudata-0.4.1:
+      Successfully uninstalled mudata-0.4.1
+  Attempting uninstall: jax
+    Found existing installation: jax 0.11.2
+    Uninstalling jax-0.11.2:
+      Successfully uninstalled jax-0.11.2
+  Attempting uninstall: umap-learn
+    Found existing installation: umap-learn 0.5.12
+    Uninstalling umap-learn-0.5.12:
+      Successfully uninstalled umap-learn-0.5.12
+  Attempting uninstall: orbax-checkpoint
+    Found existing installation: orbax-checkpoint 0.12.6
+    Uninstalling orbax-checkpoint-0.12.6:
+      Successfully uninstalled orbax-checkpoint-0.12.6
+  Attempting uninstall: numpyro
+    Found existing installation: numpyro 0.22.0
+    Uninstalling numpyro-0.22.0:
+      Successfully uninstalled numpyro-0.22.0
+  Attempting uninstall: scanpy
+    Found existing installation: scanpy 1.12.4
+    Uninstalling scanpy-1.12.4:
+      Successfully uninstalled scanpy-1.12.4
+  Attempting uninstall: optax
+    Found existing installation: optax 0.2.8
+    Uninstalling optax-0.2.8:
+      Successfully uninstalled optax-0.2.8
+  Attempting uninstall: flax
+    Found existing installation: flax 0.12.10
+    Uninstalling flax-0.12.10:
+      Successfully uninstalled flax-0.12.10
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+fast-array-utils 1.5.1 requires numpy>=2, but you have numpy 1.26.4 which is incompatible.
+numcodecs 0.17.0 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+zarr 3.4.0 requires numpy>=2, but you have numpy 1.26.4 which is incompatible.
+Successfully installed anndata-0.10.9 chex-0.1.86 contourpy-1.3.3 flax-0.8.5 h5py-3.12.1 jax-0.4.30 jaxlib-0.4.30 llvmlite-0.43.0 matplotlib-3.9.4 ml-dtypes-0.5.4 mudata-0.2.4 numba-0.60.0 numpy-1.26.4 numpyro-0.15.3 optax-0.2.3 orbax-checkpoint-0.5.20 pandas-2.1.4 pyro-ppl-1.9.1 pytz-2026.4 scanpy-1.10.4 scikit-learn-1.5.2 scipy-1.13.1 session-info-1.0.1 setuptools-69.5.1 stdlib_list-0.12.0 sympy-1.13.1 tensorstore-0.1.65 toolz-1.1.0 torch-2.5.1+cpu torchmetrics-0.11.4 umap-learn-0.5.7

@@ -1,0 +1,9 @@
+C4 first install attempt: 2026-10-03 22:30:53
+C4 import working: 22:47:13
+C4 dry init OK (no training): 22:49:56; training deferred until the Phase 4 queue frees fit slots (time box clock paused while waiting)
+C4 training started (clock resumed): 02:55:08
+C4 fits ended: 02:55:55
+C4 attempt 1 failed 02:55:55 (PL assert isinstance(max_epochs, int); numpy int from package default); fix: explicit max_epochs=int(...) = 400. Retry: 02:56:20
+C4 fits attempt 2 ended: 03:15:13
+C4 attempt 2 failed after training (my post-processing bug: test AnnData not validated before data loader); fixed + model save + 2-epoch smoke test passed. Attempt 3 start: 03:16:27
+C4 attempt 3 ended: 03:34:38

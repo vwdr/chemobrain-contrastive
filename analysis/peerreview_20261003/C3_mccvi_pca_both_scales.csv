@@ -1,0 +1,16 @@
+method,study_or_pair,seed,canonical_log_mse,modeled_gene_log_mse
+MC-ContrastiveVI (fresh),combined,0.0,0.16885676980018616,0.8981296420097351
+MC-ContrastiveVI (fresh),cisplatin,0.0,0.09140793234109879,0.44858163595199585
+MC-ContrastiveVI (fresh),doxorubicin,0.0,0.20308469235897064,1.0968036651611328
+MC-ContrastiveVI (fresh),combined,1.0,0.16869722306728363,0.9102990031242371
+MC-ContrastiveVI (fresh),cisplatin,1.0,0.09175483882427216,0.4499988555908203
+MC-ContrastiveVI (fresh),doxorubicin,1.0,0.20270128548145294,1.113724946975708
+MC-ContrastiveVI (fresh),combined,2.0,0.16861575841903687,0.9040709733963013
+MC-ContrastiveVI (fresh),cisplatin,2.0,0.09198378771543503,0.45026886463165283
+MC-ContrastiveVI (fresh),doxorubicin,2.0,0.20248262584209442,1.1046251058578491
+PCA(32) fit on canonical scale,combined,,0.15524698793888092,0.8735363483428955
+PCA(32) fit on modeled-gene scale,combined,,,0.5501803755760193
+PCA(32) fit on canonical scale,cisplatin,,0.08571916073560715,0.45403042435646057
+PCA(32) fit on modeled-gene scale,cisplatin,,,0.33165785670280457
+PCA(32) fit on canonical scale,doxorubicin,,0.18597427010536194,1.0589336156845093
+PCA(32) fit on modeled-gene scale,doxorubicin,,,0.6467545628547668

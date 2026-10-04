@@ -1,0 +1,98 @@
+regenerated (46857, 1500) 6000 2881 2881
+   array ved_dtype regen_dtype      ved_shape    regen_shape  max_abs_diff  n_nonzero_diff       status  n_mismatch
+0      X   float32     float32  (46857, 1500)  (46857, 1500)  9.536743e-07        382362.0  within_1e-6         NaN
+1      b     int64       int64       (46857,)       (46857,)           NaN             NaN    identical         0.0
+2      d     int64       int64       (46857,)       (46857,)           NaN             NaN    identical         0.0
+3  genes      <U13        <U13        (1500,)        (1500,)           NaN             NaN    identical         0.0
+4   test     int64       int64        (2881,)        (2881,)           NaN             NaN    identical         0.0
+5  train     int64       int64        (6000,)        (6000,)           NaN             NaN    identical         0.0
+6    val     int64       int64        (2881,)        (2881,)           NaN             NaN    identical         0.0
+                inputs                                      metric              committed             recomputed           difference
+0           ved_inputs                                        seed    0.00000000000000000                    NaN                  NaN
+1           ved_inputs                                  best_epoch   99.00000000000000000   97.00000000000000000 -2.00000000000000000
+2           ved_inputs                                  epochs_run  100.00000000000000000                    NaN                  NaN
+3           ved_inputs                                    test_mse    0.16865083575248718    0.16855283081531525 -0.00009800493717194
+4           ved_inputs                             test_plugin_nll  181.07989501953125000  187.05416870117187500  5.97427368164062500
+5           ved_inputs                             shared_fraction    0.92056787014007568    0.75418812036514282 -0.16637974977493286
+6           ved_inputs                  bg_study_balanced_accuracy    0.77718913704191173    0.73026877387013278 -0.04692036317177894
+7           ved_inputs              bg_condition_balanced_accuracy    0.49026382927960649    0.48197639028950379 -0.00828743899010270
+8           ved_inputs      shared_ungated_study_balanced_accuracy    0.77429921427656423    0.55551984600682225 -0.21877936826974198
+9           ved_inputs  shared_ungated_condition_balanced_accuracy    0.54850774868933494    0.45900316723740797 -0.08950458145192697
+10          ved_inputs          drug_gated_study_balanced_accuracy    0.72179880900152704    0.72065355276000798 -0.00114525624151907
+11          ved_inputs      drug_gated_condition_balanced_accuracy    0.95852661596958189    0.96810202788339661  0.00957541191381472
+12          ved_inputs        drug_ungated_study_balanced_accuracy    0.84205213140660473    0.91059887747316970  0.06854674606656497
+13          ved_inputs    drug_ungated_condition_balanced_accuracy    0.59061774876915885    0.59876563108380543  0.00814788231464658
+14          ved_inputs                              validation_mse    0.16641180362721270    0.16647653281688690  0.00006472918967421
+15  regenerated_inputs                                        seed    0.00000000000000000                    NaN                  NaN
+16  regenerated_inputs                                  best_epoch   99.00000000000000000   97.00000000000000000 -2.00000000000000000
+17  regenerated_inputs                                  epochs_run  100.00000000000000000                    NaN                  NaN
+18  regenerated_inputs                                    test_mse    0.16865083575248718    0.16855283081531525 -0.00009800493717194
+19  regenerated_inputs                             test_plugin_nll  181.07989501953125000  187.05416870117187500  5.97427368164062500
+20  regenerated_inputs                             shared_fraction    0.92056787014007568    0.75418817996978760 -0.16637969017028809
+21  regenerated_inputs                  bg_study_balanced_accuracy    0.77718913704191173    0.73026877387013278 -0.04692036317177894
+22  regenerated_inputs              bg_condition_balanced_accuracy    0.49026382927960649    0.48410958366482443 -0.00615424561478206
+23  regenerated_inputs      shared_ungated_study_balanced_accuracy    0.77429921427656423    0.55551984600682225 -0.21877936826974198
+24  regenerated_inputs  shared_ungated_condition_balanced_accuracy    0.54850774868933494    0.45917555595171899 -0.08933219273761595
+25  regenerated_inputs          drug_gated_study_balanced_accuracy    0.72179880900152704    0.72065355276000798 -0.00114525624151907
+26  regenerated_inputs      drug_gated_condition_balanced_accuracy    0.95852661596958189    0.96810202788339661  0.00957541191381472
+27  regenerated_inputs        drug_ungated_study_balanced_accuracy    0.84205213140660473    0.91059887747316970  0.06854674606656497
+28  regenerated_inputs    drug_ungated_condition_balanced_accuracy    0.59061774876915885    0.59876563108380543  0.00814788231464658
+29  regenerated_inputs                              validation_mse    0.16641180362721270    0.16647653281688690  0.00006472918967421
+                inputs       array shape_archived shape_recomputed         max_abs_diff           max_abs_value
+0           ved_inputs          bg    (46857, 16)      (46857, 16)  0.00000143051147461     4.29872131347656250
+1           ved_inputs      shared     (46857, 8)       (46857, 8)  0.00000071525573730     1.56299197673797607
+2           ved_inputs        drug     (46857, 8)       (46857, 8)  0.00000023841857910     0.95388662815093994
+3           ved_inputs  raw_shared     (46857, 8)       (46857, 8)  0.00000071525573730     1.56299197673797607
+4           ved_inputs    raw_drug     (46857, 8)       (46857, 8)  0.00000023841857910     0.95388662815093994
+5           ved_inputs         mse       (46857,)         (46857,)  0.00000011920928955     0.51959913969039917
+6           ved_inputs         nll       (46857,)         (46857,)  0.00122070312500000  4225.84814453125000000
+7   regenerated_inputs          bg    (46857, 16)      (46857, 16)  0.00000143051147461     4.29872131347656250
+8   regenerated_inputs      shared     (46857, 8)       (46857, 8)  0.00000071525573730     1.56299197673797607
+9   regenerated_inputs        drug     (46857, 8)       (46857, 8)  0.00000023841857910     0.95388662815093994
+10  regenerated_inputs  raw_shared     (46857, 8)       (46857, 8)  0.00000071525573730     1.56299197673797607
+11  regenerated_inputs    raw_drug     (46857, 8)       (46857, 8)  0.00000023841857910     0.95388662815093994
+12  regenerated_inputs         mse       (46857,)         (46857,)  0.00000014901161194     0.51959913969039917
+13  regenerated_inputs         nll       (46857,)         (46857,)  0.00122070312500000  4225.84814453125000000
+                  latents  representation                   task            committed           recomputed           difference
+0              ved_inputs      background   cis_source_cell_type  0.99084214450998476  0.98879442371226389 -0.00204772079772086
+1              ved_inputs      background  doxorubicin_treatment  0.53115579707232374  0.53978428283185553  0.00862848575953179
+2              ved_inputs      background    cisplatin_treatment  0.64509316770186342  0.66683229813664591  0.02173913043478248
+3              ved_inputs  shared_ungated   cis_source_cell_type  0.84208276700472784  0.74964349578711287 -0.09243927121761497
+4              ved_inputs  shared_ungated  doxorubicin_treatment  0.51915509770978863  0.53978830215676976  0.02063320444698113
+5              ved_inputs  shared_ungated    cisplatin_treatment  0.59370600414078678  0.60253105590062117  0.00882505175983439
+6              ved_inputs    drug_ungated   cis_source_cell_type  0.82050788826023557  0.74445750410320188 -0.07605038415703369
+7              ved_inputs    drug_ungated  doxorubicin_treatment  0.53183908230773558  0.55312542705327217  0.02128634474553659
+8              ved_inputs    drug_ungated    cisplatin_treatment  0.62245859213250521  0.56762939958592140 -0.05482919254658380
+9      regenerated_inputs      background   cis_source_cell_type  0.99084214450998476  0.98879442371226389 -0.00204772079772086
+10     regenerated_inputs      background  doxorubicin_treatment  0.53115579707232374  0.53978428283185553  0.00862848575953179
+11     regenerated_inputs      background    cisplatin_treatment  0.64509316770186342  0.66683229813664591  0.02173913043478248
+12     regenerated_inputs  shared_ungated   cis_source_cell_type  0.84208276700472784  0.74964349578711287 -0.09243927121761497
+13     regenerated_inputs  shared_ungated  doxorubicin_treatment  0.51915509770978863  0.53978830215676976  0.02063320444698113
+14     regenerated_inputs  shared_ungated    cisplatin_treatment  0.59370600414078678  0.60253105590062117  0.00882505175983439
+15     regenerated_inputs    drug_ungated   cis_source_cell_type  0.82050788826023557  0.74445750410320188 -0.07605038415703369
+16     regenerated_inputs    drug_ungated  doxorubicin_treatment  0.53183908230773558  0.55312542705327217  0.02128634474553659
+17     regenerated_inputs    drug_ungated    cisplatin_treatment  0.62245859213250521  0.56762939958592140 -0.05482919254658380
+18  archived_latents_file      background   cis_source_cell_type  0.99084214450998476  0.98879442371226389 -0.00204772079772086
+19  archived_latents_file      background  doxorubicin_treatment  0.53115579707232374  0.53925574160563994  0.00809994453331619
+20  archived_latents_file      background    cisplatin_treatment  0.64509316770186342  0.66683229813664591  0.02173913043478248
+21  archived_latents_file  shared_ungated   cis_source_cell_type  0.84208276700472784  0.74964349578711287 -0.09243927121761497
+22  archived_latents_file  shared_ungated  doxorubicin_treatment  0.51915509770978863  0.53973504610165679  0.02057994839186816
+23  archived_latents_file  shared_ungated    cisplatin_treatment  0.59370600414078678  0.60253105590062117  0.00882505175983439
+24  archived_latents_file    drug_ungated   cis_source_cell_type  0.82050788826023557  0.74445750410320188 -0.07605038415703369
+25  archived_latents_file    drug_ungated  doxorubicin_treatment  0.53183908230773558  0.55312542705327217  0.02128634474553659
+26  archived_latents_file    drug_ungated    cisplatin_treatment  0.62245859213250521  0.56762939958592140 -0.05482919254658380
+                       check                                                                                                                        ved                                                                                                                regenerated  equal  n_mismatch  max_abs_diff
+0                     n_rows                                                                                                                      46857                                                                                                                      46857   True         NaN           NaN
+1            index_identical                                                                                                                        NaN                                                                                                                        NaN   True         NaN           NaN
+2                    columns  study|sample_id|source_cell_type|source_code|drug|historical_drug|rescue|arm|total_counts|pct_counts_mt|n_genes_by_counts  study|sample_id|source_cell_type|source_code|drug|historical_drug|rescue|arm|total_counts|pct_counts_mt|n_genes_by_counts   True         NaN           NaN
+3               column:study                                                                                                                        NaN                                                                                                                        NaN   True         0.0           NaN
+4           column:sample_id                                                                                                                        NaN                                                                                                                        NaN   True         0.0           NaN
+5    column:source_cell_type                                                                                                                        NaN                                                                                                                        NaN   True         0.0           NaN
+6         column:source_code                                                                                                                        NaN                                                                                                                        NaN   True         0.0           NaN
+7                column:drug                                                                                                                        NaN                                                                                                                        NaN   True         0.0           NaN
+8     column:historical_drug                                                                                                                        NaN                                                                                                                        NaN   True         0.0           NaN
+9              column:rescue                                                                                                                        NaN                                                                                                                        NaN   True         NaN           0.0
+10                column:arm                                                                                                                        NaN                                                                                                                        NaN   True         0.0           NaN
+11       column:total_counts                                                                                                                        NaN                                                                                                                        NaN   True         NaN           0.0
+12      column:pct_counts_mt                                                                                                                        NaN                                                                                                                        NaN   True         NaN           0.0
+13  column:n_genes_by_counts                                                                                                                        NaN                                                                                                                        NaN   True         NaN           0.0

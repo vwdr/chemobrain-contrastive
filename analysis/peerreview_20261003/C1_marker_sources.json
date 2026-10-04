@@ -1,0 +1,120 @@
+{
+  "retrieved": "2026-10-03",
+  "files": {
+    "PanglaoDB_markers_27_Mar_2020.tsv.gz": {
+      "sha256": "6779952ad40aa5a124de7bd0e18975c6630bd6006d6b3ef210a916caaa6b53c9",
+      "bytes": 311558
+    },
+    "41467_2021_21407_MOESM3_ESM.xlsx": {
+      "sha256": "0cf8adc5ae1dd2bc7af0b30bd166698b012a664ad2dcfc02330c073a0cb2d363",
+      "bytes": 48705
+    },
+    "zeisel2018_mmc4.xlsx": {
+      "sha256": "b3592ad35fa6143240bc96fe3041083ddeea4f4ef82907d3f377ff1a4f332b6a",
+      "bytes": 52113
+    },
+    "dani2021_mmc1.xlsx": {
+      "sha256": "468ed30f38c18fc27ba16b82c6245928b1075ae46a8b64b39122d04a041d7467",
+      "bytes": 43182
+    },
+    "pone.0209648.s007.xlsx": {
+      "sha256": "0dd719a293fe00d707b827cf521fcb685bd16bb4eda78649ac8a6bf42efea102",
+      "bytes": 3729035
+    }
+  },
+  "symbol_matching": "case-insensitive match of source symbols to the mouse 1,500-gene universe (PanglaoDB and Bakken S2 symbols are upper-case)",
+  "not_used_after_inspection": {
+    "Van Hove H et al. 2019 Nat Neurosci, Supplementary Tables 2-3": "statistics and dissociation-gene lists, no marker table",
+    "Pietila R et al. 2023 Neuron, mmc2-mmc4": "GO tables and top-variable genes, no marker table",
+    "DeSisto J et al. 2020 Dev Cell, mmc2-mmc6": "markers contrast meningeal sub-clusters against each other, not fibroblasts against other cell types",
+    "Vanlandewijck M et al. 2018 Nature, Supplementary Table 3 / Source data Fig. 1": "mural-cell and endothelial zonation genes, no fibroblast-vs-all table",
+    "Dani N et al. 2021 Table S1 via PMC (NIHMS1690857-supplement-8.xlsx)": "PMC returned a proof-of-work bot challenge; the same table was obtained from the publisher CDN (mmc1.xlsx)"
+  },
+  "counts": [
+    {
+      "cell_type": "Astrocytes",
+      "source": "PanglaoDB markers 27 Mar 2020 (Franzen O et al. 2019, Database, doi:10.1093/database/baz046), mouse entries, cell type \"Astrocytes\"; https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz",
+      "n": 63
+    },
+    {
+      "cell_type": "Border-associated macrophages",
+      "source": "Ochocka N et al. (2021) Nat Commun, doi:10.1038/s41467-021-21407-w; Supplementary Data 1 (41467_2021_21407_MOESM3_ESM.xlsx), BAM cluster top-30 DEGs, intersection of sheets \"female control\" and \"male control\"; retrieved via https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7895824/supplementaryFiles",
+      "n": 23
+    },
+    {
+      "cell_type": "Border-associated macrophages",
+      "source": "Zeisel A et al. (2018) Cell, doi:10.1016/j.cell.2018.06.021; Table S4 (mmc4.xlsx, markers_spec_selec_rob), \"Marker\" rows for clusters PVM1, PVM2 (perivascular macrophages); https://ars.els-cdn.com/content/image/1-s2.0-S009286741830789X-mmc4.xlsx",
+      "n": 8
+    },
+    {
+      "cell_type": "Choroid plexus cells",
+      "source": "PanglaoDB markers 27 Mar 2020 (Franzen O et al. 2019, Database, doi:10.1093/database/baz046), mouse entries, cell type \"Choroid plexus cells\"; https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz",
+      "n": 22
+    },
+    {
+      "cell_type": "Choroid plexus epithelium",
+      "source": "Dani N et al. (2021) Cell, doi:10.1016/j.cell.2021.04.003; Table S1 (mmc1.xlsx), sheet \"Cell Type\", column \"Epithelial\"; https://ars.els-cdn.com/content/image/1-s2.0-S0092867421004384-mmc1.xlsx",
+      "n": 86
+    },
+    {
+      "cell_type": "Choroid plexus epithelium",
+      "source": "Zeisel A et al. (2018) Cell, doi:10.1016/j.cell.2018.06.021; Table S4 (mmc4.xlsx, markers_spec_selec_rob), \"Marker\" rows for clusters CHOR (choroid plexus epithelial cells); https://ars.els-cdn.com/content/image/1-s2.0-S009286741830789X-mmc4.xlsx",
+      "n": 5
+    },
+    {
+      "cell_type": "Endothelial cells",
+      "source": "PanglaoDB markers 27 Mar 2020 (Franzen O et al. 2019, Database, doi:10.1093/database/baz046), mouse entries, cell type \"Endothelial cells\"; https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz",
+      "n": 188
+    },
+    {
+      "cell_type": "Ependymal cells",
+      "source": "PanglaoDB markers 27 Mar 2020 (Franzen O et al. 2019, Database, doi:10.1093/database/baz046), mouse entries, cell type \"Ependymal cells\"; https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz",
+      "n": 59
+    },
+    {
+      "cell_type": "Fibroblasts",
+      "source": "PanglaoDB markers 27 Mar 2020 (Franzen O et al. 2019, Database, doi:10.1093/database/baz046), mouse entries, cell type \"Fibroblasts\"; https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz",
+      "n": 177
+    },
+    {
+      "cell_type": "Macrophages",
+      "source": "PanglaoDB markers 27 Mar 2020 (Franzen O et al. 2019, Database, doi:10.1093/database/baz046), mouse entries, cell type \"Macrophages\"; https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz",
+      "n": 147
+    },
+    {
+      "cell_type": "Meningeal/perivascular fibroblasts",
+      "source": "Zeisel A et al. (2018) Cell, doi:10.1016/j.cell.2018.06.021; Table S4 (mmc4.xlsx, markers_spec_selec_rob), \"Marker\" rows for clusters VLMC1, VLMC2, ABC (all described as \"Vascular leptomeningeal cells\"); https://ars.els-cdn.com/content/image/1-s2.0-S009286741830789X-mmc4.xlsx",
+      "n": 15
+    },
+    {
+      "cell_type": "Microglia",
+      "source": "PanglaoDB markers 27 Mar 2020 (Franzen O et al. 2019, Database, doi:10.1093/database/baz046), mouse entries, cell type \"Microglia\"; https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz",
+      "n": 79
+    },
+    {
+      "cell_type": "Neurons",
+      "source": "PanglaoDB markers 27 Mar 2020 (Franzen O et al. 2019, Database, doi:10.1093/database/baz046), mouse entries, cell type \"Neurons\"; https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz",
+      "n": 211
+    },
+    {
+      "cell_type": "Nucleus-enriched transcripts",
+      "source": "Bakken TE et al. (2018) PLoS One, doi:10.1371/journal.pone.0209648; S2 Table (pone.0209648.s007.xlsx), genes higher in nuclei: logFC < -log2(1.5) and adj.P.Val < 0.05 (159 genes, as stated in the paper); retrieved via https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6306246/supplementaryFiles",
+      "n": 159
+    },
+    {
+      "cell_type": "OPCs",
+      "source": "PanglaoDB markers 27 Mar 2020 (Franzen O et al. 2019, Database, doi:10.1093/database/baz046), mouse entries, cell type \"Oligodendrocyte progenitor cells\"; https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz",
+      "n": 28
+    },
+    {
+      "cell_type": "Oligodendrocytes",
+      "source": "PanglaoDB markers 27 Mar 2020 (Franzen O et al. 2019, Database, doi:10.1093/database/baz046), mouse entries, cell type \"Oligodendrocytes\"; https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz",
+      "n": 87
+    },
+    {
+      "cell_type": "Pericytes",
+      "source": "PanglaoDB markers 27 Mar 2020 (Franzen O et al. 2019, Database, doi:10.1093/database/baz046), mouse entries, cell type \"Pericytes\"; https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz",
+      "n": 64
+    }
+  ]
+}
