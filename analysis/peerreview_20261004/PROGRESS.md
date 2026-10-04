@@ -15,3 +15,12 @@ Instructions: `D:/chemobrain-contrastive-main/CLAUDE_CODE_PROMPT_RUN_A.md`. Star
 ## R1 — done (13:27–13:24)
 - `scripts/38_r1_injected_signal.py` → `R1_probes_per_fit.csv`, `R1_reconstruction_per_fit.csv`, `R1_summary*.csv`, `R1_injected_signal_location.md`.
 - Label-(a) probe means 0.473–0.541 across configs/studies/representations; injected-set reconstructed effects −0.033 to +0.030 vs observed −0.144 to +0.158.
+
+## R3 — done (13:20–13:42)
+- Comparison fits (13 jobs, 13:20–13:35; all exit 0) → runs/peerreview_20261004/comparison/.
+- scripts/39 reruns of 09 (13:24–13:25), 16 (13:24–13:34), 11 (13:38) with redirected paths → R3_09_interpretation/, R3_11_diagnostics/, runs/.../pseudobulk_task4/.
+- scripts/40 parts comparison/consensus/enrichment/pseudobulk; scripts/45 → R3_paper_numbers.csv (116 rows: 28 changed, 77 unchanged, 11 not recomputable); note R3_consistent_numbers.md.
+- Pseudobulk regenerated: cisplatin vs control 293 (committed 297), pooled 350 (354), same-direction 349 (353); other quantities unchanged.
+
+## R4 — queue launched 13:37 (21 multiGroupVI + 42 contrastiveVI fits, xargs -P 3); MC-ContrastiveVI attribution on grid checkpoints done 13:36 (scripts/44 --mccvi).
+- Smoke tests (2 epochs) of scripts/42 and 43 passed (outputs in runs/peerreview_20261004/r4/*/smoke/).
