@@ -11,3 +11,7 @@ Instructions: `D:/chemobrain-contrastive-main/CLAUDE_CODE_PROMPT_RUN_A.md`. Star
 
 ## R2 — done (13:21)
 - `scripts/37_r2_baseline_headline.py` → `R2_baseline_headline.csv`; note `R2_baseline_headline.md`. No refits.
+
+## R1 — done (13:27–13:24)
+- `scripts/38_r1_injected_signal.py` → `R1_probes_per_fit.csv`, `R1_reconstruction_per_fit.csv`, `R1_summary*.csv`, `R1_injected_signal_location.md`.
+- Label-(a) probe means 0.473–0.541 across configs/studies/representations; injected-set reconstructed effects −0.033 to +0.030 vs observed −0.144 to +0.158.
