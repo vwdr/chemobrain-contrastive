@@ -1,0 +1,15 @@
+check,ved,regenerated,equal,n_mismatch,max_abs_diff
+n_rows,46857,46857,True,,
+index_identical,,,True,,
+columns,study|sample_id|source_cell_type|source_code|drug|historical_drug|rescue|arm|total_counts|pct_counts_mt|n_genes_by_counts,study|sample_id|source_cell_type|source_code|drug|historical_drug|rescue|arm|total_counts|pct_counts_mt|n_genes_by_counts,True,,
+column:study,,,True,0.0,
+column:sample_id,,,True,0.0,
+column:source_cell_type,,,True,0.0,
+column:source_code,,,True,0.0,
+column:drug,,,True,0.0,
+column:historical_drug,,,True,0.0,
+column:rescue,,,True,,0.0
+column:arm,,,True,0.0,
+column:total_counts,,,True,,0.0
+column:pct_counts_mt,,,True,,0.0
+column:n_genes_by_counts,,,True,,0.0
