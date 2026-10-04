@@ -1,0 +1,54 @@
+Collecting zarr<3
+  Downloading zarr-2.18.7-py3-none-any.whl.metadata (5.8 kB)
+Collecting numcodecs<0.13
+  Downloading numcodecs-0.12.1-cp312-cp312-win_amd64.whl.metadata (2.9 kB)
+Collecting fast-array-utils<1.3
+  Downloading fast_array_utils-1.2.5-py3-none-any.whl.metadata (3.8 kB)
+Collecting asciitree (from zarr<3)
+  Downloading asciitree-0.3.3.tar.gz (4.0 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: numpy>=1.24 in .\.venv-mgvi\Lib\site-packages (from zarr<3) (1.26.4)
+Collecting fasteners (from zarr<3)
+  Downloading fasteners-0.20-py3-none-any.whl.metadata (4.8 kB)
+Collecting numpy>=1.24 (from zarr<3)
+  Using cached numpy-2.5.3-cp312-cp312-win_amd64.whl.metadata (6.6 kB)
+Downloading zarr-2.18.7-py3-none-any.whl (211 kB)
+Downloading numcodecs-0.12.1-cp312-cp312-win_amd64.whl (787 kB)
+   ---------------------------------------- 787.0/787.0 kB 32.8 MB/s  0:00:00
+Downloading fast_array_utils-1.2.5-py3-none-any.whl (34 kB)
+Using cached numpy-2.5.3-cp312-cp312-win_amd64.whl (12.6 MB)
+Downloading fasteners-0.20-py3-none-any.whl (18 kB)
+Building wheels for collected packages: asciitree
+  Building wheel for asciitree (pyproject.toml): started
+  Building wheel for asciitree (pyproject.toml): finished with status 'done'
+  Created wheel for asciitree: filename=asciitree-0.3.3-py3-none-any.whl size=5114 sha256=e8a7b638fb31e042d502491085779167189e28ad39a14c2abe8d2478dcf18f6d
+  Stored in directory: c:\users\manan\appdata\local\pip\cache\wheels\a5\d7\98\f56ae733748cd0fa577172bda0e73e0b1f1793c98e09b9e458
+Successfully built asciitree
+Installing collected packages: asciitree, numpy, fasteners, numcodecs, fast-array-utils, zarr
+  Attempting uninstall: numpy
+    Found existing installation: numpy 1.26.4
+    Uninstalling numpy-1.26.4:
+      Successfully uninstalled numpy-1.26.4
+  Attempting uninstall: numcodecs
+    Found existing installation: numcodecs 0.17.0
+    Uninstalling numcodecs-0.17.0:
+      Successfully uninstalled numcodecs-0.17.0
+  Attempting uninstall: fast-array-utils
+    Found existing installation: fast-array-utils 1.5.1
+    Uninstalling fast-array-utils-1.5.1:
+      Successfully uninstalled fast-array-utils-1.5.1
+  Attempting uninstall: zarr
+    Found existing installation: zarr 3.4.0
+    Uninstalling zarr-3.4.0:
+      Successfully uninstalled zarr-3.4.0
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+numba 0.60.0 requires numpy<2.1,>=1.22, but you have numpy 2.5.3 which is incompatible.
+pandas 2.1.4 requires numpy<2,>=1.26.0; python_version >= "3.12", but you have numpy 2.5.3 which is incompatible.
+scipy 1.13.1 requires numpy<2.3,>=1.22.4, but you have numpy 2.5.3 which is incompatible.
+Successfully installed asciitree-0.3.3 fast-array-utils-1.2.5 fasteners-0.20 numcodecs-0.12.1 numpy-2.5.3 zarr-2.18.7

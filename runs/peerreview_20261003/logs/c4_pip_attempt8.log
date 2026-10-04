@@ -1,0 +1,13 @@
+Collecting pytorch-lightning==1.7.7
+  Using cached pytorch_lightning-1.7.7-py3-none-any.whl.metadata (27 kB)
+Downloading pytorch_lightning-1.7.7-py3-none-any.whl (708 kB)
+   ---------------------------------------- 708.1/708.1 kB 4.1 MB/s eta 0:00:00
+Installing collected packages: pytorch-lightning
+  Attempting uninstall: pytorch-lightning
+    Found existing installation: pytorch-lightning 1.6.5.post0
+    Uninstalling pytorch-lightning-1.6.5.post0:
+      Successfully uninstalled pytorch-lightning-1.6.5.post0
+Successfully installed pytorch-lightning-1.7.7
+
+[notice] A new release of pip is available: 24.0 -> 26.2.1
+[notice] To update, run: D:\chemobrain-contrastive-main\chemobrain-contrastive\.venv-mgvi\Scripts\python.exe -m pip install --upgrade pip

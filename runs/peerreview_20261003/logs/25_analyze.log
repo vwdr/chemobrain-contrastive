@@ -1,0 +1,65 @@
+ seed  test_mse  shared_fraction  shared_fraction_doxorubicin  shared_fraction_cisplatin  shared_active_units_var_gt_0p01  dox_active_units_var_gt_0p01  cis_active_units_var_gt_0p01  shared_mean_total_kl_nats  dox_mean_total_kl_nats  cis_mean_total_kl_nats
+    0  0.168045         0.124479                     0.317703                   0.061788                                0                             0                             3                   0.003135                0.003719                0.037752
+    1  0.168701         0.867442                     0.529972                   0.986787                                0                             0                             0                   0.015250                0.003168                0.002147
+    2  0.168329         0.978618                     0.820814                   0.994581                                1                             0                             0                   0.025251                0.000916                0.001000
+split     study    n  n_treated_real  n_treated_shuffled  fraction_label_changed  n_shuffled_treated_that_are_real_treated
+train GSE216146 3000            1500                1500                0.500667                                       749
+train GSE271055 3000            1500                1500                0.499333                                       751
+  val GSE216146  884             401                 401                0.470588                                       193
+  val GSE271055 1997            1052                1052                0.515774                                       537
+ test GSE216146  883             400                 400                0.502831                                       178
+ test GSE271055 1998            1052                1052                0.488488                                       564
+               comparison                  axis               list_a            list_b  n_a  n_b  n_overlap  jaccard  hypergeom_p
+    primary_vs_fresh_real                shared             shuffled        fresh_real   27   40          1 0.015152 5.210996e-01
+secondary_vs_frozen_paper                shared             shuffled            frozen   27   34          1 0.016667 4.644897e-01
+    primary_vs_fresh_real           doxorubicin             shuffled        fresh_real   30   27          9 0.187500 5.148504e-10
+secondary_vs_frozen_paper           doxorubicin             shuffled            frozen   30   20          9 0.219512 2.018611e-11
+    primary_vs_fresh_real             cisplatin             shuffled        fresh_real   20   31          6 0.133333 1.487860e-06
+secondary_vs_frozen_paper             cisplatin             shuffled            frozen   20   33          3 0.060000 8.573914e-03
+cross_block_vs_fresh_real    shared|doxorubicin      shuffled_shared fresh_doxorubicin   27   27          2 0.038462 8.311406e-02
+cross_block_vs_fresh_real      shared|cisplatin      shuffled_shared   fresh_cisplatin   27   31          2 0.035714 1.054130e-01
+cross_block_vs_fresh_real    doxorubicin|shared shuffled_doxorubicin      fresh_shared   30   40          2 0.029412 1.893526e-01
+cross_block_vs_fresh_real doxorubicin|cisplatin shuffled_doxorubicin   fresh_cisplatin   30   31          2 0.033898 1.258048e-01
+cross_block_vs_fresh_real      cisplatin|shared   shuffled_cisplatin      fresh_shared   20   40          5 0.090909 1.207702e-04
+cross_block_vs_fresh_real cisplatin|doxorubicin   shuffled_cisplatin fresh_doxorubicin   20   27          4 0.093023 3.320040e-04
+        list        axis      library  n_tested  n_fdr_005    minimum_q
+  fresh_real   cisplatin        GO_BP      1625          0 9.481155e-02
+  fresh_real   cisplatin M8_cell_type       164         56 2.916487e-05
+  fresh_real   cisplatin     Reactome       114          0 3.206932e-01
+  fresh_real doxorubicin        GO_BP      1625          0 5.457342e-02
+  fresh_real doxorubicin M8_cell_type       164          0 3.048761e-01
+  fresh_real doxorubicin     Reactome       114          2 4.960480e-03
+  fresh_real      shared        GO_BP      1625          6 9.983173e-04
+  fresh_real      shared M8_cell_type       164         73 7.348460e-16
+  fresh_real      shared     Reactome       114          6 4.887330e-04
+frozen_paper   cisplatin        GO_BP      1625          0 8.112245e-02
+frozen_paper   cisplatin M8_cell_type       164         77 5.010897e-05
+frozen_paper   cisplatin     Reactome       114          5 3.404437e-02
+frozen_paper doxorubicin        GO_BP      1625          0 4.104631e-01
+frozen_paper doxorubicin M8_cell_type       164          0 1.205451e-01
+frozen_paper doxorubicin     Reactome       114          0 1.000000e+00
+frozen_paper      shared        GO_BP      1625         11 2.702103e-03
+frozen_paper      shared M8_cell_type       164         46 4.184058e-10
+frozen_paper      shared     Reactome       114          0 9.212699e-02
+    shuffled   cisplatin        GO_BP      1625          0 1.000000e+00
+    shuffled   cisplatin M8_cell_type       164         56 1.756443e-04
+    shuffled   cisplatin     Reactome       114          0 4.556790e-01
+    shuffled doxorubicin        GO_BP      1625         31 1.679981e-05
+    shuffled doxorubicin M8_cell_type       164          3 2.975979e-02
+    shuffled doxorubicin     Reactome       114          4 1.038098e-02
+    shuffled      shared        GO_BP      1625          0 5.360563e-01
+    shuffled      shared M8_cell_type       164          1 2.494009e-05
+    shuffled      shared     Reactome       114          0 1.000000e+00
+TOP M8 TERM (paper shared): ZHANG_UTERUS_C5_MACROPHAGE
+        list        axis                       term  overlap  set_size_in_universe  list_size  fold_enrichment      p_value      q_value                                                                                                       genes
+    shuffled doxorubicin ZHANG_UTERUS_C5_MACROPHAGE        1                    58         30         0.862069 6.972491e-01 1.000000e+00                                                                                                        Apoe
+    shuffled   cisplatin ZHANG_UTERUS_C5_MACROPHAGE        5                    58         20         6.465517 7.215036e-04 7.888440e-03                                                                                    Apoe|C1qc|Ly6e|Pltp|Sat1
+    shuffled      shared ZHANG_UTERUS_C5_MACROPHAGE        0                    58         27         0.000000 1.000000e+00 1.000000e+00                                                                                                            
+frozen_paper      shared ZHANG_UTERUS_C5_MACROPHAGE       14                    58         34        10.649087 2.551255e-12 4.184058e-10                            Apoe|C1qa|Ccl4|Cd52|Ctsd|Dab2|Ifi27l2a|Laptm5|Lilrb4a|Mrc1|Ms4a7|Pf4|Psmb8|Stab1
+frozen_paper doxorubicin ZHANG_UTERUS_C5_MACROPHAGE        0                    58         20         0.000000 1.000000e+00 1.000000e+00                                                                                                            
+frozen_paper   cisplatin ZHANG_UTERUS_C5_MACROPHAGE        3                    58         33         2.351097 1.321335e-01 2.025223e-01                                                                                               Apoe|Mrc1|Pf4
+  fresh_real doxorubicin ZHANG_UTERUS_C5_MACROPHAGE        1                    58         27         0.957854 6.584450e-01 1.000000e+00                                                                                                        Apoe
+  fresh_real   cisplatin ZHANG_UTERUS_C5_MACROPHAGE        3                    58         31         2.502781 1.148218e-01 1.982187e-01                                                                                              Apoe|Ctsd|Mrc1
+  fresh_real      shared ZHANG_UTERUS_C5_MACROPHAGE       19                    58         40        12.284483 4.480768e-18 7.348460e-16 Apoe|C1qa|Cd52|Ctsc|Ctsd|Ctss|Dab2|Ifi27l2a|Laptm5|Lilrb4a|Ly6e|Lyz2|Mrc1|Ms4a7|Pf4|Psmb8|Sat1|Stab1|Tyrobp
+{'doxorubicin': 30, 'cisplatin': 20, 'shared': 27}
+{'doxorubicin': ['Gria2', 'Ttr', 'Snhg11', 'Meg3', 'Plp1', 'Atp1a2', 'Grm5', 'Nrxn1', 'Miat', 'Neat1', 'Syt1', 'Apoe', 'Map1b', 'Mbp', 'Brd9', 'Grin2a', 'Zeb2', 'Peg3', 'Rnf112', 'Dclk1', 'Gjc3', 'Gatm', 'Chn1', 'Camk2a', 'Ndrg4', 'C1ql3', 'Exoc6b', 'Gria1', 'Enpp2', 'Ryr2'], 'cisplatin': ['Ccdc153', 'mt-Co2', 'Tmsb10', 'Nnat', 'Ptgds', 'Mt3', 'Bc1', 'Ly6h', 'Plp1', 'mt-Co3', 'Sat1', 'Qk', 'Bsg', 'Apoe', 'Zbtb20', 'C1qc', 'Pltp', 'Meg3', 'Ly6e', 'Snhg11'], 'shared': ['Ccdc153', 'Sncg', 'Dmkn', 'Enkur', 'S100a10', 'Anxa1', 'Gm19935', 'Odf3b', 'Crip2', 'Ttr', 'Tcp11', 'Vim', 'Cdhr4', 'Dnah10', 'Crocc2', 'Igfbp2', 'Lrrc36', 'Hydin', 'Frmpd2', 'Dnah3', 'Dnah11', 'Cfap46', 'Ak9', 'Igfbp6', 'Camk2a', 'Mbp', 'Cfap97d2']}

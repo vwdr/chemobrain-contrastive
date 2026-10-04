@@ -1,0 +1,21 @@
+{
+  "method": "contrastiveVI",
+  "study_or_pair": "doxorubicin",
+  "seed": 1,
+  "n_train": 3000,
+  "n_test": 1998,
+  "modeled_gene_log_mse": 1.5078942775726318,
+  "canonical_log_mse": 0.2630457580089569,
+  "background_condition_balanced_accuracy": 0.5600205789435606,
+  "salient_condition_balanced_accuracy": 0.612797329560527,
+  "fit_seconds": 101.8591411113739,
+  "threads": 3,
+  "salient_target_test_active_units_var_gt_0p01": 8,
+  "salient_target_test_dims_kl_gt_0p01": 8,
+  "salient_target_test_total_kl_nats": 7.309784664012153,
+  "salient_target_test_posterior_mean_var_sum": 4.05243444442749,
+  "salient_background_test_active_units_var_gt_0p01": 8,
+  "salient_background_test_dims_kl_gt_0p01": 8,
+  "salient_background_test_total_kl_nats": 7.088731329219504,
+  "salient_background_test_posterior_mean_var_sum": 3.963651657104492
+}

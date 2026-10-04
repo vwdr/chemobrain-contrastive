@@ -79,6 +79,7 @@ def make_adata(C, idx, d, b, genes):
 def posterior(model, adata):
     from scvi import REGISTRY_KEYS
     from scvi.dataloaders import AnnDataLoader
+    adata = model._validate_anndata(adata)
     dl = model._make_data_loader(adata=adata, batch_size=512, shuffle=False, data_loader_class=AnnDataLoader)
     out = {k: [] for k in ('qz_m', 'qz_v', 'qt_m_all', 'qt_v_all', 'mask')}
     model.module.eval()
@@ -90,7 +91,10 @@ def posterior(model, adata):
     return {k: np.concatenate(v) for k, v in out.items()}
 
 
-def fit(seed):
+def fit(seed, smoke=False):
+    global RUN
+    if smoke:
+        RUN = RUN / 'smoke'
     import scvi
     from multigroup_vi.model import MultiGroupVI as MultiGroupVIModel
     RUN.mkdir(parents=True, exist_ok=True)
@@ -107,8 +111,11 @@ def fit(seed):
     model = MultiGroupVIModel(atr, n_groups=3)
     # package default rule min(round(20000 / n_cells * 400), 400), passed as a Python int because the package
     # computes it with np.min (numpy integer), which pytorch-lightning 1.7.7 rejects (assert isinstance(int)).
-    max_epochs = int(min(round((20000 / atr.n_obs) * 400), 400))
+    max_epochs = int(min(round((20000 / atr.n_obs) * 400), 400)) if not smoke else 2
     model.train(group_indices, max_epochs=max_epochs, use_gpu=False)
+    model_dir = RUN / f'mgvi_{seed}_model'
+    if not model_dir.exists():
+        model.save(str(model_dir), save_anndata=False)
     epochs = int(model.trainer.current_epoch) + 1 if hasattr(model, 'trainer') else None
     # posteriors
     ptr = posterior(model, atr); pte = posterior(model, ate)
@@ -173,9 +180,9 @@ def collect():
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser(); ap.add_argument('--fit', action='store_true'); ap.add_argument('--seed', type=int, default=0)
-    ap.add_argument('--collect', action='store_true')
+    ap.add_argument('--collect', action='store_true'); ap.add_argument('--smoke', action='store_true')
     a = ap.parse_args([x for x in sys.argv[1:] if not x.startswith('--threads=')])
     if a.fit:
-        fit(a.seed)
+        fit(a.seed, smoke=a.smoke)
     if a.collect:
         collect()

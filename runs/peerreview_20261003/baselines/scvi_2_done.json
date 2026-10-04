@@ -1,0 +1,13 @@
+{
+  "method": "scVI",
+  "study_or_pair": "combined",
+  "seed": 2,
+  "modeled_gene_log_mse": 1.0767067670822144,
+  "canonical_log_mse": 0.20490510761737823,
+  "condition_balanced_accuracy": 0.6814024914832268,
+  "study_balanced_accuracy": 0.928726858228557,
+  "treatment_probe_cisplatin_within_GSE216146_balanced_accuracy": 0.7931211180124224,
+  "treatment_probe_doxorubicin_within_GSE271055_balanced_accuracy": 0.6223643276875216,
+  "fit_seconds": 144.43140053749084,
+  "threads": 3
+}

@@ -1,0 +1,52 @@
+                                                                                           0             1             2
+method                                                                          multiGroupVI  multiGroupVI  multiGroupVI
+seed                                                                                       0             1             2
+epochs_run                                                                               401           401           401
+n_train                                                                                 6000          6000          6000
+n_test                                                                                  2881          2881          2881
+modeled_gene_log_mse                                                                1.476459       1.44007      1.471026
+canonical_log_mse                                                                   0.245305      0.242906      0.248022
+shared_study_balanced_accuracy                                                      0.983222      0.973634      0.972739
+shared_condition_balanced_accuracy                                                  0.630602      0.636851      0.624679
+shared_treatment_probe_cisplatin_within_GSE216146_balanced_accuracy                 0.636889      0.654428      0.641284
+shared_treatment_probe_doxorubicin_within_GSE271055_balanced_accuracy               0.562286      0.563499      0.561233
+private_gated_study_balanced_accuracy                                               0.843869      0.853444      0.815819
+private_gated_condition_balanced_accuracy                                           0.770457       0.77262      0.771796
+private_gated_treatment_probe_cisplatin_within_GSE216146_balanced_accuracy          0.950311      0.962733      0.953416
+private_gated_treatment_probe_doxorubicin_within_GSE271055_balanced_accuracy        0.900559      0.894254      0.880847
+private_ungated_study_balanced_accuracy                                             0.868168      0.889452      0.863085
+private_ungated_condition_balanced_accuracy                                         0.616474      0.599377      0.618823
+private_ungated_treatment_probe_cisplatin_within_GSE216146_balanced_accuracy        0.820582      0.834899      0.833649
+private_ungated_treatment_probe_doxorubicin_within_GSE271055_balanced_accuracy      0.574291        0.5765      0.558533
+shared__all_test__active_units_var_gt_0p01                                                10            10            10
+shared__all_test__dims_kl_gt_0p01                                                         10            10            10
+shared__all_test__total_kl_nats                                                    12.759001     13.268681     12.979933
+shared__all_test__n_dims                                                                  10            10            10
+shared__treated_test__active_units_var_gt_0p01                                            10            10            10
+shared__treated_test__dims_kl_gt_0p01                                                     10            10            10
+shared__treated_test__total_kl_nats                                                12.497617     13.040336     12.755136
+shared__treated_test__n_dims                                                              10            10            10
+private_control__control_test__active_units_var_gt_0p01                                    7             9             8
+private_control__control_test__dims_kl_gt_0p01                                            10            10            10
+private_control__control_test__total_kl_nats                                        6.929343       6.66931      7.524033
+private_control__control_test__n_dims                                                     10            10            10
+private_cisplatin__cisplatin_test__active_units_var_gt_0p01                               10            10            10
+private_cisplatin__cisplatin_test__dims_kl_gt_0p01                                        10            10            10
+private_cisplatin__cisplatin_test__total_kl_nats                                    7.963289      8.812039      8.330644
+private_cisplatin__cisplatin_test__n_dims                                                 10            10            10
+private_doxorubicin__doxorubicin_test__active_units_var_gt_0p01                            7             6             4
+private_doxorubicin__doxorubicin_test__dims_kl_gt_0p01                                    10            10            10
+private_doxorubicin__doxorubicin_test__total_kl_nats                                6.485236      5.889215      5.950053
+private_doxorubicin__doxorubicin_test__n_dims                                             10            10            10
+fit_seconds                                                                      1076.938038   1078.509812   1076.917899
+threads                                                                                    3             3             3
+ seed_a  seed_b  representation  linear_cka
+      0       1          shared    0.755072
+      0       1   private_gated    0.364393
+      0       1 private_ungated    0.306060
+      0       2          shared    0.765409
+      0       2   private_gated    0.415267
+      0       2 private_ungated    0.380620
+      1       2          shared    0.766759
+      1       2   private_gated    0.440225
+      1       2 private_ungated    0.358877

@@ -1,0 +1,21 @@
+Collecting numpy==1.26.4
+  Using cached numpy-1.26.4-cp312-cp312-win_amd64.whl.metadata (61 kB)
+Requirement already satisfied: zarr<3 in .\.venv-mgvi\Lib\site-packages (2.18.7)
+Requirement already satisfied: numcodecs<0.13 in .\.venv-mgvi\Lib\site-packages (0.12.1)
+Collecting fast-array-utils<1.2
+  Downloading fast_array_utils-1.1.2-py3-none-any.whl.metadata (3.6 kB)
+Requirement already satisfied: asciitree in .\.venv-mgvi\Lib\site-packages (from zarr<3) (0.3.3)
+Requirement already satisfied: fasteners in .\.venv-mgvi\Lib\site-packages (from zarr<3) (0.20)
+Using cached numpy-1.26.4-cp312-cp312-win_amd64.whl (15.5 MB)
+Downloading fast_array_utils-1.1.2-py3-none-any.whl (33 kB)
+Installing collected packages: numpy, fast-array-utils
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.5.3
+    Uninstalling numpy-2.5.3:
+      Successfully uninstalled numpy-2.5.3
+  Attempting uninstall: fast-array-utils
+    Found existing installation: fast-array-utils 1.2.5
+    Uninstalling fast-array-utils-1.2.5:
+      Successfully uninstalled fast-array-utils-1.2.5
+
+Successfully installed fast-array-utils-1.1.2 numpy-1.26.4

@@ -1,0 +1,272 @@
+22:34:04 fit shared_d0.25_rf1.0 0 exit=0
+22:34:04 fit shared_d0.25_rf1.0 1 exit=0
+22:34:06 fit shared_d0.25_rf1.0 2 exit=0
+22:37:21 fit shared_d0.25_rf0.3 0 exit=0
+22:37:25 fit shared_d0.25_rf0.3 2 exit=0
+22:37:26 fit shared_d0.25_rf0.3 1 exit=0
+22:40:30 fit shared_d0.5_rf1.0 0 exit=0
+22:40:35 fit shared_d0.5_rf1.0 2 exit=0
+22:40:37 fit shared_d0.5_rf1.0 1 exit=0
+22:43:31 fit shared_d0.5_rf0.3 0 exit=0
+22:43:38 fit shared_d0.5_rf0.3 2 exit=0
+22:43:38 fit shared_d0.5_rf0.3 1 exit=0
+22:46:32 fit shared_d1_rf1.0 0 exit=0
+22:46:38 fit shared_d1_rf1.0 1 exit=0
+22:46:38 fit shared_d1_rf1.0 2 exit=0
+22:49:43 fit shared_d1_rf0.3 1 exit=0
+22:49:45 fit shared_d1_rf0.3 2 exit=0
+22:49:53 fit shared_d1_rf0.3 0 exit=0
+22:52:37 fit shared_d2_rf1.0 0 exit=0
+22:52:39 fit shared_d2_rf1.0 1 exit=0
+22:52:48 fit shared_d2_rf1.0 2 exit=0
+22:55:32 fit shared_d2_rf0.3 0 exit=0
+22:55:38 fit shared_d2_rf0.3 1 exit=0
+22:55:44 fit shared_d2_rf0.3 2 exit=0
+22:58:27 fit specific_d0.25_rf1.0 0 exit=0
+22:58:37 fit specific_d0.25_rf1.0 1 exit=0
+22:58:44 fit specific_d0.25_rf1.0 2 exit=0
+23:01:30 fit specific_d0.25_rf0.3 0 exit=0
+23:01:39 fit specific_d0.25_rf0.3 1 exit=0
+23:01:43 fit specific_d0.25_rf0.3 2 exit=0
+23:04:37 fit specific_d0.5_rf1.0 0 exit=0
+23:04:52 fit specific_d0.5_rf1.0 2 exit=0
+23:05:03 fit specific_d0.5_rf1.0 1 exit=0
+23:07:38 fit specific_d0.5_rf0.3 0 exit=0
+23:07:54 fit specific_d0.5_rf0.3 1 exit=0
+23:08:02 fit specific_d0.5_rf0.3 2 exit=0
+23:10:51 fit specific_d1_rf1.0 1 exit=0
+23:10:52 fit specific_d1_rf1.0 0 exit=0
+23:10:58 fit specific_d1_rf1.0 2 exit=0
+23:13:57 fit specific_d1_rf0.3 0 exit=0
+23:13:57 fit specific_d1_rf0.3 1 exit=0
+23:14:03 fit specific_d1_rf0.3 2 exit=0
+23:16:59 fit specific_d2_rf1.0 0 exit=0
+23:17:02 fit specific_d2_rf1.0 2 exit=0
+23:17:11 fit specific_d2_rf1.0 1 exit=0
+23:20:01 fit specific_d2_rf0.3 0 exit=0
+23:20:02 fit specific_d2_rf0.3 1 exit=0
+23:20:11 fit specific_d2_rf0.3 2 exit=0
+23:22:57 fit mixed_d0.25_rf1.0 0 exit=0
+23:23:00 fit mixed_d0.25_rf1.0 1 exit=0
+23:23:10 fit mixed_d0.25_rf1.0 2 exit=0
+23:26:07 fit mixed_d0.25_rf0.3 0 exit=0
+23:26:10 fit mixed_d0.25_rf0.3 1 exit=0
+23:26:15 fit mixed_d0.25_rf0.3 2 exit=0
+23:29:10 fit mixed_d0.5_rf1.0 0 exit=0
+23:29:15 fit mixed_d0.5_rf1.0 1 exit=0
+23:29:18 fit mixed_d0.5_rf1.0 2 exit=0
+23:32:14 fit mixed_d0.5_rf0.3 0 exit=0
+23:32:20 fit mixed_d0.5_rf0.3 1 exit=0
+23:32:23 fit mixed_d0.5_rf0.3 2 exit=0
+23:35:32 fit mixed_d1_rf1.0 0 exit=0
+23:35:36 fit mixed_d1_rf1.0 1 exit=0
+23:35:40 fit mixed_d1_rf1.0 2 exit=0
+23:38:43 fit mixed_d1_rf0.3 1 exit=0
+23:38:44 fit mixed_d1_rf0.3 0 exit=0
+23:38:52 fit mixed_d1_rf0.3 2 exit=0
+23:41:41 fit mixed_d2_rf1.0 0 exit=0
+23:41:44 fit mixed_d2_rf1.0 1 exit=0
+23:41:54 fit mixed_d2_rf1.0 2 exit=0
+23:44:39 fit mixed_d2_rf0.3 0 exit=0
+23:44:44 fit mixed_d2_rf0.3 1 exit=0
+23:44:50 fit mixed_d2_rf0.3 2 exit=0
+23:47:36 perm null 0 exit=0
+23:47:41 perm null 1 exit=0
+23:47:46 perm null 2 exit=0
+23:50:27 perm null 3 exit=0
+23:50:31 perm null 4 exit=0
+23:50:36 perm null 5 exit=0
+23:53:15 perm null 6 exit=0
+23:53:20 perm null 7 exit=0
+23:53:24 perm null 8 exit=0
+23:56:02 perm null 9 exit=0
+23:56:07 perm null 10 exit=0
+23:56:10 perm null 11 exit=0
+23:58:49 perm null 12 exit=0
+23:58:54 perm null 13 exit=0
+23:58:57 perm null 14 exit=0
+00:01:37 perm null 15 exit=0
+00:01:42 perm null 16 exit=0
+00:01:44 perm null 17 exit=0
+00:04:25 perm null 18 exit=0
+00:04:30 perm null 19 exit=0
+00:04:32 perm null 20 exit=0
+00:07:12 perm null 21 exit=0
+00:07:17 perm null 22 exit=0
+00:07:19 perm null 23 exit=0
+00:10:00 perm null 24 exit=0
+00:10:05 perm null 25 exit=0
+00:10:07 perm null 26 exit=0
+00:12:48 perm null 27 exit=0
+00:12:53 perm null 28 exit=0
+00:12:54 perm null 29 exit=0
+00:15:35 perm null 30 exit=0
+00:15:40 perm null 31 exit=0
+00:15:41 perm null 32 exit=0
+00:18:23 perm null 33 exit=0
+00:18:28 perm null 34 exit=0
+00:18:30 perm null 35 exit=0
+00:21:11 perm null 36 exit=0
+00:21:17 perm null 37 exit=0
+00:21:17 perm null 38 exit=0
+00:23:58 perm null 39 exit=0
+00:24:04 perm null 40 exit=0
+00:24:05 perm null 41 exit=0
+00:26:45 perm null 42 exit=0
+00:26:51 perm null 43 exit=0
+00:26:52 perm null 44 exit=0
+00:29:33 perm null 45 exit=0
+00:29:40 perm null 47 exit=0
+00:29:40 perm null 46 exit=0
+00:32:21 perm null 48 exit=0
+00:32:27 perm null 49 exit=0
+00:32:27 perm null 50 exit=0
+00:35:08 perm null 51 exit=0
+00:35:15 perm null 53 exit=0
+00:35:15 perm null 52 exit=0
+00:37:57 perm null 54 exit=0
+00:38:03 perm null 55 exit=0
+00:38:03 perm null 56 exit=0
+00:40:44 perm null 57 exit=0
+00:40:50 perm null 59 exit=0
+00:40:50 perm null 58 exit=0
+00:43:32 perm null 60 exit=0
+00:43:38 perm null 61 exit=0
+00:43:39 perm null 62 exit=0
+00:46:24 perm null 63 exit=0
+00:46:31 perm null 64 exit=0
+00:46:31 perm null 65 exit=0
+00:49:26 perm null 66 exit=0
+00:49:32 perm null 67 exit=0
+00:49:32 perm null 68 exit=0
+00:52:21 perm null 69 exit=0
+00:52:27 perm null 71 exit=0
+00:52:28 perm null 70 exit=0
+00:55:16 perm null 72 exit=0
+00:55:22 perm null 73 exit=0
+00:55:22 perm null 74 exit=0
+00:58:12 perm null 75 exit=0
+00:58:19 perm null 77 exit=0
+00:58:19 perm null 76 exit=0
+01:01:08 perm null 78 exit=0
+01:01:14 perm null 80 exit=0
+01:01:14 perm null 79 exit=0
+01:04:04 perm null 81 exit=0
+01:04:11 perm null 83 exit=0
+01:04:11 perm null 82 exit=0
+01:06:57 perm null 84 exit=0
+01:07:05 perm null 86 exit=0
+01:07:05 perm null 85 exit=0
+01:09:54 perm null 87 exit=0
+01:10:03 perm null 89 exit=0
+01:10:03 perm null 88 exit=0
+01:12:49 perm null 90 exit=0
+01:12:58 perm null 91 exit=0
+01:12:59 perm null 92 exit=0
+01:15:43 perm null 93 exit=0
+01:15:51 perm null 94 exit=0
+01:15:52 perm null 95 exit=0
+01:18:33 perm null 96 exit=0
+01:18:42 perm null 97 exit=0
+01:18:42 perm null 98 exit=0
+01:21:22 perm null 99 exit=0
+01:21:31 perm shared_d1_rf1.0 0 exit=0
+01:21:32 perm shared_d1_rf1.0 1 exit=0
+01:24:11 perm shared_d1_rf1.0 2 exit=0
+01:24:20 perm shared_d1_rf1.0 3 exit=0
+01:24:20 perm shared_d1_rf1.0 4 exit=0
+01:26:58 perm shared_d1_rf1.0 5 exit=0
+01:27:07 perm shared_d1_rf1.0 6 exit=0
+01:27:08 perm shared_d1_rf1.0 7 exit=0
+01:29:46 perm shared_d1_rf1.0 8 exit=0
+01:29:55 perm shared_d1_rf1.0 9 exit=0
+01:29:56 perm shared_d1_rf1.0 10 exit=0
+01:32:38 perm shared_d1_rf1.0 11 exit=0
+01:32:47 perm shared_d1_rf1.0 12 exit=0
+01:32:48 perm shared_d1_rf1.0 13 exit=0
+01:35:30 perm shared_d1_rf1.0 14 exit=0
+01:35:39 perm shared_d1_rf1.0 15 exit=0
+01:35:40 perm shared_d1_rf1.0 16 exit=0
+01:38:19 perm shared_d1_rf1.0 17 exit=0
+01:38:28 perm shared_d1_rf1.0 18 exit=0
+01:38:28 perm shared_d1_rf1.0 19 exit=0
+01:41:06 perm shared_d1_rf1.0 20 exit=0
+01:41:16 perm shared_d1_rf1.0 21 exit=0
+01:41:16 perm shared_d1_rf1.0 22 exit=0
+01:43:54 perm shared_d1_rf1.0 23 exit=0
+01:44:03 perm shared_d1_rf1.0 24 exit=0
+01:44:04 perm shared_d1_rf1.0 25 exit=0
+01:46:40 perm shared_d1_rf1.0 26 exit=0
+01:46:50 perm shared_d1_rf1.0 28 exit=0
+01:46:51 perm shared_d1_rf1.0 27 exit=0
+01:49:28 perm shared_d1_rf1.0 29 exit=0
+01:49:38 perm shared_d1_rf1.0 30 exit=0
+01:49:38 perm shared_d1_rf1.0 31 exit=0
+01:52:15 perm shared_d1_rf1.0 32 exit=0
+01:52:26 perm shared_d1_rf1.0 34 exit=0
+01:52:26 perm shared_d1_rf1.0 33 exit=0
+01:55:02 perm shared_d1_rf1.0 35 exit=0
+01:55:13 perm shared_d1_rf1.0 36 exit=0
+01:55:13 perm shared_d1_rf1.0 37 exit=0
+01:57:49 perm shared_d1_rf1.0 38 exit=0
+01:58:01 perm shared_d1_rf1.0 39 exit=0
+01:58:02 perm shared_d1_rf1.0 40 exit=0
+02:00:36 perm shared_d1_rf1.0 41 exit=0
+02:00:48 perm shared_d1_rf1.0 42 exit=0
+02:00:50 perm shared_d1_rf1.0 43 exit=0
+02:03:24 perm shared_d1_rf1.0 44 exit=0
+02:03:37 perm shared_d1_rf1.0 45 exit=0
+02:03:38 perm shared_d1_rf1.0 46 exit=0
+02:06:11 perm shared_d1_rf1.0 47 exit=0
+02:06:24 perm shared_d1_rf1.0 48 exit=0
+02:06:26 perm shared_d1_rf1.0 49 exit=0
+02:09:05 perm shared_d1_rf1.0 50 exit=0
+02:09:17 perm shared_d1_rf1.0 51 exit=0
+02:09:19 perm shared_d1_rf1.0 52 exit=0
+02:11:55 perm shared_d1_rf1.0 53 exit=0
+02:12:08 perm shared_d1_rf1.0 54 exit=0
+02:12:09 perm shared_d1_rf1.0 55 exit=0
+02:14:45 perm shared_d1_rf1.0 56 exit=0
+02:14:59 perm shared_d1_rf1.0 57 exit=0
+02:14:59 perm shared_d1_rf1.0 58 exit=0
+02:17:35 perm shared_d1_rf1.0 59 exit=0
+02:17:50 perm shared_d1_rf1.0 60 exit=0
+02:17:51 perm shared_d1_rf1.0 61 exit=0
+02:20:26 perm shared_d1_rf1.0 62 exit=0
+02:20:40 perm shared_d1_rf1.0 63 exit=0
+02:20:41 perm shared_d1_rf1.0 64 exit=0
+02:23:13 perm shared_d1_rf1.0 65 exit=0
+02:23:28 perm shared_d1_rf1.0 66 exit=0
+02:23:28 perm shared_d1_rf1.0 67 exit=0
+02:26:00 perm shared_d1_rf1.0 68 exit=0
+02:26:15 perm shared_d1_rf1.0 69 exit=0
+02:26:16 perm shared_d1_rf1.0 70 exit=0
+02:28:47 perm shared_d1_rf1.0 71 exit=0
+02:29:03 perm shared_d1_rf1.0 72 exit=0
+02:29:04 perm shared_d1_rf1.0 73 exit=0
+02:31:37 perm shared_d1_rf1.0 74 exit=0
+02:31:55 perm shared_d1_rf1.0 75 exit=0
+02:31:56 perm shared_d1_rf1.0 76 exit=0
+02:34:30 perm shared_d1_rf1.0 77 exit=0
+02:34:47 perm shared_d1_rf1.0 78 exit=0
+02:34:49 perm shared_d1_rf1.0 79 exit=0
+02:37:22 perm shared_d1_rf1.0 80 exit=0
+02:37:41 perm shared_d1_rf1.0 81 exit=0
+02:37:41 perm shared_d1_rf1.0 82 exit=0
+02:40:17 perm shared_d1_rf1.0 83 exit=0
+02:40:35 perm shared_d1_rf1.0 84 exit=0
+02:40:36 perm shared_d1_rf1.0 85 exit=0
+02:43:16 perm shared_d1_rf1.0 86 exit=0
+02:43:34 perm shared_d1_rf1.0 87 exit=0
+02:43:34 perm shared_d1_rf1.0 88 exit=0
+02:46:12 perm shared_d1_rf1.0 89 exit=0
+02:46:30 perm shared_d1_rf1.0 91 exit=0
+02:46:30 perm shared_d1_rf1.0 90 exit=0
+02:49:16 perm shared_d1_rf1.0 92 exit=0
+02:49:36 perm shared_d1_rf1.0 94 exit=0
+02:49:36 perm shared_d1_rf1.0 93 exit=0
+02:52:14 perm shared_d1_rf1.0 95 exit=0
+02:52:35 perm shared_d1_rf1.0 97 exit=0
+02:52:35 perm shared_d1_rf1.0 96 exit=0
+02:54:40 perm shared_d1_rf1.0 98 exit=0
+02:54:54 perm shared_d1_rf1.0 99 exit=0

@@ -1,0 +1,21 @@
+{
+  "method": "contrastiveVI",
+  "study_or_pair": "cisplatin",
+  "seed": 1,
+  "n_train": 3000,
+  "n_test": 883,
+  "modeled_gene_log_mse": 0.7107967138290405,
+  "canonical_log_mse": 0.12376733869314194,
+  "background_condition_balanced_accuracy": 0.6895652173913043,
+  "salient_condition_balanced_accuracy": 0.6955020703933747,
+  "fit_seconds": 105.32418632507324,
+  "threads": 3,
+  "salient_target_test_active_units_var_gt_0p01": 8,
+  "salient_target_test_dims_kl_gt_0p01": 8,
+  "salient_target_test_total_kl_nats": 8.072511575969285,
+  "salient_target_test_posterior_mean_var_sum": 4.986250877380371,
+  "salient_background_test_active_units_var_gt_0p01": 8,
+  "salient_background_test_dims_kl_gt_0p01": 8,
+  "salient_background_test_total_kl_nats": 6.586758902045294,
+  "salient_background_test_posterior_mean_var_sum": 3.559251546859741
+}
