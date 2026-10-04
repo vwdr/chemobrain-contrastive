@@ -45,3 +45,20 @@ Instructions: `D:/chemobrain-contrastive-main/CLAUDE_CODE_PROMPT.md`.
 - S4: test MSE 0.168857 / 0.168697 / 0.168616 → pass.
 - Fresh F_sh pooled 0.9237/0.9679/0.9705; consensus sizes shared 40, dox 27, cis 31; Jaccard vs frozen 0.644/0.205/0.362.
 - Deviation: openpyxl 3.1.5 installed into .venv (needed to read supplementary .xlsx for C1; not in requirements).
+
+## Task C2 fits (started early, before C1 overlap) — fits done (22:45–22:50)
+- Deviation from the order in section 6: the three C2 fits were run in the background while C1 sources were
+  being retrieved (CPU otherwise idle). C2 analysis is run after C1/C5.
+- `scripts/25_shuffled_label_attribution.py --fit --seed {0,1,2} --threads=3`; outputs `runs/peerreview_20261003/shuffled_labels/`.
+- test MSE 0.168045/0.168701/0.168329; F_sh 0.1245/0.8674/0.9786.
+
+## Task C1 — marker list built and committed before overlap (22:45–23:25)
+- Sources retrieved into `runs/peerreview_20261003/c1_sources/` (see `C1_marker_sources.json` for URLs/SHA-256):
+  PanglaoDB 27 Mar 2020 (11 types, mouse entries); Ochocka 2021 Suppl. Data 1 (BAM, female∩male control);
+  Zeisel 2018 Table S4 (PVM1/2 → BAM; VLMC1/VLMC2/ABC → meningeal/perivascular fibroblasts; CHOR → CP epithelium);
+  Dani 2021 Table S1 Epithelial (CP epithelium); Bakken 2018 S2 Table (159 nucleus-enriched genes).
+- Inspected but not usable (no marker table): Van Hove 2019 Suppl. Tables 2-3; Pietilä 2023 mmc2-4; DeSisto 2020
+  mmc2-6 (sub-cluster contrasts only); Vanlandewijck 2018 Suppl. Table 3/Fig.1 source data. PMC download of Dani
+  Table S1 hit a proof-of-work bot challenge (not bypassed); the publisher CDN copy was used instead.
+- Extra packages installed in .venv for reading supplementary files: openpyxl 3.1.5, xlrd 2.0.2.
+- `scripts/26_c1_marker_list.py` → `C1_marker_list.csv` (1,421 rows; 15 cell-type sets), `C1_marker_sources.json`.
