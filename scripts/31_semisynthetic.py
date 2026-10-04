@@ -188,6 +188,9 @@ def true_shared_fraction(cfg, base):
     eS, eA, eB = e_block('S'), e_block('A'), e_block('B')
     num = (eS ** 2).sum(); den = num + (eA ** 2).sum() + (eB ** 2).sum()
     tS = np.var(eS, axis=0).sum(); tD = np.var(np.hstack([eA, eB]), axis=0).sum()
+    # a constant e block (all pseudo-treated cells responders) has zero variance; floating-point summation can
+    # leave ~1e-34, which is set to exactly zero so that the trace fraction is 0 or undefined (0/0) as intended
+    tS = 0.0 if tS < 1e-12 else tS; tD = 0.0 if tD < 1e-12 else tD
     return dict(true_shared_energy_fraction=float(num / den) if den > 0 else np.nan,
                 true_shared_trace_fraction=float(tS / (tS + tD)) if (tS + tD) > 0 else np.nan)
 

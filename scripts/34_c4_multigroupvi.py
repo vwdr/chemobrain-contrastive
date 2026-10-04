@@ -105,7 +105,10 @@ def fit(seed):
     gcodes = atr.obs['group'].cat.codes.to_numpy()
     group_indices = [np.where(gcodes == g)[0] for g in range(3)]
     model = MultiGroupVIModel(atr, n_groups=3)
-    model.train(group_indices, use_gpu=False)
+    # package default rule min(round(20000 / n_cells * 400), 400), passed as a Python int because the package
+    # computes it with np.min (numpy integer), which pytorch-lightning 1.7.7 rejects (assert isinstance(int)).
+    max_epochs = int(min(round((20000 / atr.n_obs) * 400), 400))
+    model.train(group_indices, max_epochs=max_epochs, use_gpu=False)
     epochs = int(model.trainer.current_epoch) + 1 if hasattr(model, 'trainer') else None
     # posteriors
     ptr = posterior(model, atr); pte = posterior(model, ate)

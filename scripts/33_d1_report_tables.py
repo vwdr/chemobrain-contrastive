@@ -71,7 +71,7 @@ def main():
     for (st, dr), g in gs.groupby(['set', 'direction']):
         L.append(f'| {st} | {dr} | ' + ', '.join(f'{a} ({b})' for a, b in zip(g.gene, g.decile)) + ' |')
     out = R / 'runs' / 'peerreview_20261003' / 'scratch' / 'd1_tables.md'
-    out.write_text('\n'.join(L) + '\n')
+    out.write_text('\n'.join(L) + '\n', encoding='utf-8')
     print(out)
 
 
