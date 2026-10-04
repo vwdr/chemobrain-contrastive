@@ -1,0 +1,5 @@
+responder_fraction,study,n_pseudo_treated,n_responders,n_responders_test,n_pseudo_treated_test
+1.0,GSE216146,2415,2415,242,242
+1.0,GSE271055,4727,4727,473,473
+0.3,GSE216146,2415,724,74,242
+0.3,GSE271055,4727,1418,141,473

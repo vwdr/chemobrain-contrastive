@@ -81,3 +81,12 @@ Note: times above are wall-clock (EDT) taken from file modification times; earli
 - Shuffled consensus sizes shared 27 / dox 30 / cis 20; Jaccard vs fresh real 0.015 / 0.188 / 0.133.
 - Paper shared top M8 term ZHANG_UTERUS_C5_MACROPHAGE: shuffled shared overlap 0, q = 1 (not significant).
 - Deviation: shuffle applied within study in train, validation and test cells (see C2 note).
+
+## Task C3 — fits running (22:23)
+- `scripts/29_baselines_extended.py` (imports scripts/20 unmodified; outputs runs/peerreview_20261003/baselines/), 9 jobs via xargs -P 3, 3 threads each. scVI seeds 0-2 done.
+
+## Phase 4 — preparation (22:23)
+- Unit test `tests/test_peerreview_thinning.py` passes (run with `.venv/Scripts/python tests/test_peerreview_thinning.py`; pytest is not installed in the pinned environment).
+- `scripts/31_semisynthetic.py --prepare`: 14,285 base cells (PN 4,830; CNT 9,455); split 6,000/1,428/1,429;
+  gene sets saved to `D1_gene_sets.csv` and committed before any fitting. Manual vs scanpy normalization max diff 9.5e-7.
+- Calibration (`scripts/30_calibration_pseudobulk.py`, script 16 logic redirected) running in background.
