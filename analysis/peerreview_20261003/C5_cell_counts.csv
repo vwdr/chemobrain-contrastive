@@ -1,0 +1,49 @@
+arm,split,cell_type,n_cells
+control_PBS,train,Microglia,455
+control_PBS,train,Oligodendrocyte,421
+control_PBS,train,Astrocyte,172
+control_PBS,train,Endothelial,130
+control_PBS,train,OPC,87
+control_PBS,train,Choroid Plexus,77
+control_PBS,train,Immune,44
+control_PBS,train,Neuron,44
+control_PBS,train,Pericyte,32
+control_PBS,train,Progenitor,26
+control_PBS,train,Ependymal,10
+control_PBS,train,Fibroblast,2
+control_PBS,test,Microglia,140
+control_PBS,test,Oligodendrocyte,131
+control_PBS,test,Astrocyte,66
+control_PBS,test,OPC,33
+control_PBS,test,Endothelial,30
+control_PBS,test,Neuron,25
+control_PBS,test,Choroid Plexus,21
+control_PBS,test,Immune,15
+control_PBS,test,Pericyte,10
+control_PBS,test,Ependymal,7
+control_PBS,test,Progenitor,4
+control_PBS,test,Fibroblast,1
+cisplatin,train,Choroid Plexus,426
+cisplatin,train,Microglia,357
+cisplatin,train,Oligodendrocyte,316
+cisplatin,train,Endothelial,125
+cisplatin,train,Astrocyte,123
+cisplatin,train,OPC,48
+cisplatin,train,Immune,39
+cisplatin,train,Pericyte,37
+cisplatin,train,Ependymal,12
+cisplatin,train,Neuron,9
+cisplatin,train,Progenitor,4
+cisplatin,train,Fibroblast,4
+cisplatin,test,Choroid Plexus,120
+cisplatin,test,Microglia,94
+cisplatin,test,Oligodendrocyte,82
+cisplatin,test,Endothelial,42
+cisplatin,test,Astrocyte,20
+cisplatin,test,OPC,12
+cisplatin,test,Immune,12
+cisplatin,test,Pericyte,10
+cisplatin,test,Ependymal,4
+cisplatin,test,Fibroblast,2
+cisplatin,test,Progenitor,1
+cisplatin,test,Neuron,1

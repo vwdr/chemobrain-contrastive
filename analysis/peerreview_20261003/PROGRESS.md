@@ -31,7 +31,7 @@ Instructions: `D:/chemobrain-contrastive-main/CLAUDE_CODE_PROMPT.md`.
 - `cohort_qc.csv`, `source_annotation_counts.csv`, `label_audit.csv` rewritten; `git status` reported no
   modification (identical to committed versions). `git checkout --` not needed (no-op).
 
-## Phase 1 — ved_archive content check — done (22:00–22:10)
+## Phase 1 — ved_archive content check — done (21:56–21:58)
 - `.venv/Scripts/python scripts/23_prepare_and_ved_check.py` (log `logs/23_ved_check.log`).
 - Regenerated canonical inputs in `runs/peerreview_20261003/canonical_inputs/` (6,000/2,881/2,881).
 - inputs.npz and cells.csv: content-identical (X max abs diff 9.54e-7). full_0.pt: differs (best_epoch 97 vs 99;
@@ -39,20 +39,20 @@ Instructions: `D:/chemobrain-contrastive-main/CLAUDE_CODE_PROMPT.md`.
 - HVG reselection on this machine: 1,499/1,500 overlap (Cebpd in, Aspm out); committed universe used.
 - Output: `A0_ved_archive_check.md` + 5 CSVs.
 
-## Phase 2 — Fresh canonical fits — done (22:20–22:40)
+## Phase 2 — Fresh canonical fits — done (22:00–22:04)
 - `scripts/24_canonical_fits.py --fit --seed {0,1,2} --threads=2` (3 concurrent; 178–179 s/fit, IG 4–6 s), then `--analyze`.
 - Outputs: `runs/peerreview_20261003/canonical/`; `A1_*.csv`, `A1_fresh_canonical_fits.md`.
 - S4: test MSE 0.168857 / 0.168697 / 0.168616 → pass.
 - Fresh F_sh pooled 0.9237/0.9679/0.9705; consensus sizes shared 40, dox 27, cis 31; Jaccard vs frozen 0.644/0.205/0.362.
 - Deviation: openpyxl 3.1.5 installed into .venv (needed to read supplementary .xlsx for C1; not in requirements).
 
-## Task C2 fits (started early, before C1 overlap) — fits done (22:45–22:50)
+## Task C2 fits (started early, before C1 overlap) — fits done (22:06–22:09)
 - Deviation from the order in section 6: the three C2 fits were run in the background while C1 sources were
   being retrieved (CPU otherwise idle). C2 analysis is run after C1/C5.
 - `scripts/25_shuffled_label_attribution.py --fit --seed {0,1,2} --threads=3`; outputs `runs/peerreview_20261003/shuffled_labels/`.
 - test MSE 0.168045/0.168701/0.168329; F_sh 0.1245/0.8674/0.9786.
 
-## Task C1 — marker list built and committed before overlap (22:45–23:25)
+## Task C1 — marker list built and committed before overlap (22:05–22:13)
 - Sources retrieved into `runs/peerreview_20261003/c1_sources/` (see `C1_marker_sources.json` for URLs/SHA-256):
   PanglaoDB 27 Mar 2020 (11 types, mouse entries); Ochocka 2021 Suppl. Data 1 (BAM, female∩male control);
   Zeisel 2018 Table S4 (PVM1/2 → BAM; VLMC1/VLMC2/ABC → meningeal/perivascular fibroblasts; CHOR → CP epithelium);
@@ -62,3 +62,22 @@ Instructions: `D:/chemobrain-contrastive-main/CLAUDE_CODE_PROMPT.md`.
   Table S1 hit a proof-of-work bot challenge (not bypassed); the publisher CDN copy was used instead.
 - Extra packages installed in .venv for reading supplementary files: openpyxl 3.1.5, xlrd 2.0.2.
 - `scripts/26_c1_marker_list.py` → `C1_marker_list.csv` (1,421 rows; 15 cell-type sets), `C1_marker_sources.json`.
+
+Note: times above are wall-clock (EDT) taken from file modification times; earlier draft times were corrected.
+
+### C1 overlap — done (22:14)
+- `scripts/27_c1_marker_comparison.py` → `C1_marker_overlap.csv`, `C1_consensus_gene_annotation.csv`,
+  `C1_marker_set_sizes.csv`, `C1_marker_comparison.md`.
+- Frozen shared list: BAM overlap 9/20 (q = 1.1e-9), Macrophages 7/45 (q = 3.0e-4), Microglia 4/24 (q = 8.5e-3);
+  frozen dox: nucleus-enriched 6/32 (q = 2.7e-5), Neurons 4/47 (q = 0.021); frozen cis: BAM 4/20 (q = 0.011),
+  Fibroblasts 5/52 (q = 0.035).
+
+## Task C5 — done (22:15)
+- `scripts/28_c5_control_identity.py` → `C5_*.csv`, `C5_control_cell_identity.md`.
+- Ungated shared → source cell type balanced accuracy: control 0.819/0.780/0.717; cisplatin 0.760/0.718/0.700.
+
+## Task C2 analysis — done (22:15)
+- `scripts/25_shuffled_label_attribution.py --analyze` → `C2_*.csv`, `C2_shuffled_label_attribution.md`.
+- Shuffled consensus sizes shared 27 / dox 30 / cis 20; Jaccard vs fresh real 0.015 / 0.188 / 0.133.
+- Paper shared top M8 term ZHANG_UTERUS_C5_MACROPHAGE: shuffled shared overlap 0, q = 1 (not significant).
+- Deviation: shuffle applied within study in train, validation and test cells (see C2 note).

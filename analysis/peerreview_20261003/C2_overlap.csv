@@ -1,0 +1,13 @@
+comparison,axis,list_a,list_b,n_a,n_b,n_overlap,jaccard,hypergeom_p,overlap_genes
+primary_vs_fresh_real,shared,shuffled,fresh_real,27,40,1,0.015151515151515152,0.5210996291572332,Ttr
+secondary_vs_frozen_paper,shared,shuffled,frozen,27,34,1,0.016666666666666666,0.4644897112781486,Ttr
+primary_vs_fresh_real,doxorubicin,shuffled,fresh_real,30,27,9,0.1875,5.148503828058002e-10,Apoe|Camk2a|Grm5|Meg3|Nrxn1|Peg3|Snhg11|Ttr|Zeb2
+secondary_vs_frozen_paper,doxorubicin,shuffled,frozen,30,20,9,0.21951219512195122,2.018611499814869e-11,C1ql3|Dclk1|Gria2|Meg3|Miat|Peg3|Snhg11|Ttr|Zeb2
+primary_vs_fresh_real,cisplatin,shuffled,fresh_real,20,31,6,0.13333333333333333,1.487859858720747e-06,Apoe|Bsg|Mt3|Qk|Zbtb20|mt-Co2
+secondary_vs_frozen_paper,cisplatin,shuffled,frozen,20,33,3,0.06,0.008573914192766817,Apoe|Bsg|Tmsb10
+cross_block_vs_fresh_real,shared|doxorubicin,shuffled_shared,fresh_doxorubicin,27,27,2,0.038461538461538464,0.08311406421957403,Camk2a|Ttr
+cross_block_vs_fresh_real,shared|cisplatin,shuffled_shared,fresh_cisplatin,27,31,2,0.03571428571428571,0.10541303220939593,Igfbp6|Ttr
+cross_block_vs_fresh_real,doxorubicin|shared,shuffled_doxorubicin,fresh_shared,30,40,2,0.029411764705882353,0.18935258860233128,Apoe|Ttr
+cross_block_vs_fresh_real,doxorubicin|cisplatin,shuffled_doxorubicin,fresh_cisplatin,30,31,2,0.03389830508474576,0.12580481746600045,Apoe|Ttr
+cross_block_vs_fresh_real,cisplatin|shared,shuffled_cisplatin,fresh_shared,20,40,5,0.09090909090909091,0.00012077018961611675,Apoe|Ly6e|Sat1|mt-Co2|mt-Co3
+cross_block_vs_fresh_real,cisplatin|doxorubicin,shuffled_cisplatin,fresh_doxorubicin,20,27,4,0.09302325581395349,0.00033200396906151955,Apoe|Bc1|Meg3|Snhg11

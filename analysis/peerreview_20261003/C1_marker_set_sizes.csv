@@ -1,0 +1,20 @@
+cell_type,source,n_genes_listed,n_in_universe
+Astrocytes,all_sources,63.0,35
+Border-associated macrophages,all_sources,25.0,20
+Border-associated macrophages,Ochocka N et al.,,20
+Border-associated macrophages,Zeisel A et al.,,5
+Choroid plexus cells,all_sources,22.0,8
+Choroid plexus epithelium,all_sources,88.0,37
+Choroid plexus epithelium,Dani N et al.,,36
+Choroid plexus epithelium,Zeisel A et al.,,4
+Endothelial cells,all_sources,188.0,78
+Ependymal cells,all_sources,59.0,35
+Fibroblasts,all_sources,177.0,52
+Macrophages,all_sources,147.0,45
+Meningeal/perivascular fibroblasts,all_sources,15.0,6
+Microglia,all_sources,79.0,24
+Neurons,all_sources,211.0,47
+Nucleus-enriched transcripts,all_sources,159.0,32
+OPCs,all_sources,28.0,21
+Oligodendrocytes,all_sources,87.0,24
+Pericytes,all_sources,64.0,32
