@@ -116,4 +116,15 @@ Note: times above are wall-clock (EDT) taken from file modification times; earli
   6–7. pytorch-lightning 1.7.7 (scvi 0.18 requires >=1.6,<1.8 and imports `pytorch_lightning.loggers.logger`, added in 1.7) not installable with pip 26.
   8. pip downgraded to 24.0 inside .venv-mgvi → pytorch-lightning 1.7.7 installed; `import scvi` (0.18.0) and `multigroup_vi` work.
 - No package source was modified. multigroup_vi installed `--no-deps`. Full freeze: `C4_mgvi_pip_freeze.txt`.
-- Time box: first install attempt 22:33; import + model init working 22:58 (≈25 min of effort). Clock paused while waiting for fit slots.
+- Time box: first install attempt 22:30:53; import working 22:47:13; model init (no training) 22:49:56 (≈19 min of effort). Clock paused while waiting for fit slots.
+
+## Phase 4 — grid done (22:30–23:45), 75/75 fits, 0 failures
+- `scripts/31_semisynthetic.py --score` (grid part) → `D1_fit_metrics.csv`, `D1_config_summary.csv`, `D1_ig_per_fit.csv`,
+  `D1_ig_per_config_mean.csv`, `D1_ig_consensus.csv`, `D1_cross_seed_cka.csv`.
+- Diagnostic `scripts/35_d1_signal_check.py` → `D1_signal_check_seed0.csv` (injected-set ranks by input mean
+  difference vs IG ranks; added after inspecting the grid results to rule out an injection/pipeline error).
+- Calibration (`scripts/30_calibration_pseudobulk.py`) done: median |log2FC| 0.742 (all genes, 292 rows) / 0.981
+  (1,500-gene universe, 80 rows). Regenerated Task 4 PyDESeq2 counts differ from committed for Microglia
+  cisplatin_vs_control (101 vs 109) and Oligodendrocyte cisplatin_vs_control (141 vs 137); 69 supported universe genes
+  vs 68 asserted in scripts/19.
+- Permutation fits (200) running.

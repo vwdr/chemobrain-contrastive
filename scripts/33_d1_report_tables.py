@@ -20,7 +20,7 @@ def f(x, nd=3):
 
 
 def main():
-    s = pd.read_csv(O / 'D1_config_summary.csv')
+    s = pd.read_csv(O / 'D1_config_summary.csv', keep_default_na=False, na_values=[''])
     L = ['## Per-configuration summary (`D1_config_summary.csv`; means over seeds 0–2)\n',
          '| config | true shared (energy) | true shared (trace) | F_sh mean | F_sh SD | F_sh min–max | F_sh dox | F_sh cis | test MSE | AU sh/dox/cis | KL sh/dox/cis (nats) | CKA bg/sh/drug |',
          '|---|---|---|---|---|---|---|---|---|---|---|---|']
@@ -29,12 +29,12 @@ def main():
                  f'{f(x.F_sh_min)}–{f(x.F_sh_max)} | {f(x.F_sh_dox_mean)} | {f(x.F_sh_cis_mean)} | {x.test_mse_mean:.5f} | '
                  f'{x.shared_AU_mean:.2f}/{x.dox_AU_mean:.2f}/{x.cis_AU_mean:.2f} | {x.shared_KL_mean:.4f}/{x.dox_KL_mean:.4f}/{x.cis_KL_mean:.4f} | '
                  f'{x.mean_cross_seed_cka_bg:.3f}/{x.mean_cross_seed_cka_shared:.3f}/{x.mean_cross_seed_cka_drug:.3f} |')
-    fits = pd.read_csv(O / 'D1_fit_metrics.csv')
+    fits = pd.read_csv(O / 'D1_fit_metrics.csv', keep_default_na=False, na_values=[''])
     L += ['\n## Per-fit F_sh (`D1_fit_metrics.csv`)\n', '| config | seed 0 | seed 1 | seed 2 |', '|---|---|---|---|']
     for cfg, g in fits.groupby('config', sort=False):
         v = g.set_index('seed').shared_fraction
         L.append(f'| {cfg} | {v.get(0, np.nan):.4f} | {v.get(1, np.nan):.4f} | {v.get(2, np.nan):.4f} |')
-    ig = pd.read_csv(O / 'D1_ig_per_config_mean.csv')
+    ig = pd.read_csv(O / 'D1_ig_per_config_mean.csv', keep_default_na=False, na_values=[''])
     L += ['\n## Integrated-gradient recovery, per fit, mean over seeds (`D1_ig_per_fit.csv`, `D1_ig_per_config_mean.csv`)\n',
           'Precision = hits/50, recall = hits/40 for the top 50 genes of each block. Cross-routing counts: A∪B genes in the shared '
           'block top 50; S genes in the cisplatin / doxorubicin block top 50.\n',
@@ -43,7 +43,7 @@ def main():
     for x in ig.itertuples():
         L.append(f'| {x.config} | {x.baseline} | {x.shared_vs_S_precision:.3f}/{x.shared_vs_S_recall:.3f} | {x.cis_vs_A_precision:.3f}/{x.cis_vs_A_recall:.3f} | '
                  f'{x.dox_vs_B_precision:.3f}/{x.dox_vs_B_recall:.3f} | {x.shared_top_n_AB_genes:.2f} | {x.cis_top_n_S_genes:.2f} | {x.dox_top_n_S_genes:.2f} |')
-    c = pd.read_csv(O / 'D1_ig_consensus.csv')
+    c = pd.read_csv(O / 'D1_ig_consensus.csv', keep_default_na=False, na_values=[''])
     L += ['\n## Integrated-gradient recovery, 4-of-6 consensus per configuration (`D1_ig_consensus.csv`)\n',
           'Precision = hits / consensus-list size; recall = hits / 40.\n',
           '| config | n shared/cis/dox | shared→S hits (P/R) | cis→A hits (P/R) | dox→B hits (P/R) | A∪B in shared | S in cis | S in dox |',
@@ -54,7 +54,7 @@ def main():
                  f'{x.shared_top_n_AB_genes} | {x.cis_top_n_S_genes} | {x.dox_top_n_S_genes} |')
     p = O / 'D1_permutation_summary.csv'
     if p.exists() and p.stat().st_size > 5:
-        pr = pd.read_csv(p)
+        pr = pd.read_csv(p, keep_default_na=False, na_values=[''])
         L += ['\n## Label-exchange reference (`D1_permutation_summary.csv`, `D1_permutation_values_*.csv`)\n',
               '| config | observed F_sh (seed 0) | n perm | n perm ≥ observed | P | perm mean (SD) | perm 2.5% / 50% / 97.5% | perm min–max |',
               '|---|---|---|---|---|---|---|---|']
@@ -66,7 +66,7 @@ def main():
     if cal.exists():
         j = json.loads(cal.read_text())
         L += ['\n## Calibration (`D1_calibration.json`)\n', '```', json.dumps({k: v for k, v in j.items()}, indent=1), '```']
-    gs = pd.read_csv(O / 'D1_gene_sets.csv')
+    gs = pd.read_csv(O / 'D1_gene_sets.csv', keep_default_na=False, na_values=[''])
     L += ['\n## Injected gene sets (`D1_gene_sets.csv`)\n', '| set | direction | genes (decile) |', '|---|---|---|']
     for (st, dr), g in gs.groupby(['set', 'direction']):
         L.append(f'| {st} | {dr} | ' + ', '.join(f'{a} ({b})' for a, b in zip(g.gene, g.decile)) + ' |')
