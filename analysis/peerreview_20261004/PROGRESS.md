@@ -28,3 +28,8 @@ Instructions: `D:/chemobrain-contrastive-main/CLAUDE_CODE_PROMPT_RUN_A.md`. Star
 ## R4 — done (queue 13:36:15–16:10; 63/63 fits exit 0, first attempt)
 - multiGroupVI 21 fits (1,068–1,136 s), contrastiveVI 42 fits (87–93 s), MC-ContrastiveVI attribution on existing grid checkpoints.
 - scripts/44 --collect → R4_*.csv; note R4_baseline_positive_control.md. Fix in collect: configuration name "null" read as NaN by pandas; reads use keep_default_na=False.
+
+## R5 — done (16:14)
+- scripts/46_r5_archive.py → runs/peerreview_20261004/archive/ (7 zips, 1.2 GB; largest semisynthetic.zip 540 MB), MANIFEST.csv (1,931 rows), ARCHIVE_ZIPS.csv,
+  EXCLUDED_INPUT_HASHES.csv, pip freezes (.venv, .venv-mgvi; .venv-baselines does not exist), REPRODUCE.md. Archive folder in .git/info/exclude; copies committed in this folder.
+- Not archived: raw GEO data, recovered_counts.h5ad, MSigDB files (hashes recorded), smoke-test outputs, staging copies of inputs, raw supplementary marker-source files (SHA-256 in C1_marker_sources.json).
