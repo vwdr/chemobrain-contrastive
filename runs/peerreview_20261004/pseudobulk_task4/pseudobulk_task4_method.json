@@ -1,0 +1,19 @@
+{
+  "package": "PyDESeq2",
+  "package_version": "0.5.4",
+  "cisplatin_design": "~ replicate + condition",
+  "cisplatin_replicates": 3,
+  "contrasts": [
+    "cisplatin_vs_control",
+    "control_GENUS_vs_control",
+    "cisplatin_GENUS_vs_cisplatin"
+  ],
+  "minimum_cells_per_library_cell_type": 20,
+  "gene_filter": "raw count >= 10 in at least 3 of 6 libraries",
+  "deseq2_cooks_filter": false,
+  "deseq2_independent_filter": true,
+  "paired_exact_sensitivity": "all 2^3 within-replicate sign flips of paired log2(CPM+1) differences",
+  "paired_exact_two_sided_p_floor": 0.25,
+  "welch_analysis": "reported only as a sensitivity column for continuity with the historical analysis; it is not the primary model",
+  "doxorubicin_inference": "descriptive only because one pooled deposited library is available per arm"
+}

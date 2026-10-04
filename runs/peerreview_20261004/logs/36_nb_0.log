@@ -1,0 +1,7 @@
+NB 0 0 0.45194870811272564
+NB 0 20 0.22212952173307554
+NB 0 40 0.21514395419708643
+NB 0 60 0.21158043772993362
+NB 0 80 0.21080049367977777
+{'mode': 'negative_binomial', 'seed': 0, 'best_epoch': 96, 'epochs_run': 100, 'test_mse': 0.2108332914594756, 'test_plugin_count_nll': 387.8311553367183, 'shared_fraction': 0.8806887865066528}
+finished negative_binomial_0 293.9992666244507

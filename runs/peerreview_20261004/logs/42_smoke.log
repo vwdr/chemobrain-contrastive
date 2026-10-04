@@ -1,0 +1,20 @@
+Global seed set to 0
+D:\chemobrain-contrastive-main\chemobrain-contrastive\.venv-mgvi\Lib\site-packages\pytorch_lightning\utilities\warnings.py:53: LightningDeprecationWarning: pytorch_lightning.utilities.warnings.rank_zero_deprecation has been deprecated in v1.6 and will be removed in v1.8. Use the equivalent function from the pytorch_lightning.utilities.rank_zero module instead.
+  new_rank_zero_deprecation(
+D:\chemobrain-contrastive-main\chemobrain-contrastive\.venv-mgvi\Lib\site-packages\pytorch_lightning\utilities\warnings.py:58: LightningDeprecationWarning: The `pytorch_lightning.loggers.base.rank_zero_experiment` is deprecated in v1.7 and will be removed in v1.9. Please use `pytorch_lightning.loggers.logger.rank_zero_experiment` instead.
+  return new_rank_zero_deprecation(*args, **kwargs)
+Global seed set to 0
+INFO     multigroup_vi: The model has been initialized                         
+GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+Training:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 1/2:   0%|          | 0/2 [00:00<?, ?it/s]D:\chemobrain-contrastive-main\chemobrain-contrastive\.venv-mgvi\Lib\site-packages\pytorch_lightning\utilities\data.py:98: UserWarning: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 128. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
+  warning_cache.warn(
+D:\chemobrain-contrastive-main\chemobrain-contrastive\.venv-mgvi\Lib\site-packages\pytorch_lightning\utilities\data.py:98: UserWarning: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 12. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
+  warning_cache.warn(
+Epoch 1/2:  50%|#####     | 1/2 [00:01<00:01,  1.61s/it]Epoch 1/2:  50%|#####     | 1/2 [00:01<00:01,  1.61s/it, loss=2.62e+03, v_num=1]Epoch 2/2:  50%|#####     | 1/2 [00:01<00:01,  1.61s/it, loss=2.62e+03, v_num=1]Epoch 2/2: 100%|##########| 2/2 [00:03<00:00,  1.61s/it, loss=2.62e+03, v_num=1]Epoch 2/2: 100%|##########| 2/2 [00:03<00:00,  1.61s/it, loss=1.48e+03, v_num=1]`Trainer.fit` stopped: `max_epochs=2` reached.
+Epoch 2/2: 100%|##########| 2/2 [00:03<00:00,  1.61s/it, loss=1.48e+03, v_num=1]
+INFO     Input AnnData not setup with scvi-tools. attempting to transfer       
+         AnnData setup                                                         
+{'model': 'multiGroupVI', 'config': 'shared_d1_rf1.0', 'seed': 0, 'epochs': 2, 'fit_seconds': 3.533628225326538, 'canonical_log_mse': 0.3515925069402946, 'cisplatin_private_active_units': 10, 'cisplatin_private_total_kl_nats': 81.02638865328413, 'cisplatin_private_dims_kl_gt_0p01': 10, 'probe_within_cisplatin_study_private_ungated': 0.5507698638592641, 'probe_within_cisplatin_study_all_private_ungated': 0.6480659099482184, 'doxorubicin_private_active_units': 10, 'doxorubicin_private_total_kl_nats': 10.13457808774973, 'doxorubicin_private_dims_kl_gt_0p01': 10, 'probe_within_doxorubicin_study_private_ungated': 0.5623678646934461, 'probe_within_doxorubicin_study_all_private_ungated': 0.5771670190274842, 'seconds_total': 5.721406698226929}

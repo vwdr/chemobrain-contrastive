@@ -33,3 +33,8 @@ Instructions: `D:/chemobrain-contrastive-main/CLAUDE_CODE_PROMPT_RUN_A.md`. Star
 - scripts/46_r5_archive.py → runs/peerreview_20261004/archive/ (7 zips, 1.2 GB; largest semisynthetic.zip 540 MB), MANIFEST.csv (1,931 rows), ARCHIVE_ZIPS.csv,
   EXCLUDED_INPUT_HASHES.csv, pip freezes (.venv, .venv-mgvi; .venv-baselines does not exist), REPRODUCE.md. Archive folder in .git/info/exclude; copies committed in this folder.
 - Not archived: raw GEO data, recovered_counts.h5ad, MSigDB files (hashes recorded), smoke-test outputs, staging copies of inputs, raw supplementary marker-source files (SHA-256 in C1_marker_sources.json).
+
+## R6 — done (16:15)
+- INDEX.md (scripts/47_r6_index.py; every file of both analysis folders described), SUMMARY.md.
+- Final git status: no tracked change outside analysis/peerreview_20261004/, scripts/36_*–47_*, src/peerreview/ig_generic.py.
+- Small run outputs in runs/peerreview_20261004/ committed (metrics JSON, logs, IG summaries); files > 5 MB and archive/scratch excluded via .git/info/exclude.

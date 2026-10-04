@@ -145,6 +145,8 @@ DESC = {
     'REPRODUCE.md': ('ordered reproduction commands for both runs', MAN),
     'INDEX.md': ('this index', S47),
     'environment_notes.md': ('environment notes for Run A', MAN),
+    'pip_freeze_venv.txt': ('pip freeze of .venv (copy of the archive file)', S46),
+    'pip_freeze_venv-mgvi.txt': ('pip freeze of .venv-mgvi (copy of the archive file)', S46),
 }
 
 
