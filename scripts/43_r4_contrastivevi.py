@@ -36,8 +36,17 @@ from src.peerreview.ig_generic import integrated_gradients, recovery  # noqa: E4
 torch.set_num_threads(N_THREADS)
 R = Path(__file__).resolve().parents[1]
 RUN = R / 'runs' / 'peerreview_20261004' / 'r4' / 'contrastivevi'
-GS = pd.read_csv(R / 'analysis' / 'peerreview_20261003' / 'D1_gene_sets.csv')
-SETS = {s: set(GS[GS.set == s].gene) for s in ('S', 'A', 'B')}
+INPUTS = R / 'runs' / 'peerreview_20261004' / 'r4'    # directory holding inputs_<config>.npz (experiments/ overrides it)
+GS_PATH = R / 'analysis' / 'peerreview_20261003' / 'D1_gene_sets.csv'
+SETS = {}
+
+
+def set_gene_sets(gs):
+    SETS.clear(); SETS.update({s: set(gs[gs.set == s].gene) for s in ('S', 'A', 'B')})
+
+
+if GS_PATH.exists():
+    set_gene_sets(pd.read_csv(GS_PATH))
 STUDY = {'GSE216146': (0, 'idx_drug1', 'cisplatin', ('S', 'A')), 'GSE271055': (1, 'idx_drug0', 'doxorubicin', ('S', 'B'))}
 
 
@@ -57,7 +66,7 @@ def fit(cfg, study, seed, smoke=False):
     name = f'{cfg}_{study}_s{seed}'; done = run / f'{name}_done.json'
     if done.exists():
         print('done marker exists', name); return
-    z = np.load(R / 'runs' / 'peerreview_20261004' / 'r4' / f'inputs_{cfg}.npz')
+    z = np.load(INPUTS / f'inputs_{cfg}.npz')
     C, L, X, d, b, tr, te, genes, treated = z['C'], z['L'], z['X'], z['d'], z['b'], z['train'], z['test'], z['genes'], z['treated']
     sb, idx_key, label, set_names = STUDY[study]
     trs = tr[b[tr] == sb]; tes = te[b[te] == sb]

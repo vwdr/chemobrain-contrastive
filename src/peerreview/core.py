@@ -116,8 +116,10 @@ def means(m, x, d):
     return bg, sh, dr, e
 
 
-def make_model(n_genes: int):
-    cfg = mm.MCContrastiveVIConfig(n_genes=n_genes, n_drugs=3, n_batches=2, hidden_dim=128, dropout=.1)
+def make_model(n_genes: int, model_kwargs: dict | None = None):
+    """Canonical model; ``model_kwargs`` (e.g. free_bits) overrides config fields, default = canonical."""
+    cfg = mm.MCContrastiveVIConfig(n_genes=n_genes, n_drugs=3, n_batches=2, hidden_dim=128, dropout=.1,
+                                   **(model_kwargs or {}))
     return cfg, mm.MCContrastiveVI(cfg)
 
 
@@ -130,7 +132,7 @@ def load_model(path):
 
 
 def train_full(X: np.ndarray, d: np.ndarray, b: np.ndarray, tr, va, te, seed: int, prefix,
-               epochs: int = 100, log=print, save_checkpoint: bool = True):
+               epochs: int = 100, log=print, save_checkpoint: bool = True, model_kwargs: dict | None = None, patience: int = 15):
     """Copy of ``06_validation.train`` for mode ``full`` with parameterized inputs/outputs.
 
     Returns (model, history DataFrame, best_epoch, seconds).
@@ -142,7 +144,7 @@ def train_full(X: np.ndarray, d: np.ndarray, b: np.ndarray, tr, va, te, seed: in
     b = torch.from_numpy(np.asarray(b, dtype=np.int64))
     torch.manual_seed(seed)
     rng = np.random.default_rng(seed)
-    cfg, m = make_model(X.shape[1])
+    cfg, m = make_model(X.shape[1], model_kwargs)
     opt = torch.optim.AdamW(m.parameters(), lr=.001, weight_decay=1e-5)
     best = float('inf'); bad = 0; history = []; start = time.time(); state = None; be = -1
     for epoch in range(epochs):
@@ -150,7 +152,7 @@ def train_full(X: np.ndarray, d: np.ndarray, b: np.ndarray, tr, va, te, seed: in
         for ix in np.array_split(rng.permutation(tr), int(np.ceil(len(tr) / 256))):
             x, dd, bb = X[ix], d[ix], b[ix]
             e = m(x, dd, bb)
-            loss = mm.mc_contrastive_loss(m, e, x, dd, 1., 10, 10, 5)['loss']
+            loss = mm.mc_contrastive_loss(m, e, x, dd, mm.kl_weight_at_epoch(cfg, epoch), 10, 10, 5)['loss']
             opt.zero_grad(); loss.backward()
             torch.nn.utils.clip_grad_norm_(m.parameters(), 5); opt.step()
             vals.append(float(loss.detach()))
@@ -168,7 +170,7 @@ def train_full(X: np.ndarray, d: np.ndarray, b: np.ndarray, tr, va, te, seed: in
             bad += 1
         if epoch % 20 == 0:
             log(f'full seed={seed} epoch={epoch} val_mse={vm:.5f} seconds={time.time() - start:.0f}')
-        if bad >= 15:
+        if bad >= patience:
             break
     m.load_state_dict(state); m.eval()
     if save_checkpoint:

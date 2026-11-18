@@ -48,6 +48,15 @@ class MCContrastiveVIConfig:
     latent_dim_drug: int = 4      # per-drug; total salient = latent_dim_drug * (n_drugs-1)
     dropout: float = 0.1
     use_batch_onehot: bool = True
+    # KL utilization controls; the defaults reproduce the original objective exactly.
+    free_bits: float = 0.0        # per-dimension KL floor (nats) for the shared and drug blocks only
+    kl_warmup_epochs: int = 0     # linear 0 -> 1 ramp of kl_weight over this many epochs (0 = off)
+    treatment_kl_beta: float = 1.0  # multiplier on the shared + drug KL only
+
+    def __post_init__(self):
+        assert self.free_bits >= 0.0, "free_bits must be >= 0"
+        assert self.kl_warmup_epochs >= 0, "kl_warmup_epochs must be >= 0"
+        assert self.treatment_kl_beta >= 0.0, "treatment_kl_beta must be >= 0"
 
 
 # -----------------------------------------------------------------------------
@@ -225,9 +234,36 @@ def gaussian_nll(x: torch.Tensor, x_hat: torch.Tensor, log_sigma: torch.Tensor) 
     return nll.sum(dim=1)
 
 
+def kl_per_dim(mu: torch.Tensor, logvar: torch.Tensor) -> torch.Tensor:
+    """KL(N(mu, sigma) || N(0, 1)) per cell and latent dimension, not summed: shape (B, D)."""
+    return 0.5 * (mu.pow(2) + logvar.exp() - 1 - logvar)
+
+
 def kl_standard_normal(mu: torch.Tensor, logvar: torch.Tensor) -> torch.Tensor:
     """KL(N(mu, sigma) || N(0, 1)), summed across latent dims."""
-    return 0.5 * (mu.pow(2) + logvar.exp() - 1 - logvar).sum(dim=1)
+    return kl_per_dim(mu, logvar).sum(dim=1)
+
+
+def kl_block(mu: torch.Tensor, logvar: torch.Tensor, free_bits: float = 0.0):
+    """Mean-over-cells KL of one latent block as (true KL, KL seen by the objective).
+
+    With free_bits > 0 the per-dimension KL (averaged over the cells passed in) is floored at
+    free_bits with an elementwise maximum before summing over dimensions, so a dimension whose
+    KL is below the floor receives no KL gradient. With free_bits == 0 both values are the
+    original ``kl_standard_normal(...).mean()``.
+    """
+    kl_d = kl_per_dim(mu, logvar)
+    true_kl = kl_d.sum(dim=1).mean()
+    if free_bits > 0.0:
+        return true_kl, kl_d.mean(dim=0).clamp(min=free_bits).sum()
+    return true_kl, true_kl
+
+
+def kl_weight_at_epoch(cfg: MCContrastiveVIConfig, epoch: int, base_weight: float = 1.0) -> float:
+    """kl_weight for a 0-indexed epoch: base_weight * min(1, epoch / kl_warmup_epochs); no ramp if 0."""
+    if cfg.kl_warmup_epochs <= 0:
+        return base_weight
+    return base_weight * min(1.0, epoch / cfg.kl_warmup_epochs)
 
 
 def _rbf_kernel(x: torch.Tensor, sigma: float | None = None) -> torch.Tensor:
@@ -276,33 +312,44 @@ def mc_contrastive_loss(
     # KL for bg (always)
     kl_bg = kl_standard_normal(enc["mu_bg"], enc["lv_bg"]).mean()
 
+    free_bits = model.cfg.free_bits
+    beta = model.cfg.treatment_kl_beta
+
     # KL for shared only on treated cells (matches contrastiveVI rule)
     treated_mask = drug_idx > 0
     if treated_mask.any():
-        kl_sh = kl_standard_normal(
-            enc["mu_shared"][treated_mask], enc["lv_shared"][treated_mask]
-        ).mean()
+        kl_sh, kl_sh_pen = kl_block(
+            enc["mu_shared"][treated_mask], enc["lv_shared"][treated_mask], free_bits
+        )
     else:
-        kl_sh = torch.tensor(0.0, device=x.device)
+        kl_sh = kl_sh_pen = torch.tensor(0.0, device=x.device)
 
     # KL for each drug head, only on that drug's cells
     kl_drug_total = torch.tensor(0.0, device=x.device)
+    kl_drug_pen = torch.tensor(0.0, device=x.device)
     K = len(enc["mu_drug_list"])
     for k in range(K):
         mask = drug_idx == (k + 1)
         if mask.any():
-            kl_drug_total = kl_drug_total + kl_standard_normal(
-                enc["mu_drug_list"][k][mask], enc["lv_drug_list"][k][mask]
-            ).mean()
+            kl_k, kl_k_pen = kl_block(
+                enc["mu_drug_list"][k][mask], enc["lv_drug_list"][k][mask], free_bits
+            )
+            kl_drug_total = kl_drug_total + kl_k
+            kl_drug_pen = kl_drug_pen + kl_k_pen
 
     # HSIC disentanglement (computed on mini-batch)
     hsic_bg_shared = hsic(enc["z_bg"], enc["z_shared"])
     hsic_bg_drug = hsic(enc["z_bg"], enc["z_drug_cat"])
     hsic_shared_drug = hsic(enc["z_shared"], enc["z_drug_cat"])
 
+    if beta == 1.0:  # keep the original summation order so defaults are bit-identical
+        kl_total = kl_bg + kl_sh_pen + kl_drug_pen
+    else:
+        kl_total = kl_bg + beta * (kl_sh_pen + kl_drug_pen)
+
     loss = (
         recon_nll
-        + kl_weight * (kl_bg + kl_sh + kl_drug_total)
+        + kl_weight * kl_total
         + hsic_weight_bg_shared * hsic_bg_shared
         + hsic_weight_bg_drug * hsic_bg_drug
         + hsic_weight_shared_drug * hsic_shared_drug
@@ -314,6 +361,9 @@ def mc_contrastive_loss(
         "kl_bg": kl_bg.detach(),
         "kl_shared": kl_sh.detach(),
         "kl_drug": kl_drug_total.detach(),
+        # what the objective sees after free bits (equal to the true KL when free_bits == 0)
+        "kl_shared_penalized": kl_sh_pen.detach(),
+        "kl_drug_penalized": kl_drug_pen.detach(),
         "hsic_bg_shared": hsic_bg_shared.detach(),
         "hsic_bg_drug": hsic_bg_drug.detach(),
         "hsic_shared_drug": hsic_shared_drug.detach(),

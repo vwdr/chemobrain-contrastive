@@ -13,7 +13,7 @@ from src.peerreview import core
 
 def run_fit(inputs: dict, seed: int, outdir, name: str, *, do_ig: bool = True, save_ig_arrays: bool = False,
             save_checkpoint: bool = True, save_latents: bool = True, epochs: int = 100, log=print,
-            extra: dict | None = None):
+            extra: dict | None = None, model_kwargs: dict | None = None, patience: int = 15):
     """Fit the canonical full model on ``inputs`` (keys X, d, b, train, val, test, genes).
 
     Writes ``{outdir}/{name}_*`` files and ``{outdir}/{name}_done.json`` last. If the marker
@@ -29,14 +29,16 @@ def run_fit(inputs: dict, seed: int, outdir, name: str, *, do_ig: bool = True, s
     genes = np.asarray(inputs['genes'])
     prefix = outdir / name
     m, hist, be, secs = core.train_full(X, d, b, tr, va, te, seed, prefix, epochs=epochs, log=log,
-                                        save_checkpoint=save_checkpoint)
+                                        save_checkpoint=save_checkpoint, model_kwargs=model_kwargs, patience=patience)
     lat = core.compute_latents(m, X, d, b)
     if save_latents:
         np.savez_compressed(str(prefix) + '_latents.npz', **lat)
     fsh = core.shared_fractions(lat, d, te)
     usage, dim_rows = core.latent_usage(lat, d, te)
     pd.DataFrame(dim_rows).to_csv(str(prefix) + '_latent_usage_per_dimension.csv', index=False)
-    res = {'name': name, 'seed': seed, 'best_epoch': be, 'epochs_run': len(hist), 'fit_seconds': secs,
+    # converged: early stopping fired before the epoch cap (stopping on the very last epoch counts as not converged)
+    res = {'name': name, 'seed': seed, 'best_epoch': be, 'epochs_run': len(hist), 'epochs_requested': epochs,
+           'patience': patience, 'converged': bool(len(hist) < epochs), 'fit_seconds': secs,
            'test_mse': float(lat['mse'][te].mean()), 'validation_mse': float(lat['mse'][va].mean()),
            'test_plugin_nll': float(lat['nll'][te].mean()), 'shared_fraction': fsh['pooled'],
            'shared_fraction_doxorubicin': fsh['doxorubicin'], 'shared_fraction_cisplatin': fsh['cisplatin']}

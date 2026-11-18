@@ -35,8 +35,17 @@ import torch  # noqa: E402
 from src.peerreview.ig_generic import integrated_gradients, recovery  # noqa: E402
 
 RUN = R / 'runs' / 'peerreview_20261004' / 'r4' / 'multigroupvi'
-GS = pd.read_csv(R / 'analysis' / 'peerreview_20261003' / 'D1_gene_sets.csv')
-SETS = {s: set(GS[GS.set == s].gene) for s in ('S', 'A', 'B')}
+INPUTS = R / 'runs' / 'peerreview_20261004' / 'r4'    # directory holding inputs_<config>.npz (experiments/ overrides it)
+GS_PATH = R / 'analysis' / 'peerreview_20261003' / 'D1_gene_sets.csv'
+SETS = {}
+
+
+def set_gene_sets(gs):
+    SETS.clear(); SETS.update({s: set(gs[gs.set == s].gene) for s in ('S', 'A', 'B')})
+
+
+if GS_PATH.exists():
+    set_gene_sets(pd.read_csv(GS_PATH))
 
 
 def fit(cfg, seed, smoke=False):
@@ -49,7 +58,7 @@ def fit(cfg, seed, smoke=False):
     name = f'{cfg}_s{seed}'; done = RUN / f'{name}_done.json'
     if done.exists():
         print('done marker exists', name); return
-    z = np.load(R / 'runs' / 'peerreview_20261004' / 'r4' / f'inputs_{cfg}.npz')
+    z = np.load(INPUTS / f'inputs_{cfg}.npz')
     C, L, X, d, b, tr, te, genes = z['C'], z['L'], z['X'], z['d'], z['b'], z['train'], z['test'], z['genes']
     t0 = time.time()
     scvi.settings.seed = seed; torch.manual_seed(seed); np.random.seed(seed)
